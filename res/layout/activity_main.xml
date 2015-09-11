@@ -8,9 +8,22 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.iderly.MainActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+	<ImageView
+	    android:id="@+id/iDerly_logo"
+	    android:layout_width="250dp"
+	    android:layout_height="250dp"
+	    android:layout_alignParentTop="true"
+	    android:layout_centerHorizontal="true"
+	    android:src="@+drawable/logo_iderly" />
+	
+	<Button
+	    android:id="@+id/play_game_btn"
+	    android:layout_width="200dp"
+	    android:layout_height="50dp"
+	    android:layout_below="@id/iDerly_logo"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="100dp"
+	    android:onClick="startGameActivity"
+	    android:text="@string/PlayGame_ButtonText" />
 
 </RelativeLayout>
