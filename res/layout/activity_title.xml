@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.iderly.MainActivity" >
+    tools:context="com.iderly.boundary.TitleActivity" >
 
 	<ImageView
 	    android:id="@+id/iDerly_logo"
@@ -19,11 +19,21 @@
 	<Button
 	    android:id="@+id/play_game_btn"
 	    android:layout_width="200dp"
-	    android:layout_height="50dp"
+	    android:layout_height="100dp"
 	    android:layout_below="@id/iDerly_logo"
 	    android:layout_centerHorizontal="true"
-	    android:layout_marginTop="100dp"
+	    android:layout_marginTop="5dp"
 	    android:onClick="startGameActivity"
 	    android:text="@string/PlayGame_ButtonText" />
+	
+	<ToggleButton
+	    android:id="@+id/game_mode_btn"
+	    android:layout_width="200dp"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/play_game_btn"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="5dp"
+	    android:textOff="@string/GameMode_Classic_ButtonText"
+	    android:textOn="@string/GameMode_Unlimited_ButtonText" />
 
 </RelativeLayout>

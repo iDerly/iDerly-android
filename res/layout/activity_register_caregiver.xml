@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.iderly.boundary.RegisterCaregiverActivity" >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_below="@+id/register_messages" >
+        
+        <EditText
+            android:id="@+id/name_field"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/LabelText_Name"
+            android:textColorHint="#333333" />
+        
+        <EditText
+            android:id="@+id/email_field"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/LabelText_Email"
+            android:textColorHint="#333333" />
+        
+        <EditText
+            android:id="@+id/password_field"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/LabelText_Password"
+            android:textColorHint="#333333" />
+        
+        <EditText
+            android:id="@+id/password_confirm_field"
+            android:inputType="text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginBottom="30dp"
+            android:hint="@string/LabelText_PasswordConfirm"
+            android:textColorHint="#333333" />
+        
+        <Button
+            android:id="@+id/Register_Btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/RegisterBtn_LabelText"
+            android:onClick="registerCaregiver" />
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/register_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+</RelativeLayout>
