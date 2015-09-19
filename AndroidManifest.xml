@@ -34,6 +34,10 @@
             android:name="com.iderly.boundary.RegisterCaregiverActivity"
             android:label="@string/title_activity_register_caregiver" >
         </activity>
+        <activity
+            android:name="com.iderly.boundary.CaregiverHomeActivity"
+            android:label="@string/title_activity_caregiver_home" >
+        </activity>
     </application>
 
 </manifest>

@@ -22,5 +22,6 @@
     <string name="LabelText_Password">Password</string>
     <string name="LabelText_PasswordConfirm">Confirm Password</string>
     <string name="RegisterBtn_LabelText">Register</string>
+    <string name="title_activity_caregiver_home">CaregiverHomeActivity</string>
 
 </resources>
