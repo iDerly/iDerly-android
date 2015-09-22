@@ -1,13 +1,18 @@
 package com.iderly.boundary;
 
+import java.net.HttpURLConnection;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
+import com.iderly.control.HttpPostRequest;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class LoginCaregiverActivity extends Activity {
+	public static final String authenticationUrl = "http://iderly.kenrick95.org/caregiver/login";
+	
 	private LinearLayout loginMessagesPlaceholder;
 
 	@Override
@@ -50,7 +57,6 @@ public class LoginCaregiverActivity extends Activity {
 	// Login caregiver here
 	public void loginCaregiver(View view) {
 		this.clearMessages();
-		view.setEnabled(false);
 		
 		EditText emailField = (EditText) findViewById(R.id.email_field);
 		EditText passwordField = (EditText) findViewById(R.id.password_field);
@@ -69,14 +75,20 @@ public class LoginCaregiverActivity extends Activity {
 			valid = 0;
 		}
 		
-		switch (valid) {
-			case 0:
-				view.setEnabled(true);
-				break;
+		if(valid == 1) {
+			ProgressDialog pd = ProgressDialog.show(this, null, "Logging in...", true);
+			new HttpPostRequest(authenticationUrl, pd) {
+
+				@Override
+				public void onFinish(int statusCode, String responseText) {
+					((ProgressDialog) this.mixed[0]).dismiss();
+					Log.d("login caregiver", "status code: " + statusCode);
+					Log.d("login caregiver", "response: " + responseText);
+				}
 				
-			default:
-				// CALL HTTP REQUEST HERE!!
-				break;
+			}.addParameter("email", email)
+				.addParameter("password", password)
+				.send();
 		}
 	}
 	

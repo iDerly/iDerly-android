@@ -16,8 +16,10 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
 
 import android.os.AsyncTask;
+import android.util.Log;
 import android.util.Pair;
 
 public abstract class HttpPostRequest extends AsyncTask<Void, Void, String> {
@@ -26,12 +28,16 @@ public abstract class HttpPostRequest extends AsyncTask<Void, Void, String> {
 	 */
 	public static final int connectionTimeoutMilliseconds = 10000;
 	
+	protected Object[] mixed;
+
+	private List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 	private String url;
 	private boolean success = false;
-	private List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+	private int statusCode;
 	
-	public HttpPostRequest(String url) {
+	public HttpPostRequest(String url, Object... mixed) {
 		this.url = url;
+		this.mixed = mixed;
 	}
 	
 	public HttpPostRequest addParameter(String name, String value) {
@@ -46,22 +52,24 @@ public abstract class HttpPostRequest extends AsyncTask<Void, Void, String> {
 		return this;
 	}
 	
+	public HttpPostRequest addParameters(List<Pair<String, String>> parameters) {
+		for(Pair<String, String> param: parameters) {
+			this.parameters.add(new BasicNameValuePair(param.first, param.second));
+		}
+		return this;
+	}
+	
 	public void send() {
-		this.executeOnExecutor(THREAD_POOL_EXECUTOR);
+		this.execute();
 	}
 	
 	/**
-	 * On status code not HTTP_OK
+	 * On AsyncTask finish
 	 * @param responseText
 	 */
-	public abstract void onFail(String responseText);
+	public abstract void onFinish(int statusCode, String responseText);
 	
-	/**
-	 * On status code HTTP_OK
-	 * @param responseText
-	 */
-	public abstract void onSuccess(String responseText);
-	
+	@Override
 	protected String doInBackground(Void... params) {
 		String responseText = null;
 		
@@ -77,12 +85,9 @@ public abstract class HttpPostRequest extends AsyncTask<Void, Void, String> {
 		
 		try {
 			HttpResponse httpResponse = new DefaultHttpClient(httpParams).execute(httpPost);
-			if(httpResponse.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_OK) {
-				success = true;
-				responseText = httpResponse.toString();
-			} else {
-				responseText = httpResponse.getStatusLine().getReasonPhrase();
-			}
+			
+			statusCode = httpResponse.getStatusLine().getStatusCode();
+			responseText = EntityUtils.toString(httpResponse.getEntity());
 		} catch (ClientProtocolException e) {
 			// Just printing exception
 			e.printStackTrace();
@@ -94,11 +99,8 @@ public abstract class HttpPostRequest extends AsyncTask<Void, Void, String> {
 		return responseText;
 	}
 	
-	protected void onPostExecute(String result) {
-		if(success) {
-			this.onSuccess(result);
-		} else {
-			this.onFail(result);
-		}
+	@Override
+	protected void onPostExecute(String responseText) {
+		this.onFinish(statusCode, responseText);
 	}
 }
