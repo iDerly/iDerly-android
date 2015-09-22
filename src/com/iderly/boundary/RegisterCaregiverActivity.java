@@ -1,13 +1,17 @@
 package com.iderly.boundary;
 
+import java.net.HttpURLConnection;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
-import com.iderly.control.RegisterManager;
+import com.iderly.control.HttpPostRequest;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +21,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class RegisterCaregiverActivity extends Activity {
+	public static final int PASSWORD_MIN_LENGTH = 6;
+	public static final String postUrl = "http://iderly.kenrick95.org/caregiver/register";
+	
 	private LinearLayout registerMessages;
 
 	@Override
@@ -49,7 +56,6 @@ public class RegisterCaregiverActivity extends Activity {
 	
 	public void registerCaregiver (View view) {
 		this.clearMessages();
-		view.setEnabled(false);
 		
 		String name = ((EditText) findViewById(R.id.name_field)).getText().toString();
 		String email = ((EditText) findViewById(R.id.email_field)).getText().toString();
@@ -78,7 +84,7 @@ public class RegisterCaregiverActivity extends Activity {
 			valid = 0;
 		}
 		
-		if (password != null && !password.isEmpty() && password.length() < RegisterManager.PASSWORD_MINIMUM_LENGTH) {
+		if (password != null && !password.isEmpty() && password.length() < PASSWORD_MIN_LENGTH) {
 			this.putMessage("Password is too short!");
 			valid = 0;
 		}
@@ -88,14 +94,25 @@ public class RegisterCaregiverActivity extends Activity {
 			valid = 0;
 		}
 		
-		switch (valid) {
-			case 0:
-				view.setEnabled(true);
-				break;
+		if(valid == 1) {
+			ProgressDialog pd = ProgressDialog.show(this, null, "Registering user...", true);
+			new HttpPostRequest(postUrl, pd) {
+
+				@Override
+				public void onFinish(int statusCode, String responseText) {
+					((ProgressDialog) mixed[0]).dismiss();
+					Log.d("register caregiver", "status code: " + statusCode);
+					Log.d("register caregiver", "response text: " + responseText);
+					if(statusCode == HttpURLConnection.HTTP_OK) {
+						// Means status code 200
+					}
+				}
 				
-			default:
-				// CALL HTTP REQUEST HERE!
-				break;
+			}.addParameter("email", email)
+				.addParameter("password", password)
+				.addParameter("name", name)
+				.addParameter("user_id", "") // User ID is missing
+				.send();
 		}
 	}
 	

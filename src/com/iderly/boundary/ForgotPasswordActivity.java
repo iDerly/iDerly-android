@@ -1,12 +1,17 @@
 package com.iderly.boundary;
 
+import java.net.HttpURLConnection;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
+import com.iderly.control.HttpPostRequest;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ForgotPasswordActivity extends Activity {
+	public static final String postUrl = "http://iderly.kenrick95.org/";
+	
 	private LinearLayout forgotPasswordMessages;
 	
 	@Override
@@ -52,7 +59,6 @@ public class ForgotPasswordActivity extends Activity {
 	 */
 	public void forgetPassword (View view) {
 		this.clearMessages();
-		view.setEnabled(false);
 		
 		// Call HTTP request here to ask for PHP
 		String email = ((EditText) findViewById(R.id.emailAddress_field)).getText().toString();
@@ -63,13 +69,22 @@ public class ForgotPasswordActivity extends Activity {
 			valid = 0;
 		}
 		
-		switch (valid) {
-			case 0:
-				view.setEnabled(true);
-				break;
+		if(valid == 1) {
+			ProgressDialog pd = ProgressDialog.show(this, null, "Requesting reset password...", true);
+			new HttpPostRequest(postUrl, pd) {
+
+				@Override
+				public void onFinish(int statusCode, String responseText) {
+					((ProgressDialog) this.mixed[0]).dismiss();
+					Log.d("forgot password", "status code: " + statusCode);
+					Log.d("response text", "response text: " + responseText);
+					if(statusCode == HttpURLConnection.HTTP_OK) {
+						// Means status code 200
+					}
+				}
 				
-			default:
-				break;
+			}.addParameter("email", email)
+				.send();
 		}
 	}
 	

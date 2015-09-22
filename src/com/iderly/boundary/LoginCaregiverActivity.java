@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class LoginCaregiverActivity extends Activity {
-	public static final String authenticationUrl = "http://iderly.kenrick95.org/caregiver/login";
+	public static final String postUrl = "http://iderly.kenrick95.org/caregiver/login";
 	
 	private LinearLayout loginMessagesPlaceholder;
 
@@ -77,13 +77,16 @@ public class LoginCaregiverActivity extends Activity {
 		
 		if(valid == 1) {
 			ProgressDialog pd = ProgressDialog.show(this, null, "Logging in...", true);
-			new HttpPostRequest(authenticationUrl, pd) {
+			new HttpPostRequest(postUrl, pd) {
 
 				@Override
 				public void onFinish(int statusCode, String responseText) {
-					((ProgressDialog) this.mixed[0]).dismiss();
+					((ProgressDialog) mixed[0]).dismiss();
 					Log.d("login caregiver", "status code: " + statusCode);
 					Log.d("login caregiver", "response: " + responseText);
+					if(statusCode == HttpURLConnection.HTTP_OK) {
+						// Means status code 200
+					}
 				}
 				
 			}.addParameter("email", email)
