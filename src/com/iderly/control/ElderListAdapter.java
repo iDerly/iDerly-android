@@ -3,6 +3,7 @@ package com.iderly.control;
 
 import java.util.List;
 
+import com.example.iderly.R;
 import com.iderly.entity.User;
 
 import android.app.Activity;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ElderListAdapter extends ArrayAdapter<User> {
@@ -23,6 +25,7 @@ public class ElderListAdapter extends ArrayAdapter<User> {
 	
 	private class ViewHolder {
 		private TextView elderIdText;
+		private ImageView profilePicture;
 	}
 	
 	@Override
@@ -32,16 +35,17 @@ public class ElderListAdapter extends ArrayAdapter<User> {
 		LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		
 		if (convertView == null) {
-//			convertView = mInflater.inflate(, parent, false);
+			convertView = mInflater.inflate(R.layout.elder_list_item, parent, false);
 			holder = new ViewHolder();
 			
-//			holder.elderIdText = (TextView) convertView.findViewById();
+			holder.elderIdText = (TextView) convertView.findViewById(R.id.TextView_ElderName);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
 		if (u != null) {
-			holder.elderIdText.setText(u.getUserId());
+			holder.elderIdText.setText(u.getName());
+			holder.profilePicture.setImageBitmap(u.getProfPic().getImageBitmap());
 		}
 		
 		return convertView;

@@ -27,11 +27,15 @@ public final class R {
         public static final int logo_iderly=0x7f020002;
     }
     public static final class id {
-        public static final int ActionBar_LoginCaregiver=0x7f080014;
+        public static final int ActionBar_LoginCaregiver=0x7f080018;
+        public static final int Button_AddElder=0x7f080012;
         public static final int ForgotPassword_Messages=0x7f080001;
+        public static final int ImageView_ElderProfilePicture=0x7f080014;
+        public static final int LL_ElderListItem=0x7f080013;
         public static final int RegisterForgotPassword_ButtonGroup=0x7f080008;
         public static final int Register_Btn=0x7f08000e;
-        public static final int action_settings=0x7f080012;
+        public static final int TextView_ElderName=0x7f080015;
+        public static final int action_settings=0x7f080016;
         public static final int emailAddress_field=0x7f080002;
         public static final int email_field=0x7f080005;
         public static final int forgetPasswordInstruction=0x7f080000;
@@ -47,7 +51,7 @@ public final class R {
         public static final int play_game_btn=0x7f080010;
         public static final int register_btn=0x7f080009;
         public static final int register_messages=0x7f08000b;
-        public static final int title_activity_actionbar=0x7f080013;
+        public static final int title_activity_actionbar=0x7f080017;
     }
     public static final class layout {
         public static final int activity_caregiver_home=0x7f030000;
@@ -56,6 +60,8 @@ public final class R {
         public static final int activity_login_caregiver=0x7f030003;
         public static final int activity_register_caregiver=0x7f030004;
         public static final int activity_title=0x7f030005;
+        public static final int caregiver_home_header=0x7f030006;
+        public static final int elder_list_item=0x7f030007;
     }
     public static final class menu {
         public static final int caregiver_home=0x7f070000;
@@ -71,6 +77,7 @@ public final class R {
         public static final int ButtonText_ForgotPassword=0x7f05000b;
         public static final int ButtonText_Login=0x7f050009;
         public static final int ButtonText_Register=0x7f05000a;
+        public static final int Button_AddElder_Label=0x7f050018;
         public static final int Button_ForgetPassword=0x7f05000f;
         public static final int GameMode_Classic_ButtonText=0x7f050004;
         public static final int GameMode_Unlimited_ButtonText=0x7f050005;
@@ -78,6 +85,8 @@ public final class R {
         public static final int LabelText_Name=0x7f050011;
         public static final int LabelText_Password=0x7f050012;
         public static final int LabelText_PasswordConfirm=0x7f050013;
+        public static final int Label_ElderName=0x7f050019;
+        public static final int Label_Elder_UserId=0x7f050017;
         public static final int Label_ForgetPasswordInstruction=0x7f05000d;
         public static final int PlayGame_ButtonText=0x7f050003;
         public static final int RegisterBtn_LabelText=0x7f050014;

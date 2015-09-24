@@ -56,6 +56,13 @@ public class LoginCaregiverActivity extends Activity {
 	
 	// Login caregiver here
 	public void loginCaregiver(View view) {
+		int s = 1;
+		if (s == 1) {
+			Intent t = new Intent(this, CaregiverHomeActivity.class);
+			startActivity(t);
+			return;
+		}
+		
 		this.clearMessages();
 		
 		EditText emailField = (EditText) findViewById(R.id.email_field);

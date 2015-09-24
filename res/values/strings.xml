@@ -24,5 +24,8 @@
     <string name="RegisterBtn_LabelText">Register</string>
     <string name="title_activity_caregiver_home">CaregiverHomeActivity</string>
     <string name="title_activity_elder_profile_detail">ElderProfileDetailActivity</string>
+    <string name="Label_Elder_UserId">edocsss</string>
+    <string name="Button_AddElder_Label">Add Elder</string>
+    <string name="Label_ElderName">Kenrick</string>
 
 </resources>
