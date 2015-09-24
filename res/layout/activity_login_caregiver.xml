@@ -51,22 +51,23 @@
 	        
 	        <Button
 	            android:id="@+id/register_btn"
-	            android:layout_width="125dp"
+	            android:layout_width="150dp"
 	            android:layout_height="75dp"
 	            android:padding="10dp"
 	            android:layout_margin="4dp"
 	            android:text="@string/ButtonText_Register"
 	            android:onClick="registerCaregiver" />
-	        
+
 	        <Button
 	            android:id="@+id/forget_password_btn"
-	            android:layout_width="125dp"
+	            android:layout_width="150dp"
 	            android:layout_height="75dp"
-	            android:layout_toRightOf="@id/register_btn"
-	            android:padding="10dp"
+	            android:layout_alignParentRight="true"
+	            android:layout_alignParentTop="true"
 	            android:layout_margin="4dp"
-	            android:text="@string/ButtonText_ForgotPassword"
-	            android:onClick="forgotPasswordCaregiver" />
+	            android:onClick="forgotPasswordCaregiver"
+	            android:padding="10dp"
+	            android:text="@string/ButtonText_ForgotPassword" />
 	        
         </RelativeLayout>
         

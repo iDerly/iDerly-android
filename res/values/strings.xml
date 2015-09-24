@@ -23,5 +23,6 @@
     <string name="LabelText_PasswordConfirm">Confirm Password</string>
     <string name="RegisterBtn_LabelText">Register</string>
     <string name="title_activity_caregiver_home">CaregiverHomeActivity</string>
+    <string name="title_activity_elder_profile_detail">ElderProfileDetailActivity</string>
 
 </resources>

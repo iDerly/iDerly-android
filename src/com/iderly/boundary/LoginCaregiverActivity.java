@@ -95,16 +95,22 @@ public class LoginCaregiverActivity extends Activity {
 		}
 	}
 	
-	// Start Forgot Password Actvity
-	public void forgotPasswordCaregiver(View view) {
+	// Start Forgot Password Activity
+	public void forgotPasswordCaregiver (View view) {
 		Intent forgotPasswordIntent = new Intent(this, ForgotPasswordActivity.class);
 		startActivity(forgotPasswordIntent);
+	}
+	
+	// Start Register Caregiver Activity
+	public void registerCaregiver (View view) {
+		Intent registerCaregiverIntent = new Intent(this, RegisterCaregiverActivity.class);
+		startActivity(registerCaregiverIntent);
 	}
 	
 	/**
 	 * Clears all messages in {@link #loginMessages}
 	 */
-	private void clearMessages() {
+	private void clearMessages () {
 		this.loginMessagesPlaceholder.removeAllViews();
 	}
 	
@@ -112,7 +118,7 @@ public class LoginCaregiverActivity extends Activity {
      * Adds a message in {@link #loginMessages}
      * @param message
      */
-	private void putMessage(String message) {
+	private void putMessage (String message) {
 		TextView t = new TextView(this);
 		t.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 		t.setText("\u2022 " + message);
