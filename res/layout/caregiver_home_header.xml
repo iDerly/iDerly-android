@@ -11,6 +11,7 @@
 	    android:layout_gravity="center_horizontal"
 	    android:layout_marginTop="10dp"
 	    android:layout_marginBottom="10dp"
-	    android:text="@string/Button_AddElder_Label" />
+	    android:text="@string/Button_AddElder_Label"
+	    android:onClick="openAddElderForm" />
 	
 </LinearLayout>

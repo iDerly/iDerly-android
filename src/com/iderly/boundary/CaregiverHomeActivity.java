@@ -77,4 +77,9 @@ public class CaregiverHomeActivity extends ListActivity {
 		
 		startActivity(intent);
 	}
+	
+	public void openAddElderForm (View view) {
+		Intent addElder = new Intent (this, AddElderFormActivity.class);
+		startActivity(addElder);
+	}
 }

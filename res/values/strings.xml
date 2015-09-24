@@ -27,5 +27,12 @@
     <string name="Label_Elder_UserId">edocsss</string>
     <string name="Button_AddElder_Label">Add Elder</string>
     <string name="Label_ElderName">Kenrick</string>
+    <string name="title_activity_add_elder_form">AddElderFormActivity</string>
+    <string name="LabelText_ElderName">Elder\'s Name</string>
+    <string name="LabelText_ElderDeviceId">Elder\'s Device ID</string>
+    <string name="AddElderBtn_LabelText">Add Elder</string>
+    <string name="Label_ElderProfilePicture">Profile Picture</string>
+    <string name="ElderProfilePictureDescription">Elder\'s Profile Picture</string>
+    <string name="ButtonText_ElderProfilePicture">Select Picture</string>
 
 </resources>
