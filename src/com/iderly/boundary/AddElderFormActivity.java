@@ -31,7 +31,7 @@ public class AddElderFormActivity extends Activity {
 	 */
 	private static final int SELECT_PICTURE = 1;
 	private LinearLayout addElderMessages;
-	private String profilePictureString;
+	private String profilePictureString = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

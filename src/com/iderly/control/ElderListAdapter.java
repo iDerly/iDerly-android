@@ -39,13 +39,14 @@ public class ElderListAdapter extends ArrayAdapter<User> {
 			holder = new ViewHolder();
 			
 			holder.elderIdText = (TextView) convertView.findViewById(R.id.TextView_ElderName);
+			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
 		if (u != null) {
 			holder.elderIdText.setText(u.getName());
-			holder.profilePicture.setImageBitmap(u.getProfPic().getImageBitmap());
+//			holder.profilePicture.setImageBitmap(u.getProfPic().getImageBitmap());
 		}
 		
 		return convertView;

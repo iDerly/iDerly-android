@@ -9,7 +9,7 @@ public class User implements Parcelable {
 	public static final String ELDER = "elder";
 	public static final String CAREGIVER = "caregiver";
 	private String email;
-	private String userId;
+	private String deviceId;
 	private String type;
 	private String name;
 	private int gamesPlayed;
@@ -17,9 +17,9 @@ public class User implements Parcelable {
 	private Photo profPic;
 	private ArrayList<Photo> photosGallery;
 	
-	public User (String email, String userId, String type, String name, int gamesPlayed, double avgScore, Photo profPic, ArrayList<Photo> photosGallery) {
+	public User (String email, String deviceId, String type, String name, int gamesPlayed, double avgScore, Photo profPic, ArrayList<Photo> photosGallery) {
 		this.email = email;
-		this.userId = userId;
+		this.deviceId = deviceId;
 		this.type = type;
 		this.name = name;
 		this.avgScore = avgScore;
@@ -31,8 +31,8 @@ public class User implements Parcelable {
 		return this.email;
 	}
 	
-	public String getUserId () {
-		return this.userId;
+	public String getDeviceId () {
+		return this.deviceId;
 	}
 	
 	public String getType () {
@@ -63,8 +63,8 @@ public class User implements Parcelable {
 		this.email = email;
 	}
 	
-	public void setUserId (String userId) {
-		this.userId = userId;
+	public void setDeviceId (String deviceId) {
+		this.deviceId = deviceId;
 	}
 	
 	public void setUserType (String type) {
@@ -97,7 +97,7 @@ public class User implements Parcelable {
 	// PARCELABLE IMPLEMENTATION
 	public User (Parcel in) {
 		this.email = in.readString();
-		this.userId = in.readString();
+		this.deviceId = in.readString();
 		this.type = in.readString();
 		this.name = in.readString();
 		this.gamesPlayed = in.readInt();
@@ -114,7 +114,7 @@ public class User implements Parcelable {
 	@Override
 	public void writeToParcel (Parcel dest, int flags) {
 		dest.writeString(this.email);
-		dest.writeString(this.userId);
+		dest.writeString(this.deviceId);
 		dest.writeString(this.type);
 		dest.writeString(this.name);
 		dest.writeInt(this.gamesPlayed);

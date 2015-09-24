@@ -49,7 +49,7 @@ public class Caregiver extends User implements Parcelable {
 	 @Override
 	 public void writeToParcel (Parcel dest, int flags) {
 		 dest.writeString(this.getEmail());
-		 dest.writeString(this.getUserId());
+		 dest.writeString(this.getDeviceId());
 		 dest.writeString(this.getType());
 		 dest.writeString(this.getName());
 		 dest.writeInt(this.getGamesPlayed());

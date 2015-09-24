@@ -38,8 +38,11 @@ public class CaregiverHomeActivity extends ListActivity {
 //		this.eldersList = ((Caregiver) (Global.getUserManager().getUser())).getElders();
 		this.eldersList = new ArrayList<User> ();
 		User u = new User("e@e.com", "test1", User.ELDER, "Tester", 0, 0.0, null, null);
-		this.eldersList.add(u);
-		this.eldersList.add(u);
+		
+		for (int i = 0; i < 10; i++) {
+			this.eldersList.add(u);
+		}
+	
 		ElderListAdapter mAdapter = new ElderListAdapter(this, this.eldersList);
 		setListAdapter(mAdapter);
 	}
