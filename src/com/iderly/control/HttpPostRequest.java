@@ -25,7 +25,8 @@ public abstract class HttpPostRequest extends AsyncTask<Void, Void, String> {
 	/**
 	 * Connection timeout 10,000 milliseconds.
 	 */
-	public static final int connectionTimeoutMilliseconds = 10000;
+	public static final int connectionTimeoutMillis = 10000;
+	public static final int socketTimeoutMillis = 10000;
 	
 	protected Object[] mixed;
 
@@ -80,7 +81,8 @@ public abstract class HttpPostRequest extends AsyncTask<Void, Void, String> {
 		}
 		
 		HttpParams httpParams = new BasicHttpParams();
-		HttpConnectionParams.setConnectionTimeout(httpParams, connectionTimeoutMilliseconds);
+		HttpConnectionParams.setConnectionTimeout(httpParams, connectionTimeoutMillis);
+		HttpConnectionParams.setSoTimeout(httpParams, socketTimeoutMillis);
 		
 		try {
 			HttpResponse httpResponse = new DefaultHttpClient(httpParams).execute(httpPost);
