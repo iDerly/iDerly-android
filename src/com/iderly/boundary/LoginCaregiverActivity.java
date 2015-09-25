@@ -14,6 +14,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -92,6 +93,7 @@ public class LoginCaregiverActivity extends Activity {
 					
 					if(statusCode == HttpURLConnection.HTTP_OK) {
 						// OK
+						Log.d("login activity", "response: " + responseText);
 					}
 				}
 			});

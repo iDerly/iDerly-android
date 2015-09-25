@@ -1,5 +1,7 @@
 package com.iderly.control;
 
+import android.util.Log;
+
 public class LoginManager {
 	private static LoginManager instance = new LoginManager();
 	public static final String postUrl = "http://iderly.kenrick95.org/caregiver/login";
