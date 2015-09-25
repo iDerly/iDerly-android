@@ -7,12 +7,14 @@ public class Global {
 	private static UserManager userManager;
 	private static LoginManager loginManager;
 	private static ImageManager imageManager;
+	private static RegisterManager registerManager;
 	
 	public static void init (Context context) {
 		ImageManager.init(context);
 		userManager = UserManager.getInstance();
 		loginManager = LoginManager.getInstance();
 		imageManager = ImageManager.getInstance();
+		registerManager = RegisterManager.getInstance();
 	}
 	
 	public static UserManager getUserManager () {
@@ -25,5 +27,9 @@ public class Global {
 	
 	public static ImageManager getImageManager () {
 		return imageManager;
+	}
+	
+	public static RegisterManager getRegisterManager() {
+		return registerManager;
 	}
 }

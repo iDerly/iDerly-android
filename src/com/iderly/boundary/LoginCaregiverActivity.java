@@ -6,13 +6,14 @@ import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
+import com.iderly.control.Global;
 import com.iderly.control.HttpPostRequest;
+import com.iderly.control.HttpPostRequestListener;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -84,21 +85,16 @@ public class LoginCaregiverActivity extends Activity {
 		
 		if(valid == 1) {
 			ProgressDialog pd = ProgressDialog.show(this, null, "Logging in...", true);
-			new HttpPostRequest(postUrl, pd) {
-
+			Global.getLoginManager().doLogin(email, password, new HttpPostRequestListener (pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
-					((ProgressDialog) mixed[0]).dismiss();
-					Log.d("login caregiver", "status code: " + statusCode);
-					Log.d("login caregiver", "response: " + responseText);
+					((ProgressDialog) this.mixed[0]).dismiss();
+					
 					if(statusCode == HttpURLConnection.HTTP_OK) {
-						// Means status code 200
+						// OK
 					}
 				}
-				
-			}.addParameter("email", email)
-				.addParameter("password", password)
-				.send();
+			});
 		}
 	}
 	

@@ -19,7 +19,6 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.util.Pair;
 
 public abstract class HttpPostRequest extends AsyncTask<Void, Void, String> {
