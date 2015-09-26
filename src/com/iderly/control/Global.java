@@ -1,5 +1,7 @@
 package com.iderly.control;
 
+import com.iderly.entity.Session;
+
 import android.content.Context;
 
 public class Global {
@@ -10,6 +12,7 @@ public class Global {
 	private static RegisterManager registerManager;
 	
 	public static void init (Context context) {
+		Session.init(context);
 		ImageManager.init(context);
 		userManager = UserManager.getInstance();
 		loginManager = LoginManager.getInstance();

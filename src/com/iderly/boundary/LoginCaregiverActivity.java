@@ -9,6 +9,7 @@ import com.example.iderly.R.menu;
 import com.iderly.control.Global;
 import com.iderly.control.HttpPostRequest;
 import com.iderly.control.HttpPostRequestListener;
+import com.iderly.entity.Session;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -35,6 +36,11 @@ public class LoginCaregiverActivity extends Activity {
 		
 		// Setup Login Messages
 		this.loginMessagesPlaceholder = (LinearLayout) findViewById(R.id.login_messages);
+		
+		if(Session.contains("session_id")) {
+			Log.d("cek session", "logged in before, sir!");
+			// New intent to HomeActivity?
+		}
 	}
 
 	@Override
@@ -94,6 +100,11 @@ public class LoginCaregiverActivity extends Activity {
 					if(statusCode == HttpURLConnection.HTTP_OK) {
 						// OK
 						Log.d("login activity", "response: " + responseText);
+						
+						if(Session.contains("session_id")) {
+							// New intent here
+							Log.d("login activity", "can login");
+						}
 					}
 				}
 			});
