@@ -102,6 +102,7 @@ public class RegisterCaregiverActivity extends Activity {
 				public void onFinish(int statusCode, String responseText) {
 					((ProgressDialog) this.mixed[0]).dismiss();
 					
+					Log.d("register caregiver", "response: " + responseText);
 					if(statusCode == HttpURLConnection.HTTP_OK) {
 						// OK
 					}
