@@ -6,10 +6,15 @@ import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
+import com.iderly.control.Global;
 import com.iderly.control.HttpPostRequest;
+import com.iderly.control.HttpPostRequestListener;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -71,20 +76,24 @@ public class ForgotPasswordActivity extends Activity {
 		
 		if(valid == 1) {
 			ProgressDialog pd = ProgressDialog.show(this, null, "Requesting reset password...", true);
-			new HttpPostRequest(postUrl, pd) {
-
+			Global.getRegisterManager().forgotPassword(email, new HttpPostRequestListener(pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
 					((ProgressDialog) this.mixed[0]).dismiss();
-					Log.d("forgot password", "status code: " + statusCode);
-					Log.d("response text", "response text: " + responseText);
+					
+					Log.d("forgot password", "response: " + responseText);
 					if(statusCode == HttpURLConnection.HTTP_OK) {
-						// Means status code 200
+						new AlertDialog.Builder(ForgotPasswordActivity.this)
+							.setMessage("Forgot password request confirmed")
+							.setNeutralButton("OK", new OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.dismiss();
+								}
+							});
 					}
 				}
-				
-			}.addParameter("email", email)
-				.send();
+			});
 		}
 	}
 	
