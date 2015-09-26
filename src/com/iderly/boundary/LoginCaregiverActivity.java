@@ -25,8 +25,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class LoginCaregiverActivity extends Activity {
-	public static final String postUrl = "http://iderly.kenrick95.org/caregiver/login";
-	
 	private LinearLayout loginMessagesPlaceholder;
 
 	@Override

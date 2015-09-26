@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 public class RegisterCaregiverActivity extends Activity {
 	public static final int PASSWORD_MIN_LENGTH = 6;
-	public static final String postUrl = "http://iderly.kenrick95.org/caregiver/register";
 	
 	private LinearLayout registerMessages;
 
