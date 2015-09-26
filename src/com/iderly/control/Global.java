@@ -3,6 +3,7 @@ package com.iderly.control;
 import com.iderly.entity.Session;
 
 import android.content.Context;
+import android.provider.Settings.Secure;
 
 public class Global {
 	public static String APP_NAME = "iDerly";
@@ -11,6 +12,8 @@ public class Global {
 	private static ImageManager imageManager;
 	private static RegisterManager registerManager;
 	
+	public static String deviceId;
+	
 	public static void init (Context context) {
 		Session.init(context);
 		ImageManager.init(context);
@@ -18,6 +21,8 @@ public class Global {
 		loginManager = LoginManager.getInstance();
 		imageManager = ImageManager.getInstance();
 		registerManager = RegisterManager.getInstance();
+		
+		deviceId = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
 	}
 	
 	public static UserManager getUserManager () {
