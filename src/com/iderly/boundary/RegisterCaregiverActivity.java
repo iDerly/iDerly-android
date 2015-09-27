@@ -2,6 +2,9 @@ package com.iderly.boundary;
 
 import java.net.HttpURLConnection;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
@@ -11,7 +14,12 @@ import com.iderly.control.HttpPostRequest;
 import com.iderly.control.HttpPostRequestListener;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -97,7 +105,7 @@ public class RegisterCaregiverActivity extends Activity {
 		
 		if(valid == 1) {
 			ProgressDialog pd = ProgressDialog.show(this, null, "Registering user...", true);
-			Global.getRegisterManager().doRegister(email, password, name, "", new HttpPostRequestListener(pd) {
+			Global.getRegisterManager().doRegister(email, password, name, new HttpPostRequestListener(pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
 					((ProgressDialog) this.mixed[0]).dismiss();
@@ -105,6 +113,22 @@ public class RegisterCaregiverActivity extends Activity {
 					Log.d("register caregiver", "response: " + responseText);
 					if(statusCode == HttpURLConnection.HTTP_OK) {
 						// OK
+						try {
+							JSONObject response = new JSONObject(responseText);
+							if(response.getInt("status") == 0) {
+								new AlertDialog.Builder(RegisterCaregiverActivity.this)
+									.setMessage("Register successful!")
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									});
+							}
+						} catch (JSONException e) {
+							// Kenrick or the Internet's fault
+						}
+						
 					}
 				}
 			});

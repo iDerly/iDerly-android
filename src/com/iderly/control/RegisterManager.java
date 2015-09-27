@@ -10,7 +10,7 @@ public class RegisterManager {
 		return instance;
 	}
 	
-	public void doRegister(String email, String password, String name, String user_id, HttpPostRequestListener listener) {
+	public void doRegister(String email, String password, String name, HttpPostRequestListener listener) {
 		new HttpPostRequest(registerPOSTUrl, listener) {
 
 			@Override
@@ -21,7 +21,7 @@ public class RegisterManager {
 		}.addParameter("email", email)
 			.addParameter("password", password)
 			.addParameter("name", name)
-			.addParameter("user_id", user_id)
+			.addParameter("device_id", Global.deviceId)
 			.send();
 	}
 	
