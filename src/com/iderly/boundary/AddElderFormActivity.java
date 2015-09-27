@@ -9,6 +9,7 @@ import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
 import com.iderly.control.Global;
+import com.iderly.control.HttpPostRequest;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,6 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class AddElderFormActivity extends Activity {
+	public static String addElderPOSTUrl = "https://iderly.kenrick95.org/caregiver/add_elder";
+	
 	/**
 	 * Constant definition for image selection for profile picture
 	 */
@@ -184,6 +187,15 @@ public class AddElderFormActivity extends Activity {
 		
 		if (valid == 1) {
 			// ADD ELDER HERE!!
+			new HttpPostRequest(addElderPOSTUrl) {
+				@Override
+				public void onFinish(int statusCode, String responseText) {
+					// WTF?
+				}
+			}.addParameter("name", elderName)
+				.addParameter("elder_device_id", Global.deviceId)
+				.addParameter("caregiver_device_id", "")
+				.send();
 		}
 	}
 }
