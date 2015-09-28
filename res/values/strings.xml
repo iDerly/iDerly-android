@@ -38,5 +38,16 @@
     <string name="Label_PhotoRemarks">Remarks</string>
     <string name="TEST_PhotoRemarks">Remarks 1 2 3</string>
     <string name="title_activity_elder_photo_gallery_details">ElderPhotoGalleryDetailsActivity</string>
+    <string name="Label_ElderProfile_DeviceId">Device ID</string>
+    <string name="Text_ElderProfile_DeviceId">B123567</string>
+    <string name="Label_ElderProfile_Name">Name</string>
+    <string name="Text_ElderProfile_Name">Kenrick Anggara</string>
+    <string name="Label_ElderProfile_Email">Email</string>
+    <string name="Text_ElderProfile_Email">kenrick95@gmail.com</string>
+    <string name="Label_ElderProfile_AverageScore">Average Score</string>
+    <string name="Text_ElderProfile_AverageScore">95.5</string>
+    <string name="Label_ElderProfile_ProfilePicture">Picture</string>
+    <string name="Text_ElderProfile_EditButton">Edit Profile</string>
+    <string name="title_activity_edit_elder_profile">EditElderProfileActivity</string>
 
 </resources>

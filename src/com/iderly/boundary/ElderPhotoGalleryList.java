@@ -2,7 +2,6 @@ package com.iderly.boundary;
 
 import java.util.ArrayList;
 
-import com.example.iderly.ElderPhotoGalleryDetailsActivity;
 import com.iderly.control.ElderPhotoListAdapter;
 import com.iderly.entity.Photo;
 import com.iderly.entity.User;

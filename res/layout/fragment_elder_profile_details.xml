@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp" >
+    
+    <LinearLayout 
+        android:id="@+id/LL_ElderProfile_DeviceId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp" >
+        
+        <TextView
+            android:id="@+id/Label_ElderProfile_DeviceId"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Label_ElderProfile_DeviceId" />
+        
+        <TextView
+            android:id="@+id/Text_ElderProfile_DeviceId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Text_ElderProfile_DeviceId" />
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LL_ElderProfile_Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_marginBottom="5dp" >        
+        
+        <TextView
+            android:id="@+id/Label_ElderProfile_Name"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Label_ElderProfile_Name" />
+        
+        <TextView
+            android:id="@+id/Text_ElderProfile_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Text_ElderProfile_Name" />
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LL_ElderProfile_Email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp" >
+        
+        <TextView
+            android:id="@+id/Label_ElderProfile_Email"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Label_ElderProfile_Email" />
+        
+        <TextView
+            android:id="@+id/Text_ElderProfile_Email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Text_ElderProfile_Email" />
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LL_ElderProfile_AverageScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp" >
+        
+        <TextView
+            android:id="@+id/Label_ElderProfile_AverageScore"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Label_ElderProfile_AverageScore" />
+        
+        <TextView
+            android:id="@+id/Text_ElderProfile_AverageScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Text_ElderProfile_AverageScore" />
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LL_ElderProfile_ProfilePicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp" >
+        
+        <TextView
+            android:id="@+id/Label_ElderProfile_ProfilePicture"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/Label_ElderProfile_ProfilePicture" />
+        
+        <TextView
+            android:id="@+id/Text_ElderProfile_ProfilePicture"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/ElderProfilePictureDescription" />
+        
+    </LinearLayout>
+        
+	<Button
+	    android:id="@+id/Text_ElderProfile_EditButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="15dp"
+	    android:layout_gravity="center_horizontal"
+	    android:text="@string/Text_ElderProfile_EditButton"
+	    android:onClick="openEditElderProfile" />
+
+</LinearLayout>

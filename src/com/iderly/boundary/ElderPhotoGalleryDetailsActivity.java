@@ -1,5 +1,9 @@
-package com.example.iderly;
+package com.iderly.boundary;
 
+import com.example.iderly.R;
+import com.example.iderly.R.id;
+import com.example.iderly.R.layout;
+import com.example.iderly.R.menu;
 import com.iderly.entity.Photo;
 import com.iderly.entity.User;
 

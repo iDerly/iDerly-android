@@ -53,8 +53,12 @@
             android:label="@string/title_activity_elder_details" >
         </activity>
         <activity
-            android:name=".ElderPhotoGalleryDetailsActivity"
+            android:name="com.iderly.boundary.ElderPhotoGalleryDetailsActivity"
             android:label="@string/title_activity_elder_photo_gallery_details" >
+        </activity>
+        <activity
+            android:name="com.iderly.boundary.EditElderProfileActivity"
+            android:label="@string/title_activity_edit_elder_profile" >
         </activity>
     </application>
 
