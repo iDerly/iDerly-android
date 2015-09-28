@@ -1,21 +1,19 @@
-package com.iderly.entity;
+package com.iderly.control;
 
 import java.util.List;
-
-import com.iderly.control.Global;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Pair;
 
-public class Session {
-	private static Session instance = new Session();
+public class SessionController {
+	private static SessionController instance = new SessionController();
 	private static Context context;
 	
 	private static SharedPreferences preferences;
 	
-	private Session() {
+	private SessionController() {
 		// Empty constructor
 	}
 	

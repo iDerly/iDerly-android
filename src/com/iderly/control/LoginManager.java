@@ -5,8 +5,6 @@ import java.net.HttpURLConnection;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.iderly.entity.Session;
-
 import android.util.Log;
 
 public class LoginManager {
@@ -27,11 +25,11 @@ public class LoginManager {
 					try {
 						JSONObject response = new JSONObject(responseText);
 						
-						Session.remove("session_id", "email", "password");
+						SessionController.remove("session_id", "email", "password");
 						if(response.getInt("status") == 0) {
-							Session.set("session_id", response.getJSONArray("message").getString(0));
-							Session.set("email", email);
-							Session.set("password", password);
+							SessionController.set("session_id", response.getJSONArray("message").getString(0));
+							SessionController.set("email", email);
+							SessionController.set("password", password);
 						}
 					} catch (JSONException e) {
 						// Kenrick or the Internet's fault
@@ -59,7 +57,7 @@ public class LoginManager {
 						
 						if(response.getInt("status") == 0) {
 							Log.d("logout donk", "sukses");
-							Session.remove("session_id");
+							SessionController.remove("session_id");
 						}
 					} catch (JSONException e) {
 						// Kenrick or the Internet's fault

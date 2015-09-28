@@ -1,7 +1,5 @@
 package com.iderly.control;
 
-import com.iderly.entity.Session;
-
 import android.content.Context;
 import android.provider.Settings.Secure;
 
@@ -15,7 +13,7 @@ public class Global {
 	public static String deviceId;
 	
 	public static void init (Context context) {
-		Session.init(context);
+		SessionController.init(context);
 		ImageManager.init(context);
 		userManager = UserManager.getInstance();
 		loginManager = LoginManager.getInstance();
