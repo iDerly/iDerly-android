@@ -1,27 +1,28 @@
-package com.iderly.boundary;
+package com.example.iderly;
 
-import com.example.iderly.R;
-import com.example.iderly.R.id;
-import com.example.iderly.R.layout;
-import com.example.iderly.R.menu;
+import com.iderly.entity.Photo;
+import com.iderly.entity.User;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ElderProfileDetailActivity extends Activity {
+public class ElderPhotoGalleryDetailsActivity extends Activity {
+	private Photo photo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_elder_profile_detail);
+		setContentView(R.layout.activity_elder_photo_gallery_details);
+		
+		this.photo = this.getIntent().getExtras().getParcelable("photo");
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.elder_profile_detail, menu);
+		getMenuInflater().inflate(R.menu.elder_photo_gallery_details, menu);
 		return true;
 	}
 

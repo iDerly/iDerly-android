@@ -34,5 +34,9 @@
     <string name="Label_ElderProfilePicture">Profile Picture</string>
     <string name="ElderProfilePictureDescription">Elder\'s Profile Picture</string>
     <string name="ButtonText_ElderProfilePicture">Select Picture</string>
+    <string name="title_activity_elder_details">ElderDetailsActivity</string>
+    <string name="Label_PhotoRemarks">Remarks</string>
+    <string name="TEST_PhotoRemarks">Remarks 1 2 3</string>
+    <string name="title_activity_elder_photo_gallery_details">ElderPhotoGalleryDetailsActivity</string>
 
 </resources>

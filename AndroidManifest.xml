@@ -48,6 +48,14 @@
             android:name="com.iderly.boundary.AddElderFormActivity"
             android:label="@string/title_activity_add_elder_form" >
         </activity>
+        <activity
+            android:name="com.iderly.boundary.ElderDetailsActivity"
+            android:label="@string/title_activity_elder_details" >
+        </activity>
+        <activity
+            android:name=".ElderPhotoGalleryDetailsActivity"
+            android:label="@string/title_activity_elder_photo_gallery_details" >
+        </activity>
     </application>
 
 </manifest>

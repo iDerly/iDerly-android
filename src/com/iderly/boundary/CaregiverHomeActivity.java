@@ -74,7 +74,7 @@ public class CaregiverHomeActivity extends ListActivity {
 		super.onListItemClick(l, v, position, id);
 		
 		// Creating a new intent --> open when the item is clicked
-		Intent intent = new Intent(this, ElderProfileDetailActivity.class);
+		Intent intent = new Intent(this, ElderDetailsActivity.class);
 		User elder = this.eldersList.get(position);
 		intent.putExtra("elder", elder);
 		
