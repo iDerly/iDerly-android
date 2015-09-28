@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class CaregiverHomeActivity extends ListActivity {
@@ -32,6 +33,17 @@ public class CaregiverHomeActivity extends ListActivity {
 		ListView lv = getListView();
 		LayoutInflater inflater = getLayoutInflater();
 		View header = inflater.inflate(R.layout.caregiver_home_header, lv, false);
+		
+		Button addElderButton = (Button) header.findViewById(R.id.Button_AddElder);
+		addElderButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent addElder = new Intent (CaregiverHomeActivity.this, AddElderFormActivity.class);
+				startActivity(addElder);
+			}
+		});
+		
 		lv.addHeaderView(header);
 		
 		// Set the items in the list
@@ -79,10 +91,5 @@ public class CaregiverHomeActivity extends ListActivity {
 		intent.putExtra("elder", elder);
 		
 		startActivity(intent);
-	}
-	
-	public void openAddElderForm (View view) {
-		Intent addElder = new Intent (this, AddElderFormActivity.class);
-		startActivity(addElder);
 	}
 }

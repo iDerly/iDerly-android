@@ -38,6 +38,8 @@ public class LoginCaregiverActivity extends Activity {
 		if(Session.contains("session_id")) {
 			Log.d("cek session", "logged in before, sir!");
 			// New intent to HomeActivity?
+			Intent intent = new Intent(this, CaregiverHomeActivity.class);
+			this.startActivity(intent);
 		}
 	}
 
@@ -96,12 +98,9 @@ public class LoginCaregiverActivity extends Activity {
 					((ProgressDialog) this.mixed[0]).dismiss();
 					
 					if(statusCode == HttpURLConnection.HTTP_OK) {
-						// OK
-						Log.d("login activity", "response: " + responseText);
-						
 						if(Session.contains("session_id")) {
-							// New intent here
-							Log.d("login activity", "can login");
+							Intent intent = new Intent(LoginCaregiverActivity.this, CaregiverHomeActivity.class);
+							LoginCaregiverActivity.this.startActivity(intent);
 						}
 					}
 				}
