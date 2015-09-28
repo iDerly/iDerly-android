@@ -6,7 +6,10 @@ import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
+import com.iderly.control.Global;
 import com.iderly.control.HttpPostRequest;
+import com.iderly.control.HttpPostRequestListener;
+import com.iderly.control.SessionController;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -22,8 +25,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class LoginCaregiverActivity extends Activity {
-	public static final String postUrl = "http://iderly.kenrick95.org/caregiver/login";
-	
 	private LinearLayout loginMessagesPlaceholder;
 
 	@Override
@@ -33,6 +34,13 @@ public class LoginCaregiverActivity extends Activity {
 		
 		// Setup Login Messages
 		this.loginMessagesPlaceholder = (LinearLayout) findViewById(R.id.login_messages);
+		
+		if(SessionController.contains("session_id")) {
+			Log.d("cek session", "logged in before, sir!");
+			// New intent to HomeActivity?
+			Intent intent = new Intent(this, CaregiverHomeActivity.class);
+			this.startActivity(intent);
+		}
 	}
 
 	@Override
@@ -84,21 +92,19 @@ public class LoginCaregiverActivity extends Activity {
 		
 		if(valid == 1) {
 			ProgressDialog pd = ProgressDialog.show(this, null, "Logging in...", true);
-			new HttpPostRequest(postUrl, pd) {
-
+			Global.getLoginManager().doLogin(email, password, new HttpPostRequestListener (pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
-					((ProgressDialog) mixed[0]).dismiss();
-					Log.d("login caregiver", "status code: " + statusCode);
-					Log.d("login caregiver", "response: " + responseText);
+					((ProgressDialog) this.mixed[0]).dismiss();
+					
 					if(statusCode == HttpURLConnection.HTTP_OK) {
-						// Means status code 200
+						if(SessionController.contains("session_id")) {
+							Intent intent = new Intent(LoginCaregiverActivity.this, CaregiverHomeActivity.class);
+							LoginCaregiverActivity.this.startActivity(intent);
+						}
 					}
 				}
-				
-			}.addParameter("email", email)
-				.addParameter("password", password)
-				.send();
+			});
 		}
 	}
 	

@@ -3,6 +3,7 @@ package com.iderly.boundary;
 import com.iderly.boundary.*;
 import com.example.iderly.R;
 import com.iderly.control.GameManager;
+import com.iderly.control.Global;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -21,6 +22,8 @@ public class TitleActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Global.init(this);
+		
 		setContentView(R.layout.activity_title);
 		
 		// Register ToggleButton listener for Game Mode

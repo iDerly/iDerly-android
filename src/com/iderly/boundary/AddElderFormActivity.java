@@ -9,8 +9,15 @@ import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
 import com.iderly.control.Global;
+import com.iderly.control.HttpPostRequest;
+import com.iderly.control.HttpPostRequestListener;
+import com.iderly.control.UserManager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,6 +33,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class AddElderFormActivity extends Activity {
+	public static String addElderPOSTUrl = "https://iderly.kenrick95.org/caregiver/add_elder";
+	
 	/**
 	 * Constant definition for image selection for profile picture
 	 */
@@ -183,7 +192,24 @@ public class AddElderFormActivity extends Activity {
 		}
 		
 		if (valid == 1) {
+			ProgressDialog pd = ProgressDialog.show(this, null, "Adding elder...", true);
 			// ADD ELDER HERE!!
+			UserManager.registerElder(elderName, elderDeviceId
+					, profilePictureString, new HttpPostRequestListener(pd) {
+				@Override
+				public void onFinish(int statusCode, String responseText) {
+					((ProgressDialog) this.mixed[0]).dismiss();
+					new AlertDialog.Builder(AddElderFormActivity.this)
+						.setMessage("Added new elder!")
+						.setNeutralButton("OK", new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+							}
+						})
+						.show();
+				}
+			});
 		}
 	}
 }

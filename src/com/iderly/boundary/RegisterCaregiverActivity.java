@@ -2,14 +2,24 @@ package com.iderly.boundary;
 
 import java.net.HttpURLConnection;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
+import com.iderly.control.Global;
 import com.iderly.control.HttpPostRequest;
+import com.iderly.control.HttpPostRequestListener;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -22,7 +32,6 @@ import android.widget.TextView;
 
 public class RegisterCaregiverActivity extends Activity {
 	public static final int PASSWORD_MIN_LENGTH = 6;
-	public static final String postUrl = "http://iderly.kenrick95.org/caregiver/register";
 	
 	private LinearLayout registerMessages;
 
@@ -96,23 +105,33 @@ public class RegisterCaregiverActivity extends Activity {
 		
 		if(valid == 1) {
 			ProgressDialog pd = ProgressDialog.show(this, null, "Registering user...", true);
-			new HttpPostRequest(postUrl, pd) {
-
+			Global.getRegisterManager().doRegister(email, password, name, new HttpPostRequestListener(pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
-					((ProgressDialog) mixed[0]).dismiss();
-					Log.d("register caregiver", "status code: " + statusCode);
-					Log.d("register caregiver", "response text: " + responseText);
+					((ProgressDialog) this.mixed[0]).dismiss();
+					
+					Log.d("register caregiver", "response: " + responseText);
 					if(statusCode == HttpURLConnection.HTTP_OK) {
-						// Means status code 200
+						// OK
+						try {
+							JSONObject response = new JSONObject(responseText);
+							if(response.getInt("status") == 0) {
+								new AlertDialog.Builder(RegisterCaregiverActivity.this)
+									.setMessage("Register successful!")
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									});
+							}
+						} catch (JSONException e) {
+							// Kenrick or the Internet's fault
+						}
+						
 					}
 				}
-				
-			}.addParameter("email", email)
-				.addParameter("password", password)
-				.addParameter("name", name)
-				.addParameter("user_id", "") // User ID is missing
-				.send();
+			});
 		}
 	}
 	
