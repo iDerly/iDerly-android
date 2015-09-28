@@ -10,8 +10,14 @@ import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
 import com.iderly.control.Global;
 import com.iderly.control.HttpPostRequest;
+import com.iderly.control.HttpPostRequestListener;
+import com.iderly.control.UserManager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -186,16 +192,24 @@ public class AddElderFormActivity extends Activity {
 		}
 		
 		if (valid == 1) {
+			ProgressDialog pd = ProgressDialog.show(this, null, "Adding elder...", true);
 			// ADD ELDER HERE!!
-			new HttpPostRequest(addElderPOSTUrl) {
+			UserManager.registerElder(elderName, elderDeviceId
+					, profilePictureString, new HttpPostRequestListener(pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
-					// WTF?
+					((ProgressDialog) this.mixed[0]).dismiss();
+					new AlertDialog.Builder(AddElderFormActivity.this)
+						.setMessage("Added new elder!")
+						.setNeutralButton("OK", new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dialog.dismiss();
+							}
+						})
+						.show();
 				}
-			}.addParameter("name", elderName)
-				.addParameter("elder_device_id", Global.deviceId)
-				.addParameter("caregiver_device_id", "")
-				.send();
+			});
 		}
 	}
 }

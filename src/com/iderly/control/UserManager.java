@@ -7,6 +7,8 @@ import com.iderly.entity.Photo;
 import com.iderly.entity.User;
 
 public class UserManager {
+	public static String addElderPOSTUrl = "http://iderly.kenrick95.org/caregiver/add_elder";
+	
 	private static UserManager instance = new UserManager();
 	private User user;
 	
@@ -38,7 +40,17 @@ public class UserManager {
 		return c;
 	}
 	
-	public void registerUser () {
-		
+	public static void registerElder(String elderName, String elderDeviceId
+			, String profilePictureString, HttpPostRequestListener listener) {
+		new HttpPostRequest(addElderPOSTUrl, listener) {
+			@Override
+			public void onFinish(int statusCode, String responseText) {
+				((HttpPostRequestListener) this.mixed[0]).onFinish(statusCode, responseText);
+			}
+		}.addParameter("elder_name", elderName)
+			.addParameter("elder_device_id", elderDeviceId)
+			.addParameter("caregiver_device_id", Global.deviceId)
+			.addParameter("profile_picture_str64", profilePictureString)
+			.send();
 	}
 }
