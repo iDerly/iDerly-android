@@ -10,6 +10,9 @@ public class Photo implements Parcelable {
 	private String imageBase64;
 	private String name;
 	private String remarks;
+
+	private int displayCount;
+	private int correctCount;
 	
 	public Photo (String imageBase64, String name, String remarks) {
 		this.imageBase64 = imageBase64;
@@ -31,6 +34,26 @@ public class Photo implements Parcelable {
 	
 	public Bitmap getImageBitmap () {
 		return Global.getImageManager().decodeImageBase64(this.imageBase64);
+	}
+
+	public int getDisplayCount(){
+		return this.displayCount;
+	}
+
+	public int getCorrectCount(){
+		return this.correctCount;
+	}
+	
+	public double getCorrectRatio(){
+		return ((double)this.correctCount/(double)this.displayCount);
+	}
+
+	public void incDisplayCount(){
+		this.displayCount += 1;
+	}
+
+	public void incCorrectCount(){
+		this.correctCount += 1;
 	}
 	
 	// PARCELABLE IMPLEMENTATION
