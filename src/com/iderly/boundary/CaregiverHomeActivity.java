@@ -2,6 +2,8 @@ package com.iderly.boundary;
 
 import java.util.ArrayList;
 
+import junit.framework.Assert;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
@@ -48,6 +50,9 @@ public class CaregiverHomeActivity extends ListActivity {
 		
 		// Set the items in the list --> this data must be fetched when login!!
 		// So, in this state, tbe getElders() should have had an ArrayList already
+		Assert.assertNotNull(Global.getUserManager().getUser()); // fail here
+		Assert.assertTrue(Global.getUserManager().getUser() instanceof Caregiver);
+		Assert.assertNotNull(((Caregiver) Global.getUserManager().getUser()).getElders());
 		this.eldersList = ((Caregiver) (Global.getUserManager().getUser())).getElders();
 //		this.eldersList = new ArrayList<User> ();
 //		User u = new User("e@e.com", "test1", User.ELDER, "Tester", 0, 0.0, null, null);

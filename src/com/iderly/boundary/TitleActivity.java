@@ -1,9 +1,10 @@
 package com.iderly.boundary;
 
-import com.iderly.boundary.*;
 import com.example.iderly.R;
 import com.iderly.control.GameManager;
 import com.iderly.control.Global;
+import com.iderly.control.HttpPostRequestListener;
+import com.iderly.control.SessionController;
 
 import android.app.ActionBar;
 import android.app.Activity;
