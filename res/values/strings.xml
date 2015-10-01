@@ -48,6 +48,21 @@
     <string name="Text_ElderProfile_AverageScore">95.5</string>
     <string name="Label_ElderProfile_ProfilePicture">Picture</string>
     <string name="Text_ElderProfile_EditButton">Edit Profile</string>
-    <string name="title_activity_edit_elder_profile">EditElderProfileActivity</string>
+    <string name="title_activity_edit_elder_profile">Edit Elder Profile</string>
+    <string name="Text_ElderProfile_DeleteButton">Delete Elder</string>
+    <string name="Text_EditElder_ElderName">Elder\'s Name</string>
+    <string name="Text_EditElder_ElderDeviceId">Elder\'s Device ID</string>
+    <string name="ButtonText_EditElder_SaveButton">Save</string>
+    <string name="Label_PhotoGallery_Name">Name</string>
+    <string name="Text_PhotoGallery_Name">Kenrick Anggara</string>
+    <string name="Label_PhotoGallery_Remarks">Remarks</string>
+    <string name="Text_PhotoGallery_Remarks">Remarks 1 2 3</string>
+    <string name="Button_PhotoGallery_EditPhoto">Edit</string>
+    <string name="Button_PhotoGallery_DeletePhoto">Delete</string>
+    <string name="title_activity_elder_photo_gallery_edit_photo">ElderPhotoGalleryEditPhoto</string>
+    <string name="Label_PhotoGallery_Edit_Photo_Name">Name</string>
+    <string name="Label_PhotoGallery_EditPhoto_Remarks">Remarks</string>
+    <string name="Button_PhotoGallery_EditPhoto_SaveButton">Save</string>
+    <string name="Button_AddPhoto_Label">Add Photo</string>
 
 </resources>

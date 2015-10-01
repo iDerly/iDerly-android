@@ -40,6 +40,8 @@ public class ElderPhotoListAdapter extends ArrayAdapter<Photo> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
+		
+		// TODO: FINISH UP THE LAYOUT FOR THE LIST!!
 		if (p != null) {
 			holder.photoRemarks.setText(p.getRemarks());
 		}

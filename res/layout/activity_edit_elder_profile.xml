@@ -7,10 +7,77 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.iderly.boundary.EditElderProfileActivity" >
-
-    <TextView
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/LL_EditElder_UpdateMessage" >
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LL_EditElder_ElderProfilePicture"
+        android:layout_below="@+id/LL_EditElder_UpdateMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_marginBottom="5dp"
+        android:layout_centerHorizontal="true" >
+        
+        <ImageView
+            android:id="@+id/ImageView_EditElder_ElderProfilePicture"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/ElderProfilePictureDescription" />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        android:id="@+id/LL_EditElder_ElderName"
+        android:layout_below="@+id/LL_EditElder_ElderProfilePicture" >
+
+        <EditText 
+	         android:id="@+id/EditText_EditElder_ElderName"
+	         android:inputType="text"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:padding="10dp"
+	         android:layout_marginBottom="10dp"
+	         android:hint="@string/Text_EditElder_ElderName"
+	         android:textColorHint="#333333" />
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        android:id="@+id/LL_EditElder_ElderDeviceId"
+        android:layout_below="@+id/LL_EditElder_ElderName" >
+
+        <EditText 
+	         android:id="@+id/EditText_EditElder_ElderDeviceId"
+	         android:inputType="text"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:padding="10dp"
+	         android:layout_marginBottom="10dp"
+	         android:hint="@string/Text_EditElder_ElderDeviceId"
+	         android:textColorHint="#333333" />
+	        
+    </LinearLayout>
+    
+    <Button 
+        android:id="@+id/Button_EditElder_SaveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/ButtonText_EditElder_SaveButton"
+        android:layout_below="@+id/LL_EditElder_ElderDeviceId"
+        android:onClick="saveElderProfile" />
 
 </RelativeLayout>
