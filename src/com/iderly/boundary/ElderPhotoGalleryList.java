@@ -13,6 +13,7 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -50,7 +51,18 @@ public class ElderPhotoGalleryList extends ListFragment {
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = inflater.inflate(R.layout.elder_photo_gallery_list_fragment, container, false);
+		
 		this.headerView = inflater.inflate(R.layout.photo_gallery_list_header, container, false);
+		Button b = (Button) this.headerView.findViewById(R.id.Button_AddPhoto);
+		
+		b.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent addPhoto = new Intent (ElderPhotoGalleryList.this.getActivity(), ElderAddPhotoActivity.class);
+				startActivity(addPhoto);
+			}
+		});
 		
 		return view;
 	}

@@ -64,5 +64,11 @@
     <string name="Label_PhotoGallery_EditPhoto_Remarks">Remarks</string>
     <string name="Button_PhotoGallery_EditPhoto_SaveButton">Save</string>
     <string name="Button_AddPhoto_Label">Add Photo</string>
+    <string name="title_activity_elder_add_photo">ElderAddPhotoActivity</string>
+    <string name="LabelText_AddPhoto_PhotoName">Name</string>
+    <string name="LabelText_AddPhoto_PhotoRemarks">Remarks</string>
+    <string name="Label_PhotoImage">Photo</string>
+    <string name="ButtonText_PhotoImage">Select Image</string>
+    <string name="AddPhotoButton_LabelText">Add Photo</string>
 
 </resources>
