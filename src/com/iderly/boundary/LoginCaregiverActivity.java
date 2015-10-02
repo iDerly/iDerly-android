@@ -116,6 +116,7 @@ public class LoginCaregiverActivity extends Activity {
 //		startActivity(forgotPasswordIntent);
 		
 		// RETRIEVE DEVICE ID, HTTP REQUEST HERE!!
+		// NO NEED TO OPEN A NEW INTENT SINCE WE ARE USING THIS PHONE'S DEVICE ID!
 	}
 	
 	// Start Register Caregiver Activity
