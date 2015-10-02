@@ -1,13 +1,22 @@
 package com.iderly.boundary;
 
+import java.net.HttpURLConnection;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
+import com.iderly.control.Global;
+import com.iderly.control.HttpPostRequest;
 import com.iderly.entity.User;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class EditElderProfileActivity extends Activity {
+	public static String postUrl = "http://iderly.kenrick95.org/elder/update";
+	
 	private LinearLayout editElderProfileMessages;
 	private User elder;
 
@@ -85,7 +96,28 @@ public class EditElderProfileActivity extends Activity {
 		}
 		
 		if (valid == 1) {
-			// SEND HTTP REQUEST HERE!
+			ProgressDialog pd = ProgressDialog.show(this, null, "Fetching photos...", true);
+			new HttpPostRequest(postUrl, pd) {
+				@Override
+				public void onFinish(int statusCode, String responseText) {
+					((ProgressDialog) this.mixed[0]).dismiss();
+					
+					Log.d("fetch photo", "response: " + responseText);
+					if(statusCode == HttpURLConnection.HTTP_OK) {;
+						try {
+							JSONObject response = new JSONObject(responseText);
+							
+							// lanjut sini
+							
+						} catch (JSONException e) {
+							// As always, either Kenrick or the Internet's fault
+						}
+					}
+				}
+			}.addParameter("device_id", elderDeviceId)
+				.addParameter("attachment", "")
+				.addParameter("name", elderName)
+				.send();
 		}
 	}
 }

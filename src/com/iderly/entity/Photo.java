@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import com.iderly.control.Global;
 
 public class Photo implements Parcelable {
+	private int id = -1;
 	private String imageBase64;
 	private String name;
 	private String remarks;
@@ -84,4 +85,8 @@ public class Photo implements Parcelable {
 			return new Photo[size];
 		}
 	};
+
+	public int getId() {
+		return id;
+	}
 }

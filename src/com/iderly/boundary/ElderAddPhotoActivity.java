@@ -27,6 +27,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -201,11 +202,13 @@ public class ElderAddPhotoActivity extends Activity {
 			// HTTP REQUEST!!
 			// Ribut kali kau!
 			
-			ProgressDialog pd = ProgressDialog.show(this, null, "Adding hansum photo...");
+			ProgressDialog pd = ProgressDialog.show(this, null, "Adding hansum photo...", true);
 			new HttpPostRequest(postUrl, pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
 					((ProgressDialog) this.mixed[0]).dismiss();
+					
+					Log.d("add elder's photo", "response: " + responseText);
 					if(statusCode == HttpURLConnection.HTTP_OK) {
 						try {
 							JSONObject response = new JSONObject(responseText);
@@ -236,7 +239,11 @@ public class ElderAddPhotoActivity extends Activity {
 						
 					}
 				}
-			}.send();
+			}.addParameter("attachmnt", pictureString)
+				.addParameter("device_id", Global.deviceId)
+				.addParameter("name", photoName)
+				.addParameter("remarks", photoRemarks)
+				.send();
 		}
 	}
 }

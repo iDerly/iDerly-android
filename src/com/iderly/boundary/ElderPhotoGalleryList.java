@@ -1,15 +1,26 @@
 package com.iderly.boundary;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.example.iderly.R;
 import com.iderly.control.ElderPhotoListAdapter;
+import com.iderly.control.Global;
+import com.iderly.control.HttpPostRequest;
 import com.iderly.entity.Photo;
 import com.iderly.entity.User;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +29,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class ElderPhotoGalleryList extends ListFragment {
+	public static String postUrl = "http://iderly.kenrick95.org/elder/photos/" + Global.deviceId;
+	
 	private ArrayList<Photo> photos;
 	private User elder;
 	private ElderPhotoListAdapter mAdapter;
@@ -78,9 +91,25 @@ public class ElderPhotoGalleryList extends ListFragment {
 		this.startActivity(intent);
 	}
 	
-	
-	// TODO: PETER!
 	private void fetchPhotos () {
-		// CALL HTTP REQUEST AND ASSIGN TO THE ARRAY LIST OF PHOTOS
+		ProgressDialog pd = ProgressDialog.show(this.getActivity(), null, "Fetching photos...", true);
+		new HttpPostRequest(postUrl, pd) {
+			@Override
+			public void onFinish(int statusCode, String responseText) {
+				((ProgressDialog) this.mixed[0]).dismiss();
+				
+				Log.d("fetch photo", "response: " + responseText);
+				if(statusCode == HttpURLConnection.HTTP_OK) {;
+					try {
+						JSONObject response = new JSONObject(responseText);
+						
+						// lanjut sini
+						
+					} catch (JSONException e) {
+						// As always, either Kenrick or the Internet's fault
+					}
+				}
+			}
+		}.send();
 	}
 }

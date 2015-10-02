@@ -1,13 +1,25 @@
 package com.iderly.boundary;
 
+import java.net.HttpURLConnection;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
+import com.iderly.control.Global;
+import com.iderly.control.HttpPostRequest;
 import com.iderly.entity.Photo;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +30,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ElderPhotoGalleryEditPhotoActivity extends Activity {
+	public static String postUrl = "http://iderly.kenrick95.org/elder/update_photo";
+	
 	private Photo photo;
 	private LinearLayout editPhotoMessages;
 
@@ -88,6 +102,46 @@ public class ElderPhotoGalleryEditPhotoActivity extends Activity {
     	
     	if (valid == 1) {
     		// HTTP POST REQUEST HERE TO EDIT!!
+    		// Nasi goreng jancuk!
+    		
+    		ProgressDialog pd = ProgressDialog.show(this, null, "Peter ganteng!", true);
+    		new HttpPostRequest(postUrl, pd) {
+				@Override
+				public void onFinish(int statusCode, String responseText) {
+					((ProgressDialog) this.mixed[0]).dismiss();
+					
+					Log.d("edit photo", "response: " + responseText);
+					if(statusCode == HttpURLConnection.HTTP_OK) {;
+						try {
+							JSONObject response = new JSONObject(responseText);
+							
+							AlertDialog.Builder adb = new AlertDialog.Builder(ElderPhotoGalleryEditPhotoActivity.this);
+							if(response.getInt("status") == 0) {
+								adb.setMessage("Editting photo is successful!")
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog,	int which) {
+											dialog.dismiss();
+										}
+									}).show();
+							} else {
+								adb.setMessage(response.getJSONArray("message").getString(0))
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									}).show();
+							}
+						} catch (JSONException e) {
+							// As always, either Kenrick or the Internet's fault
+						}
+					}
+				}
+    		}.addParameter("name", name)
+    			.addParameter("remarks", remarks)
+    			.addParameter("device_id", Global.deviceId)
+    			.send();
     	}
     }
 }
