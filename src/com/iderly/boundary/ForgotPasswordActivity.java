@@ -2,6 +2,9 @@ package com.iderly.boundary;
 
 import java.net.HttpURLConnection;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
@@ -26,8 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ForgotPasswordActivity extends Activity {
-	public static final String postUrl = "http://iderly.kenrick95.org/";
-	
 	private LinearLayout forgotPasswordMessages;
 	
 	@Override
@@ -83,14 +84,34 @@ public class ForgotPasswordActivity extends Activity {
 					
 					Log.d("forgot password", "response: " + responseText);
 					if(statusCode == HttpURLConnection.HTTP_OK) {
-						new AlertDialog.Builder(ForgotPasswordActivity.this)
-							.setMessage("Forgot password request confirmed")
-							.setNeutralButton("OK", new OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-								}
-							});
+						try {
+							JSONObject response = new JSONObject(responseText);
+							
+							if(response.getInt("status") == 0) {
+								new AlertDialog.Builder(ForgotPasswordActivity.this)
+								.setMessage("Forgot password request confirmed")
+								.setNeutralButton("OK", new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+										ForgotPasswordActivity.this.finish();
+									}
+								}).show();
+							
+							} else {
+								new AlertDialog.Builder(ForgotPasswordActivity.this)
+								.setMessage(response.getJSONArray("message").getString(0))
+								.setNeutralButton("OK", new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+									}
+								}).show();
+							}
+						} catch (JSONException e) {
+							// Kenrick or the Internet's fault
+						}
+						
 					}
 				}
 			});

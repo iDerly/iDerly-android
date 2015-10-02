@@ -4,7 +4,7 @@ public class RegisterManager {
 	private static RegisterManager instance = new RegisterManager();
 	
 	public static final String registerPOSTUrl = "http://iderly.kenrick95.org/caregiver/register";
-	public static final String forgotPasswordPOSTUrl = "http://iderly.kenrick95.org/";
+	public static final String forgotPasswordPOSTUrl = "http://iderly.kenrick95.org/caregiver/forgot";
 	
 	public static RegisterManager getInstance () {
 		return instance;
@@ -32,6 +32,7 @@ public class RegisterManager {
 				((HttpPostRequestListener) this.mixed[0]).onFinish(statusCode, responseText);
 			}
 		}.addParameter("email", email)
+			.addParameter("device_id", Global.deviceId)
 			.send();
 	}
 }

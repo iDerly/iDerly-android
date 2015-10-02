@@ -10,6 +10,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ public class TitleActivity extends Activity {
 		Global.init(this);
 		
 		SessionController.remove("session_id");
+		Log.d("device id", ": " + Global.deviceId);
 		
 		setContentView(R.layout.activity_title);
 		
@@ -47,7 +49,7 @@ public class TitleActivity extends Activity {
 		this.actionBar = this.getActionBar();
 		this.actionBar.setSubtitle("Welcome!");
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
