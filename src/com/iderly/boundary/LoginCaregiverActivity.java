@@ -97,9 +97,11 @@ public class LoginCaregiverActivity extends Activity {
 				public void onFinish(int statusCode, String responseText) {
 					((ProgressDialog) this.mixed[0]).dismiss();
 					
+					Log.d("login caregiver", "response: " + responseText);
 					if(statusCode == HttpURLConnection.HTTP_OK) {
 						if(SessionController.contains("session_id")) {
 							Intent intent = new Intent(LoginCaregiverActivity.this, CaregiverHomeActivity.class);
+							LoginCaregiverActivity.this.finish();
 							LoginCaregiverActivity.this.startActivity(intent);
 						}
 					}
