@@ -25,6 +25,8 @@ public class TitleActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Global.init(this);
 		
+		SessionController.remove("session_id");
+		
 		setContentView(R.layout.activity_title);
 		
 		// Register ToggleButton listener for Game Mode
