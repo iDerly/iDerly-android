@@ -3,12 +3,17 @@ package com.iderly.boundary;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
 import com.iderly.control.Global;
+import com.iderly.control.HttpPostRequest;
 import com.iderly.control.HttpPostRequestListener;
 import com.iderly.control.UserManager;
 
@@ -32,6 +37,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ElderAddPhotoActivity extends Activity {
+	public static String postUrl = "http://iderly.kenrick95.org/elder/add_photo";
+	
 	/**
 	 * Constant definition for image selection for profile picture
 	 */
@@ -192,6 +199,44 @@ public class ElderAddPhotoActivity extends Activity {
 		if (valid == 1) {
 			// ADD PHOTO HERE
 			// HTTP REQUEST!!
+			// Ribut kali kau!
+			
+			ProgressDialog pd = ProgressDialog.show(this, null, "Adding hansum photo...");
+			new HttpPostRequest(postUrl, pd) {
+				@Override
+				public void onFinish(int statusCode, String responseText) {
+					((ProgressDialog) this.mixed[0]).dismiss();
+					if(statusCode == HttpURLConnection.HTTP_OK) {
+						try {
+							JSONObject response = new JSONObject(responseText);
+							if(response.getInt("status") == 0) {
+								new AlertDialog.Builder(ElderAddPhotoActivity.this)
+									.setMessage("Adding photo success!")
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									})
+									.show();
+							} else {
+								new AlertDialog.Builder(ElderAddPhotoActivity.this)
+									.setMessage(response.getJSONArray("message").getString(0))
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									})
+									.show();
+							}
+						} catch (JSONException e) {
+							// Kenrick or the Internet's fault
+						}
+						
+					}
+				}
+			}.send();
 		}
 	}
 }
