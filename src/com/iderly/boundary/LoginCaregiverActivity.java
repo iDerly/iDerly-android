@@ -112,8 +112,11 @@ public class LoginCaregiverActivity extends Activity {
 	
 	// Start Forgot Password Activity
 	public void forgotPasswordCaregiver (View view) {
-		Intent forgotPasswordIntent = new Intent(this, ForgotPasswordActivity.class);
-		startActivity(forgotPasswordIntent);
+//		Intent forgotPasswordIntent = new Intent(this, ForgotPasswordActivity.class);
+//		startActivity(forgotPasswordIntent);
+		
+		// RETRIEVE DEVICE ID, HTTP REQUEST HERE!!
+		// NO NEED TO OPEN A NEW INTENT SINCE WE ARE USING THIS PHONE'S DEVICE ID!
 	}
 	
 	// Start Register Caregiver Activity
