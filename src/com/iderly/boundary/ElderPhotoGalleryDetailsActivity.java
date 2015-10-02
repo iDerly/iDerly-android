@@ -8,9 +8,13 @@ import com.iderly.entity.Photo;
 import com.iderly.entity.User;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ElderPhotoGalleryDetailsActivity extends Activity {
 	private Photo photo;
@@ -20,7 +24,11 @@ public class ElderPhotoGalleryDetailsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_elder_photo_gallery_details);
 		
-		this.photo = this.getIntent().getExtras().getParcelable("photo");
+		// This Photo object will be passed to the Extra when the Photo list item is clicked
+		this.photo = (Photo) this.getIntent().getExtras().getParcelable("photo");
+		((ImageView) findViewById(R.id.ImageView_PhotoGallery_Photo)).setImageBitmap(this.photo.getImageBitmap());;
+		((TextView) findViewById(R.id.Text_PhotoGallery_Name)).setText(this.photo.getName());
+		((TextView) findViewById(R.id.Text_PhotoGallery_Remarks)).setText(this.photo.getRemarks());
 	}
 
 	@Override
@@ -40,5 +48,16 @@ public class ElderPhotoGalleryDetailsActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void openEditPhotoGallery (View view) {
+		Intent intent = new Intent(this, ElderPhotoGalleryEditPhotoActivity.class);
+		intent.putExtra("photo", this.photo);
+		
+		this.startActivity(intent);
+	}
+	 
+	public void deletePhotoGallery (View view) {
+		// CALL HTTP REQUEST HERE!!
 	}
 }

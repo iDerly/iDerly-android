@@ -42,6 +42,8 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 		this.viewPager = (ViewPager) findViewById(R.id.pager);
 		this.actionBar.removeAllTabs();
 		
+		// The "elder" object is passed into the constructor
+		// This is a way of passing the current clicked "elder" object to the corresponding fragments in the later part
 		this.mAdapter = new ElderDetailsPagerAdapter(this.getSupportFragmentManager(), elder);
 		this.viewPager.setAdapter(this.mAdapter);
 		

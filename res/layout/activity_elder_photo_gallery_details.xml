@@ -1,16 +1,85 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.iderly.boundary.ElderPhotoGalleryDetailsActivity" >
-
-    <TextView
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp" >
+    
+    <LinearLayout 
+        android:id="@+id/LL_PhotoGallery_Photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_horizontal" >
+        
+        <ImageView
+            android:id="@+id/ImageView_PhotoGallery_Photo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/ElderProfilePictureDescription" />
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LL_PhotoGallery_Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_marginBottom="5dp" >        
+        
+        <TextView
+            android:id="@+id/Label_PhotoGallery_Name"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Label_PhotoGallery_Name" />
+        
+        <TextView
+            android:id="@+id/Text_PhotoGallery_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Text_PhotoGallery_Name" />
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LL_PhotoGallery_Remarks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp" >
+        
+        <TextView
+            android:id="@+id/Label_PhotoGallery_Remarks"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Label_PhotoGallery_Remarks" />
+        
+        <TextView
+            android:id="@+id/Text_PhotoGallery_Remarks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Text_PhotoGallery_Remarks" />
+        
+    </LinearLayout>
+    
+    
+        
+	<Button
+	    android:id="@+id/Button_PhotoGallery_EditPhoto"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="15dp"
+	    android:layout_gravity="center_horizontal"
+	    android:text="@string/Button_PhotoGallery_EditPhoto"
+	    android:onClick="openEditPhotoGallery" />
+	
+	<Button
+	    android:id="@+id/Button_PhotoGallery_DeletePhoto"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="15dp"
+	    android:layout_gravity="center_horizontal"
+	    android:text="@string/Button_PhotoGallery_DeletePhoto"
+	    android:onClick="deletePhotoGallery" />
 
-</RelativeLayout>
+</LinearLayout>

@@ -71,6 +71,24 @@ public class CaregiverHomeActivity extends ListActivity {
 		
 		// Set the items in the list --> this data must be fetched when login!!
 		// So, in this state, tbe getElders() should have had an ArrayList already
+<<<<<<< HEAD
+=======
+		Assert.assertNotNull(Global.getUserManager().getUser()); // fail here
+		Assert.assertTrue(Global.getUserManager().getUser() instanceof Caregiver);
+		Assert.assertNotNull(((Caregiver) Global.getUserManager().getUser()).getElders());
+		
+		
+		// YOU NEED TO FETCH THE DATA FIRST WHEN THE CAREGIVER IS LOGGED IN!!
+		// LOAD THE CAREGIVER DATA FROM DB, STORE IT ACCORDINGLY TO A "CAREGIVER" OBJECT, WHICH IS THEN UPCASTED TO A "USER" OBJECT IN USERMANAGER!! --> USE HTTP REQUEST!!!!!
+		
+		this.eldersList = ((Caregiver) (Global.getUserManager().getUser())).getElders();
+		
+		
+		
+		
+		
+		// THESE FEW LINES OF CODES BELOW IS USED ONLY FOR TESTING --> because don't have elderList data yet
+>>>>>>> a4c08a0ec828cf13443da60a2cc340174508f738
 //		this.eldersList = new ArrayList<User> ();
 //		User u = new User("e@e.com", "test1", User.ELDER, "Tester", 0, 0.0, null, null);
 //		

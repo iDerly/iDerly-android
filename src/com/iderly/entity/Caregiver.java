@@ -7,10 +7,12 @@ import android.os.Parcelable;
 
 public class Caregiver extends User implements Parcelable {
 	 private ArrayList<User> elders;
+	 private String email;
 	 
-	 public Caregiver (String email, String userId, String type, String name, int gamesPlayed, double avgScore, ArrayList<Photo> photosGallery, ArrayList<User> elders) {
-		 super(email, userId, type, name, gamesPlayed, avgScore, null, photosGallery);
+	 public Caregiver (String email, String deviceId, String type, String name, ArrayList<Photo> photosGallery, ArrayList<User> elders) {
+		 super(deviceId, type, name, null, photosGallery);
 		 this.elders = elders;
+		 this.email = email;
 	 }
 	 
 	 public ArrayList<User> getElders () {
@@ -25,8 +27,8 @@ public class Caregiver extends User implements Parcelable {
 		 this.elders.add(elder);
 	 }
 	 
-	 public void registerElder (String email, String userId, String name, Photo profPic) {
-		 User u = new User(email, userId, User.CAREGIVER, name, 0, 0.0, profPic, new ArrayList<Photo> ());
+	 public void registerElder (String email, String deviceId, String name, Photo profPic) {
+		 User u = new User(deviceId, User.CAREGIVER, name, profPic, new ArrayList<Photo> ());
 		 this.elders.add(u);
 	 }
 	 
@@ -34,11 +36,12 @@ public class Caregiver extends User implements Parcelable {
 	 
 	 // PARCELABLE IMPLEMENTATION
 	 public Caregiver (Parcel in) {
-		 super(in.readString(), in.readString(), in.readString(), in.readString(), in.readInt(),
-				 in.readDouble(), (Photo) in.readParcelable(Photo.class.getClassLoader()), 
+		 super(in.readString(), in.readString(), in.readString(),
+				 (Photo) in.readParcelable(Photo.class.getClassLoader()), 
 				 (ArrayList<Photo>) in.readArrayList(Photo.class.getClassLoader()));
 		 
 		this.elders = (ArrayList<User>) in.readArrayList(User.class.getClassLoader());
+		this.email = in.readString();
 	 }
 	 
 	 @Override
@@ -48,15 +51,13 @@ public class Caregiver extends User implements Parcelable {
 	 
 	 @Override
 	 public void writeToParcel (Parcel dest, int flags) {
-		 dest.writeString(this.getEmail());
 		 dest.writeString(this.getDeviceId());
 		 dest.writeString(this.getType());
 		 dest.writeString(this.getName());
-		 dest.writeInt(this.getGamesPlayed());
-		 dest.writeDouble(this.getAvgScore());
 		 dest.writeParcelable(this.getProfPic(), flags);
 		 dest.writeList(this.getPhotosGallery());
 		 dest.writeList(this.getElders());
+		 dest.writeString(this.email);
 	 }
 	 
 	 public static final Parcelable.Creator<Caregiver> CREATOR = new Parcelable.Creator<Caregiver>() {

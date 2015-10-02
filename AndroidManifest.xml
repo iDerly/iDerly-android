@@ -60,6 +60,14 @@
             android:name="com.iderly.boundary.EditElderProfileActivity"
             android:label="@string/title_activity_edit_elder_profile" >
         </activity>
+        <activity
+            android:name="com.iderly.boundary.ElderPhotoGalleryEditPhotoActivity"
+            android:label="@string/title_activity_elder_photo_gallery_edit_photo" >
+        </activity>
+        <activity
+            android:name="com.iderly.boundary.ElderAddPhotoActivity"
+            android:label="@string/title_activity_elder_add_photo" >
+        </activity>
     </application>
 
 </manifest>

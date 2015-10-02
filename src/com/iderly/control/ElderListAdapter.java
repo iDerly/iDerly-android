@@ -44,6 +44,8 @@ public class ElderListAdapter extends ArrayAdapter<User> {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
+		
+		// TODO: FINISH UP THE LAYOUT FOR THE LIST!!
 		if (u != null) {
 			holder.elderIdText.setText(u.getName());
 //			holder.profilePicture.setImageBitmap(u.getProfPic().getImageBitmap());
