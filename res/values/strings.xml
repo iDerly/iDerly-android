@@ -70,5 +70,6 @@
     <string name="Label_PhotoImage">Photo</string>
     <string name="ButtonText_PhotoImage">Select Image</string>
     <string name="AddPhotoButton_LabelText">Add Photo</string>
+    <string name="Label_DeviceId">Device ID</string>
 
 </resources>

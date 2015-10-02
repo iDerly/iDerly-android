@@ -27,12 +27,12 @@ public final class R {
         public static final int logo_iderly=0x7f020002;
     }
     public static final class id {
-        public static final int ActionBar_LoginCaregiver=0x7f080051;
+        public static final int ActionBar_LoginCaregiver=0x7f080052;
         public static final int AddElder_Btn=0x7f080008;
         public static final int AddPhoto_PhotoName_Field=0x7f080013;
         public static final int AddPhoto_PhotoRemarks_Field=0x7f080014;
         public static final int Button_AddElder=0x7f08003b;
-        public static final int Button_AddPhoto=0x7f08004e;
+        public static final int Button_AddPhoto=0x7f08004f;
         public static final int Button_EditElder_SaveButton=0x7f080010;
         public static final int Button_ElderProfilePicture=0x7f080007;
         public static final int Button_PhotoGallery_DeletePhoto=0x7f080022;
@@ -44,11 +44,11 @@ public final class R {
         public static final int EditText_PhotoGallery_Edit_Photo_Name=0x7f080027;
         public static final int ElderDeviceId_Field=0x7f080003;
         public static final int ElderName_Field=0x7f080002;
-        public static final int Field_PhotoRemarks=0x7f08003f;
+        public static final int Field_PhotoRemarks=0x7f080040;
         public static final int ForgotPassword_Messages=0x7f08002a;
         public static final int ImageView_EditElder_ElderProfilePicture=0x7f08000b;
         public static final int ImageView_ElderProfilePicture=0x7f080006;
-        public static final int ImageView_ElderProfile_ProfilePicture=0x7f08004b;
+        public static final int ImageView_ElderProfile_ProfilePicture=0x7f08004c;
         public static final int ImageView_PhotoGallery_EditPhoto=0x7f080025;
         public static final int ImageView_PhotoGallery_Photo=0x7f08001a;
         public static final int ImageView_PhotoImage=0x7f080016;
@@ -58,13 +58,13 @@ public final class R {
         public static final int LL_EditElder_ElderProfilePicture=0x7f08000a;
         public static final int LL_EditElder_UpdateMessage=0x7f080009;
         public static final int LL_EditPhoto_messages=0x7f080023;
-        public static final int LL_ElderListItem=0x7f08003c;
+        public static final int LL_ElderList_ElderDetails=0x7f08003c;
         public static final int LL_ElderName=0x7f080001;
         public static final int LL_ElderProfilePicture=0x7f080004;
-        public static final int LL_ElderProfile_AverageScore=0x7f080046;
-        public static final int LL_ElderProfile_DeviceId=0x7f080040;
-        public static final int LL_ElderProfile_Name=0x7f080043;
-        public static final int LL_ElderProfile_ProfilePicture=0x7f080049;
+        public static final int LL_ElderProfile_AverageScore=0x7f080047;
+        public static final int LL_ElderProfile_DeviceId=0x7f080041;
+        public static final int LL_ElderProfile_Name=0x7f080044;
+        public static final int LL_ElderProfile_ProfilePicture=0x7f08004a;
         public static final int LL_PhotoGallery_EditPhoto=0x7f080024;
         public static final int LL_PhotoGallery_EditPhoto_Name=0x7f080026;
         public static final int LL_PhotoGallery_Name=0x7f08001b;
@@ -72,24 +72,25 @@ public final class R {
         public static final int LL_PhotoGallery_Remarks=0x7f08001e;
         public static final int LabelText_ElderProfilePicture=0x7f080005;
         public static final int LabelText_PhotoImage=0x7f080015;
-        public static final int Label_ElderProfile_AverageScore=0x7f080047;
-        public static final int Label_ElderProfile_DeviceId=0x7f080041;
-        public static final int Label_ElderProfile_Name=0x7f080044;
-        public static final int Label_ElderProfile_ProfilePicture=0x7f08004a;
+        public static final int Label_ElderProfile_AverageScore=0x7f080048;
+        public static final int Label_ElderProfile_DeviceId=0x7f080042;
+        public static final int Label_ElderProfile_Name=0x7f080045;
+        public static final int Label_ElderProfile_ProfilePicture=0x7f08004b;
         public static final int Label_PhotoGallery_Name=0x7f08001c;
         public static final int Label_PhotoGallery_Remarks=0x7f08001f;
-        public static final int Label_PhotoRemarks=0x7f08003e;
+        public static final int Label_PhotoRemarks=0x7f08003f;
         public static final int RegisterForgotPassword_ButtonGroup=0x7f080031;
         public static final int Register_Btn=0x7f080037;
-        public static final int TextView_ElderName=0x7f08003d;
-        public static final int Text_ElderProfile_AverageScore=0x7f080048;
-        public static final int Text_ElderProfile_DeleteButton=0x7f08004d;
-        public static final int Text_ElderProfile_DeviceId=0x7f080042;
-        public static final int Text_ElderProfile_EditButton=0x7f08004c;
-        public static final int Text_ElderProfile_Name=0x7f080045;
+        public static final int TextView_DeviceId=0x7f08003d;
+        public static final int TextView_ElderName=0x7f08003e;
+        public static final int Text_ElderProfile_AverageScore=0x7f080049;
+        public static final int Text_ElderProfile_DeleteButton=0x7f08004e;
+        public static final int Text_ElderProfile_DeviceId=0x7f080043;
+        public static final int Text_ElderProfile_EditButton=0x7f08004d;
+        public static final int Text_ElderProfile_Name=0x7f080046;
         public static final int Text_PhotoGallery_Name=0x7f08001d;
         public static final int Text_PhotoGallery_Remarks=0x7f080020;
-        public static final int action_settings=0x7f08004f;
+        public static final int action_settings=0x7f080050;
         public static final int add_elder_messages=0x7f080000;
         public static final int add_photo_messages=0x7f080011;
         public static final int emailAddress_field=0x7f08002b;
@@ -108,7 +109,7 @@ public final class R {
         public static final int play_game_btn=0x7f080039;
         public static final int register_btn=0x7f080032;
         public static final int register_messages=0x7f080034;
-        public static final int title_activity_actionbar=0x7f080050;
+        public static final int title_activity_actionbar=0x7f080051;
     }
     public static final class layout {
         public static final int activity_add_elder_form=0x7f030000;
@@ -171,6 +172,7 @@ public final class R {
         public static final int LabelText_Name=0x7f050011;
         public static final int LabelText_Password=0x7f050012;
         public static final int LabelText_PasswordConfirm=0x7f050013;
+        public static final int Label_DeviceId=0x7f050045;
         public static final int Label_ElderName=0x7f050019;
         public static final int Label_ElderProfilePicture=0x7f05001e;
         public static final int Label_ElderProfile_AverageScore=0x7f05002b;
