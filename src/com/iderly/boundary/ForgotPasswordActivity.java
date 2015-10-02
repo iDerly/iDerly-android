@@ -76,45 +76,7 @@ public class ForgotPasswordActivity extends Activity {
 		}
 		
 		if(valid == 1) {
-			ProgressDialog pd = ProgressDialog.show(this, null, "Requesting reset password...", true);
-			Global.getRegisterManager().forgotPassword(email, new HttpPostRequestListener(pd) {
-				@Override
-				public void onFinish(int statusCode, String responseText) {
-					((ProgressDialog) this.mixed[0]).dismiss();
-					
-					Log.d("forgot password", "response: " + responseText);
-					if(statusCode == HttpURLConnection.HTTP_OK) {
-						try {
-							JSONObject response = new JSONObject(responseText);
-							
-							if(response.getInt("status") == 0) {
-								new AlertDialog.Builder(ForgotPasswordActivity.this)
-								.setMessage("Forgot password request confirmed")
-								.setNeutralButton("OK", new OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										dialog.dismiss();
-										ForgotPasswordActivity.this.finish();
-									}
-								}).show();
-							
-							} else {
-								new AlertDialog.Builder(ForgotPasswordActivity.this)
-								.setMessage(response.getJSONArray("message").getString(0))
-								.setNeutralButton("OK", new OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										dialog.dismiss();
-									}
-								}).show();
-							}
-						} catch (JSONException e) {
-							// Kenrick or the Internet's fault
-						}
-						
-					}
-				}
-			});
+			
 		}
 	}
 	

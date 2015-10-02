@@ -25,14 +25,13 @@ public class RegisterManager {
 			.send();
 	}
 	
-	public void forgotPassword(String email, HttpPostRequestListener listener) {
+	public void forgotPassword(HttpPostRequestListener listener) {
 		new HttpPostRequest(forgotPasswordPOSTUrl, listener) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {
 				((HttpPostRequestListener) this.mixed[0]).onFinish(statusCode, responseText);
 			}
-		}.addParameter("email", email)
-			.addParameter("device_id", Global.deviceId)
+		}.addParameter("device_id", Global.deviceId)
 			.send();
 	}
 }
