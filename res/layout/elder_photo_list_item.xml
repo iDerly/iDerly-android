@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-	<LinearLayout
+    <ImageView
+        android:id="@+id/ImageView_Photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+    
+    <LinearLayout
+        android:id="@+id/LL_ElderPhotoList_Details"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:orientation="horizontal" >
+        android:layout_height="100dp"
+        android:layout_toRightOf="@+id/ImageView_Photo"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical" >
         
 	    <TextView
-	        android:id="@+id/Label_PhotoRemarks"
-	        android:layout_width="150dp"
+	        android:id="@+id/Field_PhotoName"
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:text="@string/Label_PhotoRemarks" />
+	        android:layout_marginTop="10dp"
+	        android:layout_marginBottom="10dp"
+	        android:textSize="18sp"
+	        android:text="@string/TEST_PhotoRemarks" />
 	    
 	    <TextView
 	        android:id="@+id/Field_PhotoRemarks"
-	        android:layout_width="wrap_content"
+	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
 	        android:text="@string/TEST_PhotoRemarks" />
 	    
-	 </LinearLayout>
-</LinearLayout>
+    </LinearLayout>
+		    
+</RelativeLayout>
