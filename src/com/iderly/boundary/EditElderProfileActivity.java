@@ -14,7 +14,10 @@ import com.iderly.control.HttpPostRequest;
 import com.iderly.entity.User;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -96,26 +99,43 @@ public class EditElderProfileActivity extends Activity {
 		}
 		
 		if (valid == 1) {
-			ProgressDialog pd = ProgressDialog.show(this, null, "Fetching photos...", true);
+			ProgressDialog pd = ProgressDialog.show(this, null, "Editting elder profiles...", true);
 			new HttpPostRequest(postUrl, pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
 					((ProgressDialog) this.mixed[0]).dismiss();
+
 					
-					Log.d("fetch photo", "response: " + responseText);
+					Log.d("edit elder", "response: " + responseText);
 					if(statusCode == HttpURLConnection.HTTP_OK) {;
 						try {
 							JSONObject response = new JSONObject(responseText);
 							
-							// lanjut sini
-							
+							AlertDialog.Builder adb = new AlertDialog.Builder(EditElderProfileActivity.this);
+							if(response.getInt("status") == 0) {
+								adb.setMessage("Editting elder profile is successful!")
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog,	int which) {
+											dialog.dismiss();
+										}
+									}).show();
+							} else {
+								adb.setMessage(response.getJSONArray("message").getString(0))
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									}).show();
+							}
 						} catch (JSONException e) {
 							// As always, either Kenrick or the Internet's fault
 						}
 					}
 				}
 			}.addParameter("device_id", elderDeviceId)
-				.addParameter("attachment", "")
+				.addParameter("attachment", elder.getProfPic().getImageBase64())
 				.addParameter("name", elderName)
 				.send();
 		}

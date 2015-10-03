@@ -110,6 +110,7 @@ public class ElderPhotoGalleryList extends ListFragment {
 					}
 				}
 			}
-		}.send();
+		}.addParameter("device_id", elder.getDeviceId())
+			.send();
 	}
 }

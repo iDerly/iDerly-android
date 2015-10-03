@@ -214,7 +214,7 @@ public class ElderAddPhotoActivity extends Activity {
 							JSONObject response = new JSONObject(responseText);
 							if(response.getInt("status") == 0) {
 								new AlertDialog.Builder(ElderAddPhotoActivity.this)
-									.setMessage("Adding photo success!")
+									.setMessage("Adding photo is successful!")
 									.setNeutralButton("OK", new OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
@@ -239,7 +239,7 @@ public class ElderAddPhotoActivity extends Activity {
 						
 					}
 				}
-			}.addParameter("attachmnt", pictureString)
+			}.addParameter("attachment", pictureString)
 				.addParameter("device_id", Global.deviceId)
 				.addParameter("name", photoName)
 				.addParameter("remarks", photoRemarks)
