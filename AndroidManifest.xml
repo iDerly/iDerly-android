@@ -60,6 +60,14 @@
             android:name="com.iderly.boundary.EditElderProfileActivity"
             android:label="@string/title_activity_edit_elder_profile" >
         </activity>
+        <activity
+            android:name="com.iderly.boundary.GameRoundActivity"
+            android:label="@string/title_activity_game_round" >
+        </activity>
+        <activity
+            android:name="com.iderly.boundary.GameEndActivity"
+            android:label="@string/title_activity_game_end" >
+        </activity>
     </application>
 
 </manifest>

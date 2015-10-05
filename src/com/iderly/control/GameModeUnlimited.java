@@ -7,29 +7,38 @@ import java.util.Random;
 public class GameModeUnlimited {
 	
 	public static ArrayList<Integer> indexList;
+
+	private static int lives;
+	private static int score;
+	private static int len, ite;
 	
-	public static void Play(){
-		Initialize();
-		int lives = 3;
-		int score = 0;
-		int len = GameManager.photoList.size();
-		 
-		for(int i=0; i<len; ++i){
-			if (GameManager.PlayRound(indexList.get(i))){
-				--lives;
-			} else {
-				++score;
-				//increment correct counter 
-			}
-			if (lives==0) break;
-		}
-		//display score
+	public static int GetNextIndex(){
+		//returns next index of photo in database. -1 if game ends
+		if (ite>=len || lives == 0) return -1;
+		
+		int ret = indexList.get(ite);
+		++ite;
+		return ret;
 	}        
 	
-	private static void Initialize(){ 
+	public static void ReturnResult(boolean res){
+		if (res) ++score;
+		else --lives;
+	}
+
+	public static int GetScore(){
+		return score;
+	}
+	
+	public static void Initialize(){
+		len = GameManager.photoList.size();
+		lives = GameManager.UNLIMITED_LIVES;
+		score = 0;
+		ite = 0;
+		
 		//initialize random sequence
 		indexList = new ArrayList<Integer>();
 		for(int i=0; i<GameManager.photoList.size(); ++i) indexList.add(i);
-		Collections.shuffle(indexList, new Random(System.nanoTime()));
+		Collections.shuffle(indexList);
 	}
 }

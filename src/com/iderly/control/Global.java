@@ -9,6 +9,7 @@ public class Global {
 	private static LoginManager loginManager;
 	private static ImageManager imageManager;
 	private static RegisterManager registerManager;
+	private static GameManager gameManager;
 	
 	public static String deviceId;
 	
@@ -19,7 +20,7 @@ public class Global {
 		loginManager = LoginManager.getInstance();
 		imageManager = ImageManager.getInstance();
 		registerManager = RegisterManager.getInstance();
-		
+		gameManager  = GameManager.getInstance();
 		deviceId = Secure.getString(context.getContentResolver(), Secure.ANDROID_ID);
 	}
 	
@@ -34,8 +35,12 @@ public class Global {
 	public static ImageManager getImageManager () {
 		return imageManager;
 	}
-	
+
 	public static RegisterManager getRegisterManager() {
 		return registerManager;
+	}
+	
+	public static GameManager getGameManager() {
+		return gameManager;
 	}
 }

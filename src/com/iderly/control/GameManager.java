@@ -9,66 +9,99 @@ import com.iderly.entity.Photo;
 
 public class GameManager {
 	public static int CLASSIC_MODE = 0;
+	public static int CLASSIC_ROUNDS = 10;
 	public static int UNLIMITED_MODE = 1;
+	public static int UNLIMITED_LIVES = 3;
+ 
+	private static int GameMode;
+    private static Random randomGenerator;
+    
+    private static Photo currentPhoto;
+    private static ArrayList<String> selectedNames;
+    private static String correctName;
 
 	public static ArrayList<Photo> photoList;
-
-    private static Random randomGenerator;
 	
-	public static void StartGame(int GameMode){
-		Initialize();
-		if (GameMode == CLASSIC_MODE){
-			if (GameManager.photoList.size() >= 10)	GameModeClassic.Play();
-		} else { 
-			GameModeUnlimited.Play();
-		}
-	} 
-	                                                                              
+	private static GameManager instance = new GameManager();
 	
-	public static boolean PlayRound(int photoID){
-		//plays a round using the photo denoted by the photoID. Returns whether or not player is correct  
-		Photo curPhoto  = photoList.get(photoID);
-		
-		//prepare list of names
-		ArrayList<String> SelectedNames = new ArrayList<String>();
-		String CorrectName = curPhoto.getName();
-		SelectedNames.add(CorrectName);
-		
-		while(SelectedNames.size()<4){ 
-			int nextget = randomGenerator.nextInt(photoList.size());
-			String RandName = photoList.get(nextget).getName();
-			boolean unique = true;
-			for(int i=0; i<SelectedNames.size(); ++i){
-				if (RandName == SelectedNames.get(i)) {
-					unique=false;
-					break;
-				}
-			}
-			if (unique) SelectedNames.add(RandName);
-		}
-		
-		//show photo from photoList[photoID] for the game
-		//show names from SelectedNames for the game
-		
-		curPhoto.incDisplayCount();
-		
-		//if ([user selected name] == correctName){
-		//curPhoto.incCorrectCount //update photo correct number
-		return true;
-		
-		//} else 
-		//return false;
+	public static GameManager getInstance(){
+		return instance;
 	}
+	
+	public static void StartGame(){
+		Initialize();
+	}  
 	
 	private static void Initialize(){
 		//reset randomgen
 		long seed = System.nanoTime();
 		randomGenerator = new Random(seed);
-
-		getPhotoDatabase();
+		 
+		GetPhotoDatabase(); 
+		
+		if (GameMode == CLASSIC_MODE)
+			GameModeClassic.Initialize();
+		else 
+			GameModeUnlimited.Initialize(); 
+	}                                                       
+	
+	public static boolean GetNextRound(){
+		//updates currentPhoto and nameList. returns false if game is over
+		
+		int photoID;
+		if (GameMode == CLASSIC_MODE)
+			photoID = GameModeClassic.GetNextIndex();
+		else 
+			photoID = GameModeUnlimited.GetNextIndex(); 
+		
+		if (photoID<0) return false;
+		currentPhoto  = photoList.get(photoID);
+		
+		//generate random names 
+		selectedNames = new ArrayList<String>();
+		correctName = currentPhoto.getName();
+		selectedNames.add(correctName);
+		
+		while(selectedNames.size()<4){ 
+			int nextget = randomGenerator.nextInt(photoList.size());
+			String RandName = photoList.get(nextget).getName();
+			boolean unique = true;
+			for(int i=0; i<selectedNames.size(); ++i){
+				if (RandName == selectedNames.get(i)) {
+					unique=false;
+					break;
+				}
+			}
+			if (unique) selectedNames.add(RandName);
+		}
+		Collections.shuffle(selectedNames);
+		 
+		return true;
 	}
 	
-	private static void getPhotoDatabase(){
+	public static void SendUserInput(int choice){
+		boolean roundResult = (selectedNames.get(choice) == correctName);	
+		if (GameMode == CLASSIC_MODE)
+			GameModeClassic.ReturnResult(roundResult);
+		else 
+			GameModeUnlimited.ReturnResult(roundResult); 
+		
+		//increment displayCount
+		if(roundResult){
+			//increment correct count
+		}
+	}
+
+	public static Photo getPhoto(){
+		return currentPhoto;
+	}
+	
+	public static String getChoice(int ind){
+		return selectedNames.get(ind);
+	}
+	
+	private static void GetPhotoDatabase(){
 		//get list of photos somehow
 	}
+	
 }

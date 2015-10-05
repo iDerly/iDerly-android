@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gameEndLayout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.iderly.boundary.TitleActivity" >
+
+    <TextView
+        android:id="@+id/gameCongratsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/GameRound_CongratulationText"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="38sp" />
+
+    <TextView
+        android:id="@+id/gameScoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="10/10"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="70sp" />
+    
+    <TextView
+        android:id="@+id/gameCongratsSubText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/gameScoreText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="@string/GameRound_ScoreText"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/gameScoreSubText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gameScoreText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="Points this round"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/GameRound_ReturnText"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp" />
+
+
+</RelativeLayout>
