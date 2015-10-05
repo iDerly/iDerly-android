@@ -29,13 +29,13 @@ public class UserManager {
 	}
 	
 	// Call this or createCaregiver depending on the user type read from DB
-	public User createElder (String email, String userId, String name, int gamesPlayed, double avgScore, Photo profPic, ArrayList<Photo> photosGallery) {
-		return this.user = new User(email, userId, User.ELDER, name, gamesPlayed, avgScore, profPic, photosGallery);
+	public User createElder (String email, String userId, String name, Photo profPic, ArrayList<Photo> photosGallery) {
+		return this.user = new User(userId, User.ELDER, name, profPic, photosGallery);
 	}
 	
 	// Call this or createElder depending on the user type read from DB
-	public Caregiver createCaregiver (String email, String userId, String name, int gamesPlayed, double avgScore, ArrayList<Photo> photosGallery, ArrayList<User> elders) {
-		Caregiver c = new Caregiver(email, userId, User.CAREGIVER, name, gamesPlayed, avgScore, photosGallery, elders);
+	public Caregiver createCaregiver (String email, String userId, String name, ArrayList<Photo> photosGallery, ArrayList<User> elders) {
+		Caregiver c = new Caregiver(email, userId, User.CAREGIVER, name, photosGallery, elders);
 		this.user = c;
 		return c;
 	}

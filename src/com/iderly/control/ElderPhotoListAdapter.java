@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ElderPhotoListAdapter extends ArrayAdapter<Photo> {
@@ -22,7 +23,8 @@ public class ElderPhotoListAdapter extends ArrayAdapter<Photo> {
 	}
 	
 	private class ViewHolder {
-		private TextView photoRemarks;
+		private TextView photoName, photoRemarks;
+		private ImageView photo;
 	}
 	
 	public View getView (int position, View convertView, ViewGroup parent) {
@@ -35,12 +37,17 @@ public class ElderPhotoListAdapter extends ArrayAdapter<Photo> {
 			convertView = mInflater.inflate(R.layout.elder_photo_list_item, parent, false);
 			holder = new ViewHolder();
 			
+			holder.photo = (ImageView) convertView.findViewById(R.id.ImageView_Photo);
+			holder.photoName = (TextView) convertView.findViewById(R.id.Field_PhotoName);
 			holder.photoRemarks = (TextView) convertView.findViewById(R.id.Field_PhotoRemarks);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
+		
 		if (p != null) {
+			holder.photo.setImageBitmap(p.getImageBitmap());
+			holder.photoName.setText(p.getName());
 			holder.photoRemarks.setText(p.getRemarks());
 		}
 		

@@ -48,26 +48,6 @@
     </LinearLayout>
     
     <LinearLayout 
-        android:id="@+id/LL_ElderProfile_Email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp" >
-        
-        <TextView
-            android:id="@+id/Label_ElderProfile_Email"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="@string/Label_ElderProfile_Email" />
-        
-        <TextView
-            android:id="@+id/Text_ElderProfile_Email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Text_ElderProfile_Email" />
-        
-    </LinearLayout>
-    
-    <LinearLayout 
         android:id="@+id/LL_ElderProfile_AverageScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -100,8 +80,8 @@
             android:layout_gravity="center_vertical"
             android:text="@string/Label_ElderProfile_ProfilePicture" />
         
-        <TextView
-            android:id="@+id/Text_ElderProfile_ProfilePicture"
+        <ImageView
+            android:id="@+id/ImageView_ElderProfile_ProfilePicture"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:contentDescription="@string/ElderProfilePictureDescription" />
@@ -116,5 +96,14 @@
 	    android:layout_gravity="center_horizontal"
 	    android:text="@string/Text_ElderProfile_EditButton"
 	    android:onClick="openEditElderProfile" />
+	
+	<Button
+	    android:id="@+id/Text_ElderProfile_DeleteButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="15dp"
+	    android:layout_gravity="center_horizontal"
+	    android:text="@string/Text_ElderProfile_DeleteButton"
+	    android:onClick="deleteElder" />
 
 </LinearLayout>

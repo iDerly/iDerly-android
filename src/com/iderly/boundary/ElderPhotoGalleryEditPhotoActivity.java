@@ -11,7 +11,7 @@ import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
 import com.iderly.control.Global;
 import com.iderly.control.HttpPostRequest;
-import com.iderly.entity.User;
+import com.iderly.entity.Photo;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -29,28 +29,30 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class EditElderProfileActivity extends Activity {
-	public static String postUrl = "http://iderly.kenrick95.org/elder/update";
+public class ElderPhotoGalleryEditPhotoActivity extends Activity {
+	public static String postUrl = "http://iderly.kenrick95.org/elder/update_photo";
 	
-	private LinearLayout editElderProfileMessages;
-	private User elder;
+	private Photo photo;
+	private LinearLayout editPhotoMessages;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_edit_elder_profile);
-		this.elder = this.getIntent().getExtras().getParcelable("elder");
+		setContentView(R.layout.activity_elder_photo_gallery_edit_photo);
 		
-		this.editElderProfileMessages = (LinearLayout) findViewById(R.id.add_elder_messages);
-		((ImageView) findViewById(R.id.ImageView_EditElder_ElderProfilePicture)).setImageBitmap(this.elder.getProfPic().getImageBitmap());
-		((EditText) findViewById(R.id.EditText_EditElder_ElderName)).setText(this.elder.getName());
-		((EditText) findViewById(R.id.EditText_EditElder_ElderDeviceId)).setText(this.elder.getDeviceId());
+		this.photo = (Photo) this.getIntent().getExtras().getParcelable("photo");
+		this.editPhotoMessages = (LinearLayout) findViewById(R.id.LL_EditPhoto_messages);
+		
+		// CAN ONLY CHANGE NAME AND REMARKS, BUT SHOW THE PHOTO --> PHOTO IS NOT EDITABLE THOUGH
+		((ImageView) findViewById(R.id.ImageView_PhotoGallery_EditPhoto)).setImageBitmap(this.photo.getImageBitmap());
+		((EditText) findViewById(R.id.EditText_PhotoGallery_Edit_Photo_Name)).setText(this.photo.getName());
+		((EditText) findViewById(R.id.EditText_PhotoGallery_EditPhoto_Remarks)).setText(this.photo.getRemarks());
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.edit_elder_profile, menu);
+		getMenuInflater().inflate(R.menu.elder_photo_gallery_edit_photo, menu);
 		return true;
 	}
 
@@ -67,7 +69,7 @@ public class EditElderProfileActivity extends Activity {
 	}
 	
 	private void clearMessages() {
-        this.editElderProfileMessages.removeAllViews();
+        this.editPhotoMessages.removeAllViews();
     }
 	
 	/**
@@ -78,42 +80,44 @@ public class EditElderProfileActivity extends Activity {
         TextView textView = new TextView(this);
         textView.setText("\u2022 " + message);
         textView.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        this.editElderProfileMessages.addView(textView);
+        this.editPhotoMessages.addView(textView);
     }
-	
-	public void saveElderProfile (View view) {
-		this.clearMessages();
-		
-		int valid = 1;
-		String elderName = ((EditText) findViewById(R.id.EditText_EditElder_ElderName)).getText().toString();
-		String elderDeviceId = ((EditText) findViewById(R.id.EditText_EditElder_ElderDeviceId)).getText().toString();
-		
-		if (elderName == null || elderName.isEmpty()) {
-			this.putMessage("Elder's name is empty!");
-			valid = 0;
-		}
-		
-		if (elderDeviceId == null || elderDeviceId.isEmpty()) {
-			this.putMessage("Elder's device ID is empty!");
-			valid = 0;
-		}
-		
-		if (valid == 1) {
-			ProgressDialog pd = ProgressDialog.show(this, null, "Editting elder profiles...", true);
-			new HttpPostRequest(postUrl, pd) {
+    
+    public void saveEditPhotoGallery (View view) {
+    	this.clearMessages();
+    	int valid = 1;
+    	
+    	String name = ((EditText) findViewById(R.id.EditText_PhotoGallery_Edit_Photo_Name)).getText().toString();
+    	String remarks = ((EditText) findViewById(R.id.EditText_PhotoGallery_EditPhoto_Remarks)).getText().toString();
+
+    	if (name == null || name.isEmpty()) {
+    		this.putMessage("Photo name is empty!");
+    		valid = 0;
+    	}
+    	
+    	if (remarks == null || remarks.isEmpty()) {
+    		this.putMessage("Photo remarks is empty!");
+    		valid = 0;
+    	}
+    	
+    	if (valid == 1) {
+    		// HTTP POST REQUEST HERE TO EDIT!!
+    		// Nasi goreng jancuk!
+    		
+    		ProgressDialog pd = ProgressDialog.show(this, null, "Peter ganteng!", true);
+    		new HttpPostRequest(postUrl, pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
 					((ProgressDialog) this.mixed[0]).dismiss();
-
 					
-					Log.d("edit elder", "response: " + responseText);
+					Log.d("edit photo", "response: " + responseText);
 					if(statusCode == HttpURLConnection.HTTP_OK) {;
 						try {
 							JSONObject response = new JSONObject(responseText);
 							
-							AlertDialog.Builder adb = new AlertDialog.Builder(EditElderProfileActivity.this);
+							AlertDialog.Builder adb = new AlertDialog.Builder(ElderPhotoGalleryEditPhotoActivity.this);
 							if(response.getInt("status") == 0) {
-								adb.setMessage("Editting elder profile is successful!")
+								adb.setMessage("Editting photo is successful!")
 									.setNeutralButton("OK", new OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog,	int which) {
@@ -134,10 +138,10 @@ public class EditElderProfileActivity extends Activity {
 						}
 					}
 				}
-			}.addParameter("device_id", elderDeviceId)
-				.addParameter("attachment", elder.getProfPic().getImageBase64())
-				.addParameter("name", elderName)
-				.send();
-		}
-	}
+    		}.addParameter("name", name)
+    			.addParameter("remarks", remarks)
+    			.addParameter("device_id", Global.deviceId)
+    			.send();
+    	}
+    }
 }

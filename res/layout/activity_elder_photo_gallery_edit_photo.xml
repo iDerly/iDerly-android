@@ -1,0 +1,78 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.iderly.boundary.ElderPhotoGalleryEditPhotoActivity" >
+
+    <LinearLayout
+        android:id="@+id/LL_EditPhoto_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LL_PhotoGallery_EditPhoto"
+        android:layout_below="@+id/LL_EditPhoto_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_centerHorizontal="true" >
+        
+        <ImageView
+            android:id="@+id/ImageView_PhotoGallery_EditPhoto"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/ElderProfilePictureDescription" />
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LL_PhotoGallery_EditPhoto_Name"
+        android:layout_below="@+id/LL_PhotoGallery_EditPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+		android:layout_marginBottom="5dp" >        
+        
+        <EditText
+            android:id="@+id/EditText_PhotoGallery_Edit_Photo_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="@string/Label_PhotoGallery_Edit_Photo_Name" />
+        
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/LL_PhotoGallery_Remarks"
+        android:layout_below="@+id/LL_PhotoGallery_EditPhoto_Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp" >
+        
+        <EditText
+            android:id="@+id/EditText_PhotoGallery_EditPhoto_Remarks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:text="@string/Label_PhotoGallery_EditPhoto_Remarks" />
+        
+    </LinearLayout>
+    
+    
+        
+	<Button
+	    android:id="@+id/Button_PhotoGallery_EditPhoto"
+	    android:layout_below="@+id/LL_PhotoGallery_Remarks"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="15dp"
+	    android:layout_centerHorizontal="true"
+	    android:text="@string/Button_PhotoGallery_EditPhoto_SaveButton"
+	    android:onClick="saveEditPhotoGallery" />
+
+</RelativeLayout>

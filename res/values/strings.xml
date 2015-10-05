@@ -54,7 +54,7 @@
     <string name="Text_ElderProfile_AverageScore">95.5</string>
     <string name="Label_ElderProfile_ProfilePicture">Picture</string>
     <string name="Text_ElderProfile_EditButton">Edit Profile</string>
-    
+
     <string name="PlayGame_ButtonText">Play Game!</string>
     <string name="GameMode_Classic_ButtonText">Mode: Classic</string>
     <string name="GameMode_Unlimited_ButtonText">Mode: Unlimited</string>
@@ -63,5 +63,29 @@
     <string name="GameRound_ScoreText">You Scored:</string>
     <string name="GameRound_ReturnText">Press anywhere to return to main menu</string>
     <string name="GameRound_NextText">Press anywhere to continue</string> 
+ 
+    <string name="Text_ElderProfile_DeleteButton">Delete Elder</string>
+    <string name="Text_EditElder_ElderName">Elder\'s Name</string>
+    <string name="Text_EditElder_ElderDeviceId">Elder\'s Device ID</string>
+    <string name="ButtonText_EditElder_SaveButton">Save</string>
+    <string name="Label_PhotoGallery_Name">Name</string>
+    <string name="Text_PhotoGallery_Name">Kenrick Anggara</string>
+    <string name="Label_PhotoGallery_Remarks">Remarks</string>
+    <string name="Text_PhotoGallery_Remarks">Remarks 1 2 3</string>
+    <string name="Button_PhotoGallery_EditPhoto">Edit</string>
+    <string name="Button_PhotoGallery_DeletePhoto">Delete</string>
+    <string name="title_activity_elder_photo_gallery_edit_photo">ElderPhotoGalleryEditPhoto</string>
+    <string name="Label_PhotoGallery_Edit_Photo_Name">Name</string>
+    <string name="Label_PhotoGallery_EditPhoto_Remarks">Remarks</string>
+    <string name="Button_PhotoGallery_EditPhoto_SaveButton">Save</string>
+    <string name="Button_AddPhoto_Label">Add Photo</string>
+    <string name="title_activity_elder_add_photo">ElderAddPhotoActivity</string>
+    <string name="LabelText_AddPhoto_PhotoName">Name</string>
+    <string name="LabelText_AddPhoto_PhotoRemarks">Remarks</string>
+    <string name="Label_PhotoImage">Photo</string>
+    <string name="ButtonText_PhotoImage">Select Image</string>
+    <string name="AddPhotoButton_LabelText">Add Photo</string>
+    <string name="Label_DeviceId">Device ID</string>
+
 
 </resources>

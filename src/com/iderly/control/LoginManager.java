@@ -64,7 +64,7 @@ public class LoginManager {
 					}
 				}
 				
-				((HttpPostRequest) this.mixed[0]).onFinish(statusCode, responseText);
+				((HttpPostRequestListener) this.mixed[0]).onFinish(statusCode, responseText);
 			}
 			
 		}.send();

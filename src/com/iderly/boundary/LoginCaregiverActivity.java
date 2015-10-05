@@ -2,6 +2,9 @@ package com.iderly.boundary;
 
 import java.net.HttpURLConnection;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
@@ -12,8 +15,11 @@ import com.iderly.control.HttpPostRequestListener;
 import com.iderly.control.SessionController;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -97,9 +103,11 @@ public class LoginCaregiverActivity extends Activity {
 				public void onFinish(int statusCode, String responseText) {
 					((ProgressDialog) this.mixed[0]).dismiss();
 					
+					Log.d("login caregiver", "response: " + responseText);
 					if(statusCode == HttpURLConnection.HTTP_OK) {
 						if(SessionController.contains("session_id")) {
 							Intent intent = new Intent(LoginCaregiverActivity.this, CaregiverHomeActivity.class);
+							LoginCaregiverActivity.this.finish();
 							LoginCaregiverActivity.this.startActivity(intent);
 						}
 					}
@@ -110,8 +118,47 @@ public class LoginCaregiverActivity extends Activity {
 	
 	// Start Forgot Password Activity
 	public void forgotPasswordCaregiver (View view) {
-		Intent forgotPasswordIntent = new Intent(this, ForgotPasswordActivity.class);
-		startActivity(forgotPasswordIntent);
+//		Intent forgotPasswordIntent = new Intent(this, ForgotPasswordActivity.class);
+//		startActivity(forgotPasswordIntent);
+		ProgressDialog pd = ProgressDialog.show(this, null, "Requesting reset password...", true);
+		Global.getRegisterManager().forgotPassword(new HttpPostRequestListener(pd) {
+			@Override
+			public void onFinish(int statusCode, String responseText) {
+				((ProgressDialog) this.mixed[0]).dismiss();
+				
+				Log.d("forgot password", "response: " + responseText);
+				if(statusCode == HttpURLConnection.HTTP_OK) {
+					try {
+						JSONObject response = new JSONObject(responseText);
+						
+						if(response.getInt("status") == 0) {
+							new AlertDialog.Builder(LoginCaregiverActivity.this)
+							.setMessage("Forgot password request confirmed")
+							.setNeutralButton("OK", new OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.dismiss();
+									LoginCaregiverActivity.this.finish();
+								}
+							}).show();
+						
+						} else {
+							new AlertDialog.Builder(LoginCaregiverActivity.this)
+							.setMessage(response.getJSONArray("message").getString(0))
+							.setNeutralButton("OK", new OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									dialog.dismiss();
+								}
+							}).show();
+						}
+					} catch (JSONException e) {
+						// Kenrick or the Internet's fault
+					}
+					
+				}
+			}
+		});
 	}
 	
 	// Start Register Caregiver Activity

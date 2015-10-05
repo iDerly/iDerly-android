@@ -24,7 +24,7 @@ public class ElderListAdapter extends ArrayAdapter<User> {
 	}
 	
 	private class ViewHolder {
-		private TextView elderIdText;
+		private TextView elderDeviceIdText, elderNameText;
 		private ImageView profilePicture;
 	}
 	
@@ -38,15 +38,18 @@ public class ElderListAdapter extends ArrayAdapter<User> {
 			convertView = mInflater.inflate(R.layout.elder_list_item, parent, false);
 			holder = new ViewHolder();
 			
-			holder.elderIdText = (TextView) convertView.findViewById(R.id.TextView_ElderName);
+			holder.elderDeviceIdText = (TextView) convertView.findViewById(R.id.TextView_DeviceId);
+			holder.elderNameText = (TextView) convertView.findViewById(R.id.TextView_ElderName);
+			holder.profilePicture = (ImageView) convertView.findViewById(R.id.ImageView_ElderProfilePicture);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		
 		if (u != null) {
-			holder.elderIdText.setText(u.getName());
-//			holder.profilePicture.setImageBitmap(u.getProfPic().getImageBitmap());
+			holder.elderDeviceIdText.setText(u.getDeviceId());
+			holder.elderNameText.setText(u.getName());
+			holder.profilePicture.setImageBitmap(u.getProfPic().getImageBitmap());
 		}
 		
 		return convertView;

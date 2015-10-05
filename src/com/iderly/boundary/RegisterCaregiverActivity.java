@@ -122,8 +122,18 @@ public class RegisterCaregiverActivity extends Activity {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
 											dialog.dismiss();
+											RegisterCaregiverActivity.this.finish();
 										}
-									});
+									}).show();
+							} else {
+								new AlertDialog.Builder(RegisterCaregiverActivity.this)
+									.setMessage(response.getJSONArray("message").getString(0))
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									}).show();
 							}
 						} catch (JSONException e) {
 							// Kenrick or the Internet's fault

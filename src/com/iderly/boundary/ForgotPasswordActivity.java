@@ -2,6 +2,9 @@ package com.iderly.boundary;
 
 import java.net.HttpURLConnection;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
@@ -26,8 +29,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ForgotPasswordActivity extends Activity {
-	public static final String postUrl = "http://iderly.kenrick95.org/";
-	
 	private LinearLayout forgotPasswordMessages;
 	
 	@Override
@@ -75,25 +76,7 @@ public class ForgotPasswordActivity extends Activity {
 		}
 		
 		if(valid == 1) {
-			ProgressDialog pd = ProgressDialog.show(this, null, "Requesting reset password...", true);
-			Global.getRegisterManager().forgotPassword(email, new HttpPostRequestListener(pd) {
-				@Override
-				public void onFinish(int statusCode, String responseText) {
-					((ProgressDialog) this.mixed[0]).dismiss();
-					
-					Log.d("forgot password", "response: " + responseText);
-					if(statusCode == HttpURLConnection.HTTP_OK) {
-						new AlertDialog.Builder(ForgotPasswordActivity.this)
-							.setMessage("Forgot password request confirmed")
-							.setNeutralButton("OK", new OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-								}
-							});
-					}
-				}
-			});
+			
 		}
 	}
 	

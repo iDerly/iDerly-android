@@ -68,6 +68,14 @@
             android:name="com.iderly.boundary.GameEndActivity"
             android:label="@string/title_activity_game_end" >
         </activity>
+        <activity
+            android:name="com.iderly.boundary.ElderPhotoGalleryEditPhotoActivity"
+            android:label="@string/title_activity_elder_photo_gallery_edit_photo" >
+        </activity>
+        <activity
+            android:name="com.iderly.boundary.ElderAddPhotoActivity"
+            android:label="@string/title_activity_elder_add_photo" > 
+        </activity>
     </application>
 
 </manifest>
