@@ -41,6 +41,9 @@ public class LoginCaregiverActivity extends Activity {
 		// Setup Login Messages
 		this.loginMessagesPlaceholder = (LinearLayout) findViewById(R.id.login_messages);
 		
+		((EditText) findViewById(R.id.email_field)).setText("kenrick95@gmail.com");
+		((EditText) findViewById(R.id.password_field)).setText("123456");
+		
 		if(SessionController.contains("session_id")) {
 			Log.d("cek session", "logged in before, sir!");
 			// New intent to HomeActivity?
