@@ -58,7 +58,7 @@ public class CaregiverHomeActivity extends ListActivity {
 		
 		lv.addHeaderView(header);
 		
-		ProgressDialog pd = ProgressDialog.show(this, null, "Loading...");
+		ProgressDialog pd = ProgressDialog.show(this, null, "Sorry, more loading...");
 		new HttpPostRequest(getCaregiverPOSTURL, pd) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {
