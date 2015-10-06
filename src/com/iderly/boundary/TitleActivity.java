@@ -1,13 +1,20 @@
 package com.iderly.boundary;
 
+import java.net.HttpURLConnection;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.iderly.R;
 import com.iderly.control.GameManager;
 import com.iderly.control.Global;
+import com.iderly.control.HttpPostRequest;
 import com.iderly.control.HttpPostRequestListener;
 import com.iderly.control.SessionController;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +35,15 @@ public class TitleActivity extends Activity {
 		
 		SessionController.remove("session_id");
 		Log.d("device id", ": " + Global.deviceId);
+		
+		ProgressDialog pd = ProgressDialog.show(this, null, "Sorry, loading...", true);
+		new HttpPostRequest("http://iderly.kenrick95.org/elder/auth", pd) {
+			@Override
+			public void onFinish(int statusCode, String responseText) {
+				((ProgressDialog) this.mixed[0]).dismiss();
+			}
+		}.addParameter("device_id", Global.deviceId)
+			.send();
 		
 		setContentView(R.layout.activity_title);
 		

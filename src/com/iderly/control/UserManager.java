@@ -50,7 +50,7 @@ public class UserManager {
 		}.addParameter("elder_name", elderName)
 			.addParameter("elder_device_id", elderDeviceId)
 			.addParameter("caregiver_device_id", Global.deviceId)
-			.addParameter("profile_picture_str64", profilePictureString)
+			.addParameter("elder_attachment", profilePictureString)
 			.send();
 	}
 }

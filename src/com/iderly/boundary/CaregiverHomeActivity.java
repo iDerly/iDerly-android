@@ -81,6 +81,7 @@ public class CaregiverHomeActivity extends ListActivity {
 							
 							for(int i = 1, size = messages.length(); i < size; ++i) {
 								JSONObject elderJSON = messages.getJSONObject(i);
+								Log.d("elder-" + i, ": " + elderJSON);
 								elders.add(new User(elderJSON.getString("device_id"), User.ELDER, elderJSON.getString("name"), new Photo(elderJSON.getString("attachment"), null, null), null));
 							}
 							
