@@ -34,8 +34,8 @@ public class UserManager {
 	}
 	
 	// Call this or createElder depending on the user type read from DB
-	public Caregiver createCaregiver (String email, String userId, String name, ArrayList<Photo> photosGallery, ArrayList<User> elders) {
-		Caregiver c = new Caregiver(email, userId, User.CAREGIVER, name, photosGallery, elders);
+	public Caregiver createCaregiver (String email, String userId, String name, ArrayList<User> elders) {
+		Caregiver c = new Caregiver(email, userId, User.CAREGIVER, name, elders);
 		this.user = c;
 		return c;
 	}

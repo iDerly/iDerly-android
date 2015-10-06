@@ -9,8 +9,8 @@ public class Caregiver extends User implements Parcelable {
 	 private ArrayList<User> elders;
 	 private String email;
 	 
-	 public Caregiver (String email, String deviceId, String type, String name, ArrayList<Photo> photosGallery, ArrayList<User> elders) {
-		 super(deviceId, type, name, null, photosGallery);
+	 public Caregiver (String email, String deviceId, String type, String name, ArrayList<User> elders) {
+		 super(deviceId, type, name, null, null);
 		 this.elders = elders;
 		 this.email = email;
 	 }
