@@ -48,14 +48,14 @@ public class GameRoundActivity extends Activity {
 		this.actionBar.setSubtitle("Welcome!");
 		
 		button = new ArrayList<Button>();
-		button.add((android.widget.Button)findViewById(R.id.gameChoice1));
-		button.add((android.widget.Button)findViewById(R.id.gameChoice2));
-		button.add((android.widget.Button)findViewById(R.id.gameChoice3));
-		button.add((android.widget.Button)findViewById(R.id.gameChoice4));
+		button.add((Button)findViewById(R.id.gameChoice1));
+		button.add((Button)findViewById(R.id.gameChoice2));
+		button.add((Button)findViewById(R.id.gameChoice3));
+		button.add((Button)findViewById(R.id.gameChoice4));
 		
-		headerText = (android.widget.TextView)findViewById(R.id.gameRoundHeaderText);
-		pictureText = (android.widget.TextView)findViewById(R.id.gameRoundSubText);
-		instText = (android.widget.TextView)findViewById(R.id.gameRoundFooterText);
+		headerText =  (TextView)findViewById(R.id.gameRoundHeaderText);
+		pictureText = (TextView)findViewById(R.id.gameRoundSubText);
+		instText = 	  (TextView)findViewById(R.id.gameRoundFooterText);
 		 
 //		Global.getGameManager().StartGame();
 		ResetRound();
@@ -80,30 +80,33 @@ public class GameRoundActivity extends Activity {
 		else if (view.getId() == R.id.gameChoice3) buttonNo = 2;
 		else if (view.getId() == R.id.gameChoice4) buttonNo = 3; 
 		
+		Log.d("button text",button.get(0).getText() + " "+ button.get(0).getTextSize()); 
+		Log.d("button text",((Button)findViewById(R.id.gameChoice1)).getText() + " "+ ((Button)findViewById(R.id.gameChoice1)).getTextSize()); 
+		
 		if (buttonNo>=0){
 			//set screen and buttons to correct/false based on asnwer result 
 			//Global.getGameManager().SendUserInput(buttonNo); 
 			if (buttonNo == 3){ //correct
-				//gameRoundLayout.setBackgroundColor(Color.argb(255, 200, 255, 200));
-				headerText.setText(R.string.GameRound_PictureCorrectText);
+				gameRoundLayout.setBackgroundColor(Color.argb(255, 200, 255, 200));
+//				headerText.setText(R.string.GameRound_PictureCorrectText);
 			} else {		   //incorrect
-				//gameRoundLayout.setBackgroundColor(Color.argb(255, 255, 200, 200));
-				headerText.setText(R.string.GameRound_PictureWrongText); 
+				gameRoundLayout.setBackgroundColor(Color.argb(255, 255, 200, 200));
+//				headerText.setText(R.string.GameRound_PictureWrongText); 
 			}
 			
 			for(int i=0;i<4;++i){ 
-				//button.get(i).getBackground().setColorFilter(0xFFFFAAAA, PorterDuff.Mode.MULTIPLY); //red  
-				//button.get(i).setEnabled(false);
+				button.get(i).setEnabled(false);
+				button.get(i).getBackground().setColorFilter(0xFFFFAAAA, PorterDuff.Mode.MULTIPLY); //red  
 			}
-			//button.get(3).getBackground().setColorFilter(0xFFBBFFBB, PorterDuff.Mode.MULTIPLY); //green
+			button.get(3).getBackground().setColorFilter(0xFFBBFFBB, PorterDuff.Mode.MULTIPLY); //green
  
-			//set pictureText to photo remark
-			//pictureText.setText("\"" + remark + "\"");
-
-			//"Click anywhere to continue" 
-			instText.setText(R.string.GameRound_ContinueText);
-			waitForContinue = true; 
-			
+//			//set pictureText to photo remark
+//			//pictureText.setText("\"" + remark + "\"");
+//
+//			//"Click anywhere to continue" 
+//			instText.setText(R.string.GameRound_ContinueText);
+//			waitForContinue = true; 
+//			
             gameRoundLayout.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) { 
@@ -139,15 +142,32 @@ public class GameRoundActivity extends Activity {
 	public void ResetRound(){ 
 		gameRoundLayout.setBackgroundColor(Color.argb(255, 255, 255, 255));
 		for(int i=0;i<4;++i){
-//			button.get(i).setBackgroundResource(android.R.drawable.btn_default);
-//			button.get(i).getBackground().clearColorFilter();
-//			button.get(i).setText("Candinegara"); 
-//			button.get(i).setEnabled(true);
+			button.get(i).setBackgroundResource(android.R.drawable.btn_default);
+			button.get(i).getBackground().setColorFilter(0xFFFFFFFF, PorterDuff.Mode.MULTIPLY); //white  
+			button.get(i).setText("Candinegara"); 
+			button.get(i).setEnabled(true);
+
 		}
+		 
+		button.get(0).setText("TEST!!");
+		Log.d("button text",button.get(0).getText() + " "+ button.get(0).getTextSize()); 
+		Log.d("button text",((Button)findViewById(R.id.gameChoice1)).getText() + " "+ ((Button)findViewById(R.id.gameChoice1)).getTextSize()); 
 		
-		headerText.setText(R.string.GameRound_PictureText);
-		pictureText.setText("");
-		instText.setText(""); 
+		Log.d("gameChoice1",""+R.id.gameChoice1);
+		Log.d("gameChoice2",""+R.id.gameChoice2);
+		Log.d("gameChoice3",""+R.id.gameChoice3);
+		Log.d("gameChoice4",""+R.id.gameChoice4);
+		
+		Log.d("gameRoundFooterText",""+R.id.gameRoundFooterText);
+		Log.d("gameRoundSubText",""+R.id.gameRoundSubText);
+		Log.d("gameRoundHeaderText",""+R.id.gameRoundHeaderText); 
+		
+		
+//		headerText
+//		((TextView)findViewById(R.id.gameRoundHeaderText)).setText(R.string.GameRound_PictureText);
+//		pictureText
+//		((TextView)findViewById(R.id.gameRoundSubText)).setText("");
+//		instText.setText(""); 
 		
 		waitForContinue = false;
 	} 

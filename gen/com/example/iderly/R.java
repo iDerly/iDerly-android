@@ -225,6 +225,7 @@ public final class R {
         public static final int PlayGame_ButtonText=0x7f05002f;
         public static final int RegisterBtn_LabelText=0x7f05001a;
         public static final int TEST_PhotoRemarks=0x7f050024;
+        public static final int Test=0x7f050050;
         public static final int Text_EditElder_ElderDeviceId=0x7f05003c;
         public static final int Text_EditElder_ElderName=0x7f05003b;
         public static final int Text_ElderProfile_AverageScore=0x7f05002c;
