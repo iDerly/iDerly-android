@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/gameRoundLayout"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gameRoundLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -14,9 +14,10 @@
         android:id="@+id/game_round_progbar"
         android:layout_width="match_parent"
         android:layout_height="15dp"
-	        android:layout_alignParentBottom="true" />
-	
+        android:layout_alignParentBottom="true" />
+
     <TableLayout
+        android:id="@+id/tableLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/game_round_progbar"
@@ -35,7 +36,8 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:onClick="gameListener"
-                android:text="Candinegara" />
+                android:text="Candinegara"
+                android:textColor="#000000" />
 
             <Button
                 android:id="@+id/gameChoice2"
@@ -43,7 +45,8 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:onClick="gameListener"
-                android:text="Candinegara" />
+                android:text="Candinegara"
+                android:textColor="#000000" />
         </TableRow>
 
         <TableRow
@@ -58,7 +61,8 @@
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:onClick="gameListener"
-                android:text="Candinegara" />
+                android:text="Candinegara" 
+                android:textColor="#000000"/>
 
             <Button
                 android:id="@+id/gameChoice4"
@@ -66,12 +70,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:onClick="gameListener"
-                android:text="Candinegara" />
+                android:text="Candinegara" 
+                android:textColor="#000000"/>
         </TableRow>
     </TableLayout>
 
     <TextView
-        android:id="@+id/gameHeaderText"
+        android:id="@+id/gameRoundHeaderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -82,12 +87,12 @@
         android:id="@+id/gamePhoto"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_below="@id/gameHeaderText"
+        android:layout_below="@id/gameRoundHeaderText"
         android:layout_centerHorizontal="true"
         android:src="@drawable/logo_iderly" />
 
     <TextView
-        android:id="@+id/gameSubText"
+        android:id="@+id/gameRoundSubText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gamePhoto"
@@ -101,5 +106,13 @@
         android:layout_alignLeft="@+id/gamePhoto"
         android:layout_alignParentBottom="true"
         android:background="@drawable/rectangle" />
-    
+
+    <TextView
+        android:id="@+id/gameRoundFooterText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tableLayout1"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
 </RelativeLayout>

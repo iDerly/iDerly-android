@@ -11,7 +11,7 @@
     tools:context="com.iderly.boundary.TitleActivity" >
 
     <TextView
-        android:id="@+id/gameCongratsText"
+        android:id="@+id/gameEndCongratsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -21,7 +21,7 @@
         android:textSize="38sp" />
 
     <TextView
-        android:id="@+id/gameScoreText"
+        android:id="@+id/gameEndScoreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -30,10 +30,10 @@
         android:textSize="70sp" />
     
     <TextView
-        android:id="@+id/gameCongratsSubText"
+        android:id="@+id/gameEndScorePreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/gameScoreText"
+        android:layout_above="@id/gameEndScoreText"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:text="@string/GameRound_ScoreText"
@@ -41,10 +41,10 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/gameScoreSubText"
+        android:id="@+id/gameEndScoreSubText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/gameScoreText"
+        android:layout_below="@id/gameEndScoreText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="Points this round"
@@ -52,7 +52,7 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/gameEndFooterText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
