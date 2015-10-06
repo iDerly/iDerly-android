@@ -114,11 +114,6 @@ public class GameRoundActivity extends Activity {
 		}
 		return;
 	}
-	
-	private void GoToEnd(){
-		Intent gameEndIntent = new Intent(this, GameEndActivity.class);
-	    startActivity(gameEndIntent);
-	}
 
 	private int cnt = 0;
 	public boolean getData(){
@@ -155,32 +150,12 @@ public class GameRoundActivity extends Activity {
 		instText.setText(""); 
 		
 		waitForContinue = false;
-	}
+	} 
 	
-//
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.title_activity_menu, menu);
-//		return true;
-//	}
-//
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		// Handle action bar item clicks here. The action bar will
-//		// automatically handle clicks on the Home/Up button, so long
-//		// as you specify a parent activity in AndroidManifest.xml.
-//		int id = item.getItemId();
-//		
-//		// Open Caregiver Login activity
-//		if (id == R.id.ActionBar_LoginCaregiver) {
-//			Intent loginCaregiverIntent = new Intent(this, LoginCaregiverActivity.class);
-//            startActivity(loginCaregiverIntent);
-//            
-//			return true;
-//		}
-//		
-//		return super.onOptionsItemSelected(item);
-//	}
+	private void GoToEnd(){
+		Intent gameEndIntent = new Intent(this, GameEndActivity.class);
+	    startActivity(gameEndIntent);
+	}
+
 	
 }
