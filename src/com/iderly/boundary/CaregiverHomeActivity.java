@@ -58,7 +58,7 @@ public class CaregiverHomeActivity extends ListActivity {
 		
 		lv.addHeaderView(header);
 		
-		ProgressDialog pd = ProgressDialog.show(this, null, "Loading...");
+		ProgressDialog pd = ProgressDialog.show(this, null, "Sorry, more loading...");
 		new HttpPostRequest(getCaregiverPOSTURL, pd) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {
@@ -81,6 +81,7 @@ public class CaregiverHomeActivity extends ListActivity {
 							
 							for(int i = 1, size = messages.length(); i < size; ++i) {
 								JSONObject elderJSON = messages.getJSONObject(i);
+								Log.d("elder-" + i, ": " + elderJSON);
 								elders.add(new User(elderJSON.getString("device_id"), User.ELDER, elderJSON.getString("name"), new Photo(elderJSON.getString("attachment"), null, null), null));
 							}
 							
@@ -88,7 +89,7 @@ public class CaregiverHomeActivity extends ListActivity {
 							
 							CaregiverHomeActivity.this.eldersList = ((Caregiver) (Global.getUserManager().getUser())).getElders();
 							ElderListAdapter mAdapter = new ElderListAdapter(CaregiverHomeActivity.this, CaregiverHomeActivity.this.eldersList);
-							setListAdapter(mAdapter);
+							CaregiverHomeActivity.this.setListAdapter(mAdapter);
 						}
 						else {
 							
