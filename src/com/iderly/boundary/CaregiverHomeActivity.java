@@ -1,6 +1,11 @@
 package com.iderly.boundary;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import junit.framework.Assert;
 
@@ -12,6 +17,7 @@ import com.iderly.control.ElderListAdapter;
 import com.iderly.control.Global;
 import com.iderly.control.HttpPostRequest;
 import com.iderly.entity.Caregiver;
+import com.iderly.entity.Photo;
 import com.iderly.entity.User;
 
 import android.app.Activity;
@@ -28,7 +34,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 public class CaregiverHomeActivity extends ListActivity {
-	public static String getCaregiverPOSTURL = "https://iderly-kenrick95.rhcloud.com/caregiver/view_caregiver_and_elder/";
+	public static String getCaregiverPOSTURL = "https://iderly-kenrick95.rhcloud.com/caregiver/view_caregiver_and_elder/" + Global.deviceId;
 	private ArrayList<User> eldersList;
 
 	@Override
@@ -52,20 +58,47 @@ public class CaregiverHomeActivity extends ListActivity {
 		
 		lv.addHeaderView(header);
 		
-		ProgressDialog pd = ProgressDialog.show(this, null, "Loading...");
-		new HttpPostRequest(getCaregiverPOSTURL + Global.deviceId, pd) {
+		ProgressDialog pd = ProgressDialog.show(this, null, "Sorry, more loading...");
+		new HttpPostRequest(getCaregiverPOSTURL, pd) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {
 				((ProgressDialog) this.mixed[0]).dismiss();
 				Log.d("caregiver home", "response: " + responseText);
 				
-				Assert.assertNotNull(Global.getUserManager().getUser()); // fail here
-				Assert.assertTrue(Global.getUserManager().getUser() instanceof Caregiver);
-				Assert.assertNotNull(((Caregiver) Global.getUserManager().getUser()).getElders());
-				
-				CaregiverHomeActivity.this.eldersList = ((Caregiver) (Global.getUserManager().getUser())).getElders();
-				ElderListAdapter mAdapter = new ElderListAdapter(CaregiverHomeActivity.this, CaregiverHomeActivity.this.eldersList);
-				setListAdapter(mAdapter);
+				if(statusCode == HttpURLConnection.HTTP_OK) {
+					try {
+						JSONObject response = new JSONObject(responseText);
+						
+						if(response.getInt("status") == 0) {
+							JSONArray messages = response.getJSONArray("message");
+							
+							JSONObject caregiverJSON = messages.getJSONObject(0);
+							
+							String email = caregiverJSON.getString("email");
+							String name = caregiverJSON.getString("name");
+							
+							ArrayList<User> elders = new ArrayList<User>();
+							
+							for(int i = 1, size = messages.length(); i < size; ++i) {
+								JSONObject elderJSON = messages.getJSONObject(i);
+								Log.d("elder-" + i, ": " + elderJSON);
+								elders.add(new User(elderJSON.getString("device_id"), User.ELDER, elderJSON.getString("name"), new Photo(elderJSON.getString("attachment"), null, null), null));
+							}
+							
+							Global.getUserManager().createCaregiver(email, Global.deviceId, name, elders);
+							
+							CaregiverHomeActivity.this.eldersList = ((Caregiver) (Global.getUserManager().getUser())).getElders();
+							ElderListAdapter mAdapter = new ElderListAdapter(CaregiverHomeActivity.this, CaregiverHomeActivity.this.eldersList);
+							CaregiverHomeActivity.this.setListAdapter(mAdapter);
+						}
+						else {
+							
+						}
+					} catch (JSONException e) {
+						// Kenrick -_-
+					}
+					
+				}
 			}
 		}.send();
 		

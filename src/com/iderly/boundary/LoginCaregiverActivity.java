@@ -41,6 +41,9 @@ public class LoginCaregiverActivity extends Activity {
 		// Setup Login Messages
 		this.loginMessagesPlaceholder = (LinearLayout) findViewById(R.id.login_messages);
 		
+		((EditText) findViewById(R.id.email_field)).setText("kenrick95@gmail.com");
+		((EditText) findViewById(R.id.password_field)).setText("123456");
+		
 		if(SessionController.contains("session_id")) {
 			Log.d("cek session", "logged in before, sir!");
 			// New intent to HomeActivity?
@@ -109,6 +112,21 @@ public class LoginCaregiverActivity extends Activity {
 							Intent intent = new Intent(LoginCaregiverActivity.this, CaregiverHomeActivity.class);
 							LoginCaregiverActivity.this.finish();
 							LoginCaregiverActivity.this.startActivity(intent);
+						} else {
+							try {
+								JSONObject response = new JSONObject(responseText);
+								new AlertDialog.Builder(LoginCaregiverActivity.this)
+									.setMessage(response.getJSONArray("message").getString(0))
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+											LoginCaregiverActivity.this.finish();
+										}
+									}).show();
+							} catch (JSONException e) {
+								// Kenrick or the Internet's fault
+							}
 						}
 					}
 				}
@@ -133,24 +151,24 @@ public class LoginCaregiverActivity extends Activity {
 						
 						if(response.getInt("status") == 0) {
 							new AlertDialog.Builder(LoginCaregiverActivity.this)
-							.setMessage("Forgot password request confirmed")
-							.setNeutralButton("OK", new OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-									LoginCaregiverActivity.this.finish();
-								}
-							}).show();
+								.setMessage("Forgot password request confirmed")
+								.setNeutralButton("OK", new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+										LoginCaregiverActivity.this.finish();
+									}
+								}).show();
 						
 						} else {
 							new AlertDialog.Builder(LoginCaregiverActivity.this)
-							.setMessage(response.getJSONArray("message").getString(0))
-							.setNeutralButton("OK", new OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									dialog.dismiss();
-								}
-							}).show();
+								.setMessage(response.getJSONArray("message").getString(0))
+								.setNeutralButton("OK", new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+									}
+								}).show();
 						}
 					} catch (JSONException e) {
 						// Kenrick or the Internet's fault
