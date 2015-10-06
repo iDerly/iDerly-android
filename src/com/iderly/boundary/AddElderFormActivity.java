@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
@@ -23,6 +26,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -199,15 +203,38 @@ public class AddElderFormActivity extends Activity {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
 					((ProgressDialog) this.mixed[0]).dismiss();
-					new AlertDialog.Builder(AddElderFormActivity.this)
-						.setMessage("Added new elder!")
-						.setNeutralButton("OK", new OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								dialog.dismiss();
-							}
-						})
-						.show();
+					Log.d("add elder:", ": " + responseText);
+					
+					try {
+						JSONObject response = new JSONObject(responseText);
+						
+						if(response.getInt("status") == 0) {
+							new AlertDialog.Builder(AddElderFormActivity.this)
+								.setMessage("Added new elder!")
+								.setNeutralButton("OK", new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+										AddElderFormActivity.this.finish();
+									}
+								})
+								.show();
+						} else {
+							new AlertDialog.Builder(AddElderFormActivity.this)
+								.setMessage(response.getJSONArray("message").getString(0))
+								.setNeutralButton("OK", new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+										AddElderFormActivity.this.finish();
+									}
+								})
+								.show();
+						}
+					} catch (JSONException e) {
+						// Kenrick -___-
+					}
+					
 				}
 			});
 		}

@@ -88,7 +88,7 @@ public class CaregiverHomeActivity extends ListActivity {
 							
 							CaregiverHomeActivity.this.eldersList = ((Caregiver) (Global.getUserManager().getUser())).getElders();
 							ElderListAdapter mAdapter = new ElderListAdapter(CaregiverHomeActivity.this, CaregiverHomeActivity.this.eldersList);
-							setListAdapter(mAdapter);
+							CaregiverHomeActivity.this.setListAdapter(mAdapter);
 						}
 						else {
 							
