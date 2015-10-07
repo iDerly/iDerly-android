@@ -88,10 +88,10 @@ public class GameRoundActivity extends Activity {
 			//Global.getGameManager().SendUserInput(buttonNo); 
 			if (buttonNo == 3){ //correct
 				gameRoundLayout.setBackgroundColor(Color.argb(255, 200, 255, 200));
-//				headerText.setText(R.string.GameRound_PictureCorrectText);
+				headerText.setText(R.string.GameRound_PictureCorrectText);
 			} else {		   //incorrect
 				gameRoundLayout.setBackgroundColor(Color.argb(255, 255, 200, 200));
-//				headerText.setText(R.string.GameRound_PictureWrongText); 
+				headerText.setText(R.string.GameRound_PictureWrongText); 
 			}
 			
 			for(int i=0;i<4;++i){ 
@@ -101,11 +101,11 @@ public class GameRoundActivity extends Activity {
 			button.get(3).getBackground().setColorFilter(0xFFBBFFBB, PorterDuff.Mode.MULTIPLY); //green
  
 //			//set pictureText to photo remark
-//			//pictureText.setText("\"" + remark + "\"");
+//			pictureText.setText("\"" + remark + "\"");
 //
 //			//"Click anywhere to continue" 
-//			instText.setText(R.string.GameRound_ContinueText);
-//			waitForContinue = true; 
+			instText.setText(R.string.GameRound_ContinueText);
+			waitForContinue = true; 
 //			
             gameRoundLayout.setOnClickListener(new OnClickListener() {
 				@Override
@@ -163,11 +163,9 @@ public class GameRoundActivity extends Activity {
 		Log.d("gameRoundHeaderText",""+R.id.gameRoundHeaderText); 
 		
 		
-//		headerText
-//		((TextView)findViewById(R.id.gameRoundHeaderText)).setText(R.string.GameRound_PictureText);
-//		pictureText
-//		((TextView)findViewById(R.id.gameRoundSubText)).setText("");
-//		instText.setText(""); 
+		headerText.setText(R.string.GameRound_PictureText);
+		pictureText.setText("");
+		instText.setText(""); 
 		
 		waitForContinue = false;
 	} 
