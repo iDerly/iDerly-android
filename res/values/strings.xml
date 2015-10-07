@@ -59,9 +59,12 @@
     <string name="GameMode_Classic_ButtonText">Mode: Classic</string>
     <string name="GameMode_Unlimited_ButtonText">Mode: Unlimited</string>
     <string name="GameRound_PictureText">Who is this?</string>
+    <string name="GameRound_PictureCorrectText">Correct!</string>
+    <string name="GameRound_PictureWrongText">Wrong Answer...</string>
     <string name="GameRound_CongratulationText">Congratulations!</string>
     <string name="GameRound_ScoreText">You Scored:</string>
     <string name="GameRound_ReturnText">Press anywhere to return to main menu</string>
+    <string name="GameRound_ContinueText">Press anywhere to continue</string>
     <string name="GameRound_NextText">Press anywhere to continue</string> 
  
     <string name="Text_ElderProfile_DeleteButton">Delete Elder</string>
@@ -87,5 +90,7 @@
     <string name="AddPhotoButton_LabelText">Add Photo</string>
     <string name="Label_DeviceId">Device ID</string>
 
+	<string name="Test">TestTets</string>
 
+	
 </resources>
