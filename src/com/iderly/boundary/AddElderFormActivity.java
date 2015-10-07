@@ -226,7 +226,6 @@ public class AddElderFormActivity extends Activity {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
 										dialog.dismiss();
-										AddElderFormActivity.this.finish();
 									}
 								})
 								.show();
