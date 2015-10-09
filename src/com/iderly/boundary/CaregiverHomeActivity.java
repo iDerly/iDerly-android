@@ -87,7 +87,7 @@ public class CaregiverHomeActivity extends ListActivity {
 							
 							Global.getUserManager().createCaregiver(email, Global.deviceId, name, elders);
 							
-							CaregiverHomeActivity.this.eldersList = ((Caregiver) (Global.getUserManager().getUser())).getElders();
+							CaregiverHomeActivity.this.eldersList = elders; // ((Caregiver) (Global.getUserManager().getUser())).getElders();
 							ElderListAdapter mAdapter = new ElderListAdapter(CaregiverHomeActivity.this, CaregiverHomeActivity.this.eldersList);
 							CaregiverHomeActivity.this.setListAdapter(mAdapter);
 						}
@@ -146,7 +146,7 @@ public class CaregiverHomeActivity extends ListActivity {
 		
 		// Creating a new intent --> open when the item is clicked
 		Intent intent = new Intent(this, ElderDetailsActivity.class);
-		User elder = this.eldersList.get(position);
+		User elder = this.eldersList.get(position - 1);
 		intent.putExtra("elder", elder);
 		
 		startActivity(intent);

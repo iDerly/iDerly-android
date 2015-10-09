@@ -49,50 +49,50 @@ public class ElderProfileFragment extends Fragment {
 		return view;
 	}
 	
-	public void openEditElderProfile (View v) {
-		Intent intent = new Intent(this.getActivity(), EditElderProfileActivity.class);
-		intent.putExtra("elder", this.elder);
-		
-		this.startActivity(intent);
-	}
+//	public void openEditElderProfile (View v) {
+//		Intent intent = new Intent(this.getActivity(), EditElderProfileActivity.class);
+//		intent.putExtra("elder", this.elder);
+//		
+//		this.startActivity(intent);
+//	}
 	
-	public void deleteElder (View v) {
-		ProgressDialog pd = ProgressDialog.show(this.getActivity(), null, "Deleting this elder...", true);
-		new HttpPostRequest(postUrl, pd) {
-			@Override
-			public void onFinish(int statusCode, String responseText) {
-				((ProgressDialog) this.mixed[0]).dismiss();
-				
-				Log.d("delete elder", "response: " + responseText);
-				if(statusCode == HttpURLConnection.HTTP_OK) {;
-					try {
-						JSONObject response = new JSONObject(responseText);
-						
-						AlertDialog.Builder adb = new AlertDialog.Builder(ElderProfileFragment.this.getActivity());
-						if(response.getInt("status") == 0) {
-							adb.setMessage("Deleting elder is successful!")
-								.setNeutralButton("OK", new OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog,	int which) {
-										dialog.dismiss();
-									}
-								}).show();
-						} else {
-							adb.setMessage(response.getJSONArray("message").getString(0))
-								.setNeutralButton("OK", new OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog, int which) {
-										dialog.dismiss();
-									}
-								}).show();
-						}
-					} catch (JSONException e) {
-						// As always, either Kenrick or the Internet's fault
-					}
-				}
-			}
-		}.addParameter("elder_device_id", elder.getDeviceId())
-			.addParameter("caregiver_device_id", Global.deviceId)
-			.send();
-	}
+//	public void deleteElder (View v) {
+//		ProgressDialog pd = ProgressDialog.show(this.getActivity(), null, "Deleting this elder...", true);
+//		new HttpPostRequest(postUrl, pd) {
+//			@Override
+//			public void onFinish(int statusCode, String responseText) {
+//				((ProgressDialog) this.mixed[0]).dismiss();
+//				
+//				Log.d("delete elder", "response: " + responseText);
+//				if(statusCode == HttpURLConnection.HTTP_OK) {;
+//					try {
+//						JSONObject response = new JSONObject(responseText);
+//						
+//						AlertDialog.Builder adb = new AlertDialog.Builder(ElderProfileFragment.this.getActivity());
+//						if(response.getInt("status") == 0) {
+//							adb.setMessage("Deleting elder is successful!")
+//								.setNeutralButton("OK", new OnClickListener() {
+//									@Override
+//									public void onClick(DialogInterface dialog,	int which) {
+//										dialog.dismiss();
+//									}
+//								}).show();
+//						} else {
+//							adb.setMessage(response.getJSONArray("message").getString(0))
+//								.setNeutralButton("OK", new OnClickListener() {
+//									@Override
+//									public void onClick(DialogInterface dialog, int which) {
+//										dialog.dismiss();
+//									}
+//								}).show();
+//						}
+//					} catch (JSONException e) {
+//						// As always, either Kenrick or the Internet's fault
+//					}
+//				}
+//			}
+//		}.addParameter("elder_device_id", elder.getDeviceId())
+//			.addParameter("caregiver_device_id", Global.deviceId)
+//			.send();
+//	}
 }

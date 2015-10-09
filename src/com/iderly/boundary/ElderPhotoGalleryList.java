@@ -3,6 +3,7 @@ package com.iderly.boundary;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -93,18 +94,45 @@ public class ElderPhotoGalleryList extends ListFragment {
 	
 	private void fetchPhotos () {
 		ProgressDialog pd = ProgressDialog.show(this.getActivity(), null, "Fetching photos...", true);
-		new HttpPostRequest(postUrl, pd) {
+		new HttpPostRequest(postUrl, pd, photos) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {
 				((ProgressDialog) this.mixed[0]).dismiss();
-				
 				Log.d("fetch photo", "response: " + responseText);
 				if(statusCode == HttpURLConnection.HTTP_OK) {;
 					try {
 						JSONObject response = new JSONObject(responseText);
 						
-						// lanjut sini
-						
+						ArrayList<Photo> photos = (ArrayList<Photo>) this.mixed[1];
+						if(statusCode == HttpURLConnection.HTTP_OK) {
+							if(response.getInt("status") == 0) {
+								JSONArray messages = response.getJSONArray("message");
+								for(int i = 0, size = messages.length(); i < size; ++i) {
+									JSONObject message = messages.getJSONObject(i);
+									photos.add(new Photo(message.getString("attachment"), message.getString("name"), message.getString("remarks")));
+								}
+								
+								new AlertDialog.Builder(ElderPhotoGalleryList.this.getActivity())
+									.setMessage("Fetching photos completed!")
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									})
+									.show();
+							} else {
+								new AlertDialog.Builder(ElderPhotoGalleryList.this.getActivity())
+									.setMessage("Error in fetching photos!")
+									.setNeutralButton("OK", new OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											dialog.dismiss();
+										}
+									})
+									.show();
+							}
+						}
 					} catch (JSONException e) {
 						// As always, either Kenrick or the Internet's fault
 					}

@@ -1,30 +1,45 @@
 package com.iderly.boundary;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.example.iderly.R;
 import com.example.iderly.R.id;
 import com.example.iderly.R.layout;
 import com.example.iderly.R.menu;
 import com.iderly.control.ElderDetailsPagerAdapter;
+import com.iderly.control.Global;
+import com.iderly.control.HttpPostRequest;
 import com.iderly.entity.Photo;
 import com.iderly.entity.User;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.app.ActionBar.Tab;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 
 public class ElderDetailsActivity extends FragmentActivity implements ActionBar.TabListener {
+	public static String postUrl = "http://iderly.kenrick95.org/caregiver/delete_elder";
 	private ViewPager viewPager;
 	private ElderDetailsPagerAdapter mAdapter;
 	private ActionBar actionBar;
+	private User elder;
 	private String[] tabs = {"Profile", "Gallery"};
 
 	@Override
@@ -34,7 +49,7 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 		setContentView(R.layout.activity_elder_details);
 		
 		// Fetch Elder from Intent putExtra
-		User elder = this.getIntent().getExtras().getParcelable("elder");
+		this.elder = this.getIntent().getExtras().getParcelable("elder");
 		
 		this.actionBar = this.getActionBar();
 		this.actionBar.setSubtitle("");
@@ -102,4 +117,51 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {}
+	
+	public void openEditElderProfile (View v) {
+		Intent intent = new Intent(this, EditElderProfileActivity.class);
+		intent.putExtra("elder", this.elder);
+		
+		this.startActivity(intent);
+	}
+	
+	public void deleteElder (View v) {
+		ProgressDialog pd = ProgressDialog.show(this, null, "Deleting this elder...", true);
+		new HttpPostRequest(postUrl, pd) {
+			@Override
+			public void onFinish(int statusCode, String responseText) {
+				((ProgressDialog) this.mixed[0]).dismiss();
+				
+				Log.d("delete elder", "response: " + responseText);
+				if(statusCode == HttpURLConnection.HTTP_OK) {;
+					try {
+						JSONObject response = new JSONObject(responseText);
+						
+						AlertDialog.Builder adb = new AlertDialog.Builder(ElderDetailsActivity.this);
+						if(response.getInt("status") == 0) {
+							adb.setMessage("Deleting elder is successful!")
+								.setNeutralButton("OK", new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,	int which) {
+										dialog.dismiss();
+									}
+								}).show();
+						} else {
+							adb.setMessage(response.getJSONArray("message").getString(0))
+								.setNeutralButton("OK", new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+									}
+								}).show();
+						}
+					} catch (JSONException e) {
+						// As always, either Kenrick or the Internet's fault
+					}
+				}
+			}
+		}.addParameter("elder_device_id", elder.getDeviceId())
+			.addParameter("caregiver_device_id", Global.deviceId)
+			.send();
+	}
 }
