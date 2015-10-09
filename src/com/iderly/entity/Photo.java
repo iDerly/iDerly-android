@@ -34,7 +34,8 @@ public class Photo implements Parcelable {
 	}
 	
 	public Bitmap getImageBitmap () {
-		return Global.getImageManager().decodeImageBase64(this.imageBase64);
+		Bitmap result = Global.getImageManager().decodeImageBase64(this.imageBase64);
+		return result;
 	}
 
 	public int getDisplayCount(){

@@ -31,7 +31,7 @@ import android.widget.ListView;
 public class ElderPhotoGalleryList extends ListFragment {
 	public static String postUrl = "http://iderly.kenrick95.org/elder/photos/" + Global.deviceId;
 	
-	private ArrayList<Photo> photos;
+	private ArrayList<Photo> photos = new ArrayList<Photo>();
 	private User elder;
 	private ElderPhotoListAdapter mAdapter;
 	private View headerView = null;
@@ -52,7 +52,7 @@ public class ElderPhotoGalleryList extends ListFragment {
 		
 		this.elder = this.getArguments().getParcelable("elder");
 		this.fetchPhotos();
-		
+				
 		this.mAdapter = new ElderPhotoListAdapter(this.getActivity(), this.photos);
 		this.setListAdapter(mAdapter);
 	}
@@ -63,19 +63,19 @@ public class ElderPhotoGalleryList extends ListFragment {
 	@Override
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-		View view = inflater.inflate(R.layout.elder_photo_gallery_list_fragment, container, false);
+		View view = (View) inflater.inflate(R.layout.elder_photo_gallery_list_fragment, container, false);
 		
-		this.headerView = inflater.inflate(R.layout.photo_gallery_list_header, container, false);
-		Button b = (Button) this.headerView.findViewById(R.id.Button_AddPhoto);
-		
-		b.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Intent addPhoto = new Intent (ElderPhotoGalleryList.this.getActivity(), ElderAddPhotoActivity.class);
-				startActivity(addPhoto);
-			}
-		});
+//		this.headerView = (View) inflater.inflate(R.layout.photo_gallery_list_header, container, false);
+//		Button b = (Button) this.headerView.findViewById(R.id.Button_AddPhoto);
+//		
+//		b.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Intent addPhoto = new Intent (ElderPhotoGalleryList.this.getActivity(), ElderAddPhotoActivity.class);
+//				startActivity(addPhoto);
+//			}
+//		});
 		
 		return view;
 	}
@@ -85,7 +85,7 @@ public class ElderPhotoGalleryList extends ListFragment {
 		super.onListItemClick(l, v, position, id);
 		Photo p = this.photos.get(position);
 		
-		Intent intent = new Intent(this.getActivity(), ElderPhotoGalleryDetailsActivity.class);
+		Intent intent = new Intent(this.getActivity(), ElderDetailsActivity.class);
 		intent.putExtra("photo", p);
 		
 		this.startActivity(intent);

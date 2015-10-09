@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 public class ImageManager {
 	private static ImageManager instance = new ImageManager();
@@ -40,8 +41,10 @@ public class ImageManager {
 	}
 	
 	public Bitmap decodeImageBase64 (String encodedImage) {
+		Log.wtf("imageByte", "base64: " + encodedImage);
 		byte[] imageByte = Base64.decode(encodedImage, Base64.DEFAULT);
-		return BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+		Bitmap result = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
+		return result;
 	}
 	
 	public Bitmap rescaleImage (Bitmap image) {
