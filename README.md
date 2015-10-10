@@ -4,12 +4,12 @@
 
 Package:
 ```java
-package com.iderly.control.HttpPostRequest;
+import com.iderly.control.HttpPostRequest;
 ```
 
 Optional:
 ```java
-package com.iderly.control.HttpPostRequestListener;
+import com.iderly.control.HttpPostRequestListener;
 ```
 
 Class:
