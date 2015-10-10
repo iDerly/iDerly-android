@@ -32,7 +32,7 @@ public HttpPostRequest addParameters(Pair<String, String>... parameters)
 
 public HttpPostRequest addParameters(List<Pair<String, String>> parameters)
 ```
-*Never forget to send the request!*
+**Never forget to send the request!**
 
 Basic Usage:
 ```java
