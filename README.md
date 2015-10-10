@@ -17,9 +17,18 @@ Class:
 public abstract HttpPostRequest extends AsyncTask<Void, Void, String>
 ```
 
-Constructor
+Constructor:
 ```java
 public HttpPostRequest(String url, Object... mixed)
+```
+
+Methods:
+```java
+public HttpPostRequest addParameter(String name, String value)
+
+public HttpPostRequest addParameters(Pair<String, String>... parameters)
+
+public HttpPostRequest addParameters(List<Pair<String, String>> parameters)
 ```
 
 Basic Usage:
