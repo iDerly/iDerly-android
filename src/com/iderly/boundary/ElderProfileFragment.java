@@ -2,6 +2,8 @@ package com.iderly.boundary;
 
 import java.net.HttpURLConnection;
 
+import junit.framework.Assert;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +44,8 @@ public class ElderProfileFragment extends Fragment {
 		double elderAverageScore = 0.0;
 		// FETCH THIS ELDER'S AVERAGE SCORE FROM DATABASE FIRST!!
 		// HTTP REQUEST HERE!!
+		
+		Assert.assertNotNull(this.elder);
 		
 		((TextView) view.findViewById(R.id.Text_ElderProfile_DeviceId)).setText(this.elder.getDeviceId());
 		((TextView) view.findViewById(R.id.Text_ElderProfile_Name)).setText(this.elder.getName());

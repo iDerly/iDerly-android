@@ -41,7 +41,6 @@ public class ImageManager {
 	}
 	
 	public Bitmap decodeImageBase64 (String encodedImage) {
-		Log.wtf("imageByte", "base64: " + encodedImage);
 		byte[] imageByte = Base64.decode(encodedImage, Base64.DEFAULT);
 		Bitmap result = BitmapFactory.decodeByteArray(imageByte, 0, imageByte.length);
 		return result;

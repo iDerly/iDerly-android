@@ -38,6 +38,7 @@ public class CaregiverHomeActivity extends ListActivity {
 	private ArrayList<User> eldersList;
 	
 	public static int VIEW_ELDER = 0x00000001;
+	public static int ADD_ELDER = 0x00000002;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class CaregiverHomeActivity extends ListActivity {
 			@Override
 			public void onClick(View v) {
 				Intent addElder = new Intent (CaregiverHomeActivity.this, AddElderFormActivity.class);
-				startActivity(addElder);
+				startActivityForResult(addElder, ADD_ELDER);
 			}
 		});
 		
@@ -83,7 +84,7 @@ public class CaregiverHomeActivity extends ListActivity {
 							
 							for(int i = 1, size = messages.length(); i < size; ++i) {
 								JSONObject elderJSON = messages.getJSONObject(i);
-								Log.d("elder-" + i, ": " + elderJSON);
+//								Log.d("elder-" + i, ": " + elderJSON);
 								elders.add(new User(elderJSON.getString("device_id"), User.ELDER, elderJSON.getString("name"), new Photo(elderJSON.getString("attachment"), null, null), null));
 							}
 							
@@ -156,8 +157,8 @@ public class CaregiverHomeActivity extends ListActivity {
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if(requestCode == VIEW_ELDER && resultCode == AddElderFormActivity.ADD_ELDER_OK
-			|| requestCode == ElderDetailsActivity.EDIT_ELDER && resultCode == EditElderProfileActivity.EDIT_ELDER_OK)
+		if(requestCode == ADD_ELDER && resultCode == AddElderFormActivity.ADD_ELDER_OK
+			|| requestCode == VIEW_ELDER && (resultCode == ElderDetailsActivity.EDIT_ELDER_OK || resultCode == ElderDetailsActivity.DELETE_ELDER_OK))
 		{
 			// Basically restart
 			// Reference: http://stackoverflow.com/a/3974828

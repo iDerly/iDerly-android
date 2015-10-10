@@ -30,7 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class ElderPhotoGalleryList extends ListFragment {
-	public static String postUrl = "http://iderly.kenrick95.org/elder/photos/" + Global.deviceId;
+	public static String postUrl = "http://iderly.kenrick95.org/elder/photos";
 	
 	private ArrayList<Photo> photos = new ArrayList<Photo>();
 	private User elder;
@@ -53,9 +53,6 @@ public class ElderPhotoGalleryList extends ListFragment {
 		
 		this.elder = this.getArguments().getParcelable("elder");
 		this.fetchPhotos();
-				
-		this.mAdapter = new ElderPhotoListAdapter(this.getActivity(), this.photos);
-		this.setListAdapter(mAdapter);
 	}
 	
 	
@@ -82,7 +79,9 @@ public class ElderPhotoGalleryList extends ListFragment {
 	
 	private void fetchPhotos () {
 		ProgressDialog pd = ProgressDialog.show(this.getActivity(), null, "Fetching photos...", true);
-		new HttpPostRequest(postUrl, pd, photos) {
+		
+		String targetUrl = postUrl + "/" + elder.getDeviceId();
+		new HttpPostRequest(targetUrl, pd, photos) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {
 				((ProgressDialog) this.mixed[0]).dismiss();
@@ -99,6 +98,9 @@ public class ElderPhotoGalleryList extends ListFragment {
 									JSONObject message = messages.getJSONObject(i);
 									photos.add(new Photo(message.getString("attachment"), message.getString("name"), message.getString("remarks")));
 								}
+								
+								mAdapter = new ElderPhotoListAdapter(ElderPhotoGalleryList.this.getActivity(), photos);
+								ElderPhotoGalleryList.this.setListAdapter(mAdapter);
 							} else {
 								new AlertDialog.Builder(ElderPhotoGalleryList.this.getActivity())
 									.setMessage("Error occurred in fetching photos!")
