@@ -3,9 +3,17 @@
     tools:context="com.example.iderly.ElderDetailsActivity" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:id="@+id/elder_details_actionbar"
+        android:icon="@drawable/ic_action_overflow"
+        android:showAsAction="always"
+        android:title="@string/elder_details_actionbar_title" >
+      
+        <menu>
+            <item
+                android:id="@+id/ActionBar_AddPhoto"
+                android:title="@string/ActionBar_LoginCaregiver_Text" />
+        </menu>
+        
+    </item>
 
 </menu>

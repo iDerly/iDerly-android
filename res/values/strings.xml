@@ -18,6 +18,7 @@
     <string name="title_activity_login_caregiver">LoginCaregiverActivity</string>
     <string name="title_activity_register_caregiver">RegisterCaregiverActivity</string>
     <string name="ActionBar_LoginCaregiver_Text">Login as Caregiver</string>
+    <string name="elder_details_actionbar_title">Add Photo</string>
     
     <string name="ButtonText_Login">Login</string>
     <string name="ButtonText_Register">Register</string>
