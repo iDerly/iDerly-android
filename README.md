@@ -29,7 +29,9 @@ new HttpPostRequest("https://github.com/") {
     public void onFinish(int statusCode, String responseText) {
         // Do something here
     }
-}.send();
+}.addParameter("param1", "value1")
+    .addParameter("param2", "value2")
+    .send();
 ```
 
 Advanced Usage:
@@ -49,5 +51,7 @@ new HttpPostRequest("https://github.com/", pd) {
     public void onFinish(int statusCode, String responseText) {
         ((ProgressDialog) this.mixed[0]).dismiss();  // dismiss the dialog, releasing the block in MainUI Thread
     }
-}.send();
+}.addParameter("param1", "value1")
+    .addParameter("param2", "value2")
+    .send();
 ```
