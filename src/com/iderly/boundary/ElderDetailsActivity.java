@@ -36,6 +36,9 @@ import android.content.DialogInterface.OnClickListener;
 
 public class ElderDetailsActivity extends FragmentActivity implements ActionBar.TabListener {
 	public static String postUrl = "http://iderly.kenrick95.org/caregiver/delete_elder";
+	
+	public static int EDIT_ELDER = 0x00000001;
+	
 	private ViewPager viewPager;
 	private ElderDetailsPagerAdapter mAdapter;
 	private ActionBar actionBar;
@@ -122,7 +125,7 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 		Intent intent = new Intent(this, EditElderProfileActivity.class);
 		intent.putExtra("elder", this.elder);
 		
-		this.startActivity(intent);
+		this.startActivityForResult(intent, EDIT_ELDER);
 	}
 	
 	public void deleteElder (View v) {
@@ -164,5 +167,13 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 		}.addParameter("elder_device_id", elder.getDeviceId())
 			.addParameter("caregiver_device_id", Global.deviceId)
 			.send();
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == EDIT_ELDER && resultCode == EditElderProfileActivity.EDIT_ELDER_OK) {
+			setResult(EditElderProfileActivity.EDIT_ELDER_OK);
+			finish();
+		}
 	}
 }

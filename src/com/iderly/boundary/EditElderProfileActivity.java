@@ -32,6 +32,8 @@ import android.widget.TextView;
 public class EditElderProfileActivity extends Activity {
 	public static String postUrl = "http://iderly.kenrick95.org/elder/update";
 	
+	public static int EDIT_ELDER_OK = 0x00000001;
+	
 	private LinearLayout editElderProfileMessages;
 	private User elder;
 
@@ -41,7 +43,7 @@ public class EditElderProfileActivity extends Activity {
 		setContentView(R.layout.activity_edit_elder_profile);
 		this.elder = this.getIntent().getExtras().getParcelable("elder");
 		
-		this.editElderProfileMessages = (LinearLayout) findViewById(R.id.add_elder_messages);
+		this.editElderProfileMessages = (LinearLayout) findViewById(R.id.LL_EditElder_UpdateMessage);
 		((ImageView) findViewById(R.id.ImageView_EditElder_ElderProfilePicture)).setImageBitmap(this.elder.getProfPic().getImageBitmap());
 		((EditText) findViewById(R.id.EditText_EditElder_ElderName)).setText(this.elder.getName());
 		((EditText) findViewById(R.id.EditText_EditElder_ElderDeviceId)).setText(this.elder.getDeviceId());
@@ -119,6 +121,7 @@ public class EditElderProfileActivity extends Activity {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
 											dialog.dismiss();
+											EditElderProfileActivity.this.setResult(EDIT_ELDER_OK);
 											EditElderProfileActivity.this.finish();
 										}
 									})

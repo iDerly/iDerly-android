@@ -36,6 +36,8 @@ import android.widget.ListView;
 public class CaregiverHomeActivity extends ListActivity {
 	public static String getCaregiverPOSTURL = "https://iderly-kenrick95.rhcloud.com/caregiver/view_caregiver_and_elder/" + Global.deviceId;
 	private ArrayList<User> eldersList;
+	
+	public static int VIEW_ELDER = 0x00000001;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +151,19 @@ public class CaregiverHomeActivity extends ListActivity {
 		User elder = this.eldersList.get(position - 1);
 		intent.putExtra("elder", elder);
 		
-		startActivity(intent);
+		this.startActivityForResult(intent, VIEW_ELDER);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == VIEW_ELDER && resultCode == AddElderFormActivity.ADD_ELDER_OK
+			|| requestCode == ElderDetailsActivity.EDIT_ELDER && resultCode == EditElderProfileActivity.EDIT_ELDER_OK)
+		{
+			// Basically restart
+			// Reference: http://stackoverflow.com/a/3974828
+			Intent intent = getIntent();
+			finish();
+			startActivity(intent);
+		}
 	}
 }
