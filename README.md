@@ -24,12 +24,15 @@ public HttpPostRequest(String url, Object... mixed)
 
 Methods:
 ```java
+public void send()
+
 public HttpPostRequest addParameter(String name, String value)
 
 public HttpPostRequest addParameters(Pair<String, String>... parameters)
 
 public HttpPostRequest addParameters(List<Pair<String, String>> parameters)
 ```
+*Never forget to send the request!*
 
 Basic Usage:
 ```java
