@@ -44,6 +44,8 @@ public class ElderProfileFragment extends Fragment {
 		// FETCH THIS ELDER'S AVERAGE SCORE FROM DATABASE FIRST!!
 		// HTTP REQUEST HERE!!
 		
+		Assert.assertNotNull(this.elder);
+		
 		((TextView) view.findViewById(R.id.Text_ElderProfile_DeviceId)).setText(this.elder.getDeviceId());
 		((TextView) view.findViewById(R.id.Text_ElderProfile_Name)).setText(this.elder.getName());
 		((TextView) view.findViewById(R.id.Text_ElderProfile_AverageScore)).setText("" + elderAverageScore);
