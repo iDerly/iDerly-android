@@ -2,6 +2,8 @@ package com.iderly.boundary;
 
 import java.net.HttpURLConnection;
 
+import junit.framework.Assert;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

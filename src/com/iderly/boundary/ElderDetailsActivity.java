@@ -38,6 +38,8 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 	public static String postUrl = "http://iderly.kenrick95.org/caregiver/delete_elder";
 	
 	public static int EDIT_ELDER = 0x00000001;
+	public static int DELETE_ELDER_OK = 0x80000000;
+	public static int EDIT_ELDER_OK = 0x80000001;
 	
 	private ViewPager viewPager;
 	private ElderDetailsPagerAdapter mAdapter;
@@ -149,6 +151,8 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 									@Override
 									public void onClick(DialogInterface dialog,	int which) {
 										dialog.dismiss();
+										
+										ElderDetailsActivity.this.setResult(DELETE_ELDER_OK);
 										ElderDetailsActivity.this.finish();
 									}
 								}).show();
@@ -174,7 +178,7 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == EDIT_ELDER && resultCode == EditElderProfileActivity.EDIT_ELDER_OK) {
-			setResult(EditElderProfileActivity.EDIT_ELDER_OK);
+			setResult(EDIT_ELDER_OK);
 			finish();
 		}
 	}
