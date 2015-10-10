@@ -112,14 +112,17 @@ public class EditElderProfileActivity extends Activity {
 							JSONObject response = new JSONObject(responseText);
 							
 							AlertDialog.Builder adb = new AlertDialog.Builder(EditElderProfileActivity.this);
+							
 							if(response.getInt("status") == 0) {
 								adb.setMessage("Editting elder profile is successful!")
 									.setNeutralButton("OK", new OnClickListener() {
 										@Override
-										public void onClick(DialogInterface dialog,	int which) {
+										public void onClick(DialogInterface dialog, int which) {
 											dialog.dismiss();
+											EditElderProfileActivity.this.finish();
 										}
-									}).show();
+									})
+									.show();
 							} else {
 								adb.setMessage(response.getJSONArray("message").getString(0))
 									.setNeutralButton("OK", new OnClickListener() {
@@ -127,7 +130,8 @@ public class EditElderProfileActivity extends Activity {
 										public void onClick(DialogInterface dialog, int which) {
 											dialog.dismiss();
 										}
-									}).show();
+									})
+									.show();
 							}
 						} catch (JSONException e) {
 							// As always, either Kenrick or the Internet's fault

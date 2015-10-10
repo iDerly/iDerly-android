@@ -111,19 +111,9 @@ public class ElderPhotoGalleryList extends ListFragment {
 									JSONObject message = messages.getJSONObject(i);
 									photos.add(new Photo(message.getString("attachment"), message.getString("name"), message.getString("remarks")));
 								}
-								
-								new AlertDialog.Builder(ElderPhotoGalleryList.this.getActivity())
-									.setMessage("Fetching photos completed!")
-									.setNeutralButton("OK", new OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											dialog.dismiss();
-										}
-									})
-									.show();
 							} else {
 								new AlertDialog.Builder(ElderPhotoGalleryList.this.getActivity())
-									.setMessage("Error in fetching photos!")
+									.setMessage("Error occurred in fetching photos!")
 									.setNeutralButton("OK", new OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {

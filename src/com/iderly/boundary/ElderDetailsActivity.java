@@ -126,7 +126,7 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 	}
 	
 	public void deleteElder (View v) {
-		ProgressDialog pd = ProgressDialog.show(this, null, "Deleting this elder...", true);
+		ProgressDialog pd = ProgressDialog.show(this, null, "Deleting selected elder...", true);
 		new HttpPostRequest(postUrl, pd) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {
@@ -144,6 +144,7 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 									@Override
 									public void onClick(DialogInterface dialog,	int which) {
 										dialog.dismiss();
+										ElderDetailsActivity.this.finish();
 									}
 								}).show();
 						} else {
