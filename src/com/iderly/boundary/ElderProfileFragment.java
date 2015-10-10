@@ -36,7 +36,8 @@ public class ElderProfileFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		View view = inflater.inflate(R.layout.fragment_elder_profile_details, container, false);
-		this.elder = this.getActivity().getIntent().getExtras().getParcelable("elder");
+//		this.elder = this.getActivity().getIntent().getExtras().getParcelable("elder");
+		this.elder = this.getArguments().getParcelable("elder");
 		
 		double elderAverageScore = 0.0;
 		// FETCH THIS ELDER'S AVERAGE SCORE FROM DATABASE FIRST!!
