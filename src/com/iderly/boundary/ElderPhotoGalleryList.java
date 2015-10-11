@@ -71,7 +71,7 @@ public class ElderPhotoGalleryList extends ListFragment {
 		super.onListItemClick(l, v, position, id);
 		Photo p = this.photos.get(position);
 		
-		Intent intent = new Intent(this.getActivity(), ElderDetailsActivity.class);
+		Intent intent = new Intent(this.getActivity(), ElderPhotoGalleryDetailsActivity.class);
 		intent.putExtra("photo", p);
 		
 		this.startActivity(intent);

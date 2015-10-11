@@ -71,9 +71,6 @@ public class ElderPhotoGalleryDetailsActivity extends Activity {
 	}
 	 
 	public void deletePhotoGallery (View view) {
-		// CALL HTTP REQUEST HERE!!
-		// Tak usah caps cuk!
-		
 		ProgressDialog pd = ProgressDialog.show(this, null, "Deleting photo...", true);
 		new HttpPostRequest(postUrl, pd) {
 			@Override

@@ -101,9 +101,6 @@ public class ElderPhotoGalleryEditPhotoActivity extends Activity {
     	}
     	
     	if (valid == 1) {
-    		// HTTP POST REQUEST HERE TO EDIT!!
-    		// Nasi goreng jancuk!
-    		
     		ProgressDialog pd = ProgressDialog.show(this, null, "Peter ganteng!", true);
     		new HttpPostRequest(postUrl, pd) {
 				@Override
