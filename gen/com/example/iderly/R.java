@@ -22,10 +22,12 @@ public final class R {
         public static final int activity_vertical_margin=0x7f040001;
     }
     public static final class drawable {
-        public static final int ic_action_overflow=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
-        public static final int logo_iderly=0x7f020002;
-        public static final int rectangle=0x7f020003;
+        public static final int barcorrect=0x7f020000;
+        public static final int barincorrect=0x7f020001;
+        public static final int ic_action_overflow=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int logo_iderly=0x7f020004;
+        public static final int rectangle=0x7f020005;
     }
     public static final class id {
         public static final int ActionBar_LoginCaregiver=0x7f080069;
@@ -101,28 +103,28 @@ public final class R {
         public static final int forgetPasswordInstruction=0x7f080029;
         public static final int forgetPassword_button=0x7f08002c;
         public static final int forget_password_btn=0x7f080047;
-        public static final int gameChoice1=0x7f080037;
-        public static final int gameChoice2=0x7f080038;
-        public static final int gameChoice3=0x7f08003a;
-        public static final int gameChoice4=0x7f08003b;
+        public static final int gameChoice1=0x7f080038;
+        public static final int gameChoice2=0x7f080039;
+        public static final int gameChoice3=0x7f08003b;
+        public static final int gameChoice4=0x7f08003c;
         public static final int gameEndCongratsText=0x7f08002e;
         public static final int gameEndFooterText=0x7f080032;
         public static final int gameEndLayout=0x7f08002d;
         public static final int gameEndScorePreText=0x7f080030;
         public static final int gameEndScoreSubText=0x7f080031;
         public static final int gameEndScoreText=0x7f08002f;
-        public static final int gamePhoto=0x7f08003d;
+        public static final int gamePhoto=0x7f08003e;
         public static final int gameRoundFooterText=0x7f080040;
-        public static final int gameRoundHeaderText=0x7f08003c;
+        public static final int gameRoundHeaderText=0x7f08003d;
         public static final int gameRoundLayout=0x7f080033;
-        public static final int gameRoundSubText=0x7f08003e;
+        public static final int gameRoundSubText=0x7f08003f;
         public static final int game_mode_btn=0x7f08004e;
-        public static final int game_round_progbar=0x7f080034;
+        public static final int game_round_progbar=0x7f080035;
         public static final int iDerly_logo=0x7f08004c;
         public static final int listview_background_shape=0x7f080066;
         public static final int login_btn=0x7f080044;
         public static final int login_messages=0x7f080041;
-        public static final int myRectangleView=0x7f08003f;
+        public static final int myRectangleView=0x7f080034;
         public static final int name_field=0x7f080049;
         public static final int pager=0x7f080018;
         public static final int password_confirm_field=0x7f08004a;
@@ -130,9 +132,9 @@ public final class R {
         public static final int play_game_btn=0x7f08004d;
         public static final int register_btn=0x7f080046;
         public static final int register_messages=0x7f080048;
-        public static final int tableLayout1=0x7f080035;
-        public static final int tableRow1=0x7f080036;
-        public static final int tableRow2=0x7f080039;
+        public static final int tableLayout1=0x7f080036;
+        public static final int tableRow1=0x7f080037;
+        public static final int tableRow2=0x7f08003a;
         public static final int title_activity_actionbar=0x7f080068;
     }
     public static final class layout {

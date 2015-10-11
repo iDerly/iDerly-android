@@ -10,11 +10,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.iderly.boundary.TitleActivity" >
 
-    <SurfaceView
-        android:id="@+id/game_round_progbar"
+    <View
+        android:id="@+id/myRectangleView"
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rectangle" />
+
+    <LinearLayout
+        android:id="@+id/game_round_progbar"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:layout_alignParentBottom="true" >
+
+    </LinearLayout>
 
     <TableLayout
         android:id="@+id/tableLayout1"
@@ -98,14 +108,6 @@
         android:layout_below="@id/gamePhoto"
         android:layout_centerHorizontal="true"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <View
-        android:id="@+id/myRectangleView"
-        android:layout_width="50dp"
-        android:layout_height="15dp"
-        android:layout_alignLeft="@+id/gamePhoto"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/rectangle" />
 
     <TextView
         android:id="@+id/gameRoundFooterText"

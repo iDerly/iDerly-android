@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import android.view.View;
+
 public class GameModeUnlimited {
 	
 	public static ArrayList<Integer> indexList;
@@ -40,5 +42,5 @@ public class GameModeUnlimited {
 		indexList = new ArrayList<Integer>();
 		for(int i=0; i<GameManager.photoList.size(); ++i) indexList.add(i);
 		Collections.shuffle(indexList);
-	}
+	} 
 }

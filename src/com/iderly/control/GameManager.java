@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.RandomAccess;
+import android.view.View;
 
 import com.iderly.entity.Photo;
 
@@ -13,7 +14,7 @@ public class GameManager {
 	public static int UNLIMITED_MODE = 1;
 	public static int UNLIMITED_LIVES = 3;
  
-	private static int GameMode;
+	public static int GameMode;
     private static Random randomGenerator;
     
     private static Photo currentPhoto;

@@ -14,13 +14,16 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -36,6 +39,7 @@ public class GameRoundActivity extends Activity {
 	private RelativeLayout gameRoundLayout;
 	private boolean waitForContinue;
 	private Color bgColor, buttonColor;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +93,11 @@ public class GameRoundActivity extends Activity {
 			if (buttonNo == 3){ //correct
 				gameRoundLayout.setBackgroundColor(Color.argb(255, 200, 255, 200));
 				headerText.setText(R.string.GameRound_PictureCorrectText);
+	            UpdateView(true);
 			} else {		   //incorrect
 				gameRoundLayout.setBackgroundColor(Color.argb(255, 255, 200, 200));
 				headerText.setText(R.string.GameRound_PictureWrongText); 
+	            UpdateView(false);
 			}
 			
 			for(int i=0;i<4;++i){ 
@@ -114,12 +120,14 @@ public class GameRoundActivity extends Activity {
 					return;
 				}
             });
+            
 		}
 		return;
 	}
 
 	private int cnt = 0;
 	public boolean getData(){
+		
 //		while(Global.getGameManager().GetNextRound()){
 //			//updatePhoto
 //			for(int i=0;i<4;++i){
@@ -127,8 +135,42 @@ public class GameRoundActivity extends Activity {
 //			}
 //		}
 		++cnt;
-		return (cnt<5);
+		return (cnt<=10);
 	}
+	
+	private void UpdateView(boolean inp){ 
+		/*    <View
+        android:id="@+id/myRectangleView"
+        android:layout_width="50dp"
+        android:layout_height="15dp"
+        android:layout_alignLeft="@+id/gamePhoto"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/rectangle" />*/
+		
+		LinearLayout progBarHolder = (LinearLayout)findViewById(R.id.game_round_progbar);
+
+		DisplayMetrics dm = new DisplayMetrics();
+		int width = progBarHolder.getWidth(); 
+		
+		View progBar = new View(this);
+		if (GameManager.GameMode == GameManager.CLASSIC_MODE){
+			if (inp)
+				progBar.setBackgroundResource(R.drawable.barcorrect);
+			else 
+				progBar.setBackgroundResource(R.drawable.barincorrect); 
+			progBar.setLayoutParams(new LinearLayout.LayoutParams(width/10, LayoutParams.MATCH_PARENT));
+			progBarHolder.addView(progBar);
+		} else {
+			if (!inp){
+				progBar.setBackgroundResource(R.drawable.barincorrect);
+				progBar.setLayoutParams(new LinearLayout.LayoutParams(width/3, LayoutParams.MATCH_PARENT));
+				progBarHolder.addView(progBar);
+			}
+		} 
+		
+		//progBar.set(color);
+	}
+	
 	private void NextRound(){
 		gameRoundLayout.setOnClickListener(null); 
 		if (getData()){  

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import com.iderly.boundary.GameRoundActivity;
+
+import android.view.View;
+
 public class GameModeClassic {
  
 	private static final double BASE_CHANCE = 3;
@@ -54,5 +58,5 @@ public class GameModeClassic {
 			totalChance += chance;
 			chanceList.add(chance);
 		}  
-	}
+	} 
 }
