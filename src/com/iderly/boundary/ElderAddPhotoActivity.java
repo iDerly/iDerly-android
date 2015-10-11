@@ -201,6 +201,7 @@ public class ElderAddPhotoActivity extends Activity {
 			// ADD PHOTO HERE
 			// HTTP REQUEST!!
 			// Ribut kali kau!
+			// Diam lah, kerjain sono!
 			
 			ProgressDialog pd = ProgressDialog.show(this, null, "Adding hansum photo...", true);
 			new HttpPostRequest(postUrl, pd) {

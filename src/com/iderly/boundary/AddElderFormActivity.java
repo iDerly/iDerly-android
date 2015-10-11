@@ -39,6 +39,8 @@ import android.widget.TextView;
 public class AddElderFormActivity extends Activity {
 	public static String addElderPOSTUrl = "https://iderly.kenrick95.org/caregiver/add_elder";
 	
+	public static int ADD_ELDER_OK = 0x00000001;
+	
 	/**
 	 * Constant definition for image selection for profile picture
 	 */
@@ -215,6 +217,8 @@ public class AddElderFormActivity extends Activity {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
 										dialog.dismiss();
+										
+										AddElderFormActivity.this.setResult(ADD_ELDER_OK);
 										AddElderFormActivity.this.finish();
 									}
 								})
@@ -233,7 +237,6 @@ public class AddElderFormActivity extends Activity {
 					} catch (JSONException e) {
 						// Kenrick -___-
 					}
-					
 				}
 			});
 		}

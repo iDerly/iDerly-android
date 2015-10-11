@@ -30,7 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class ElderPhotoGalleryList extends ListFragment {
-	public static String postUrl = "http://iderly.kenrick95.org/elder/photos/" + Global.deviceId;
+	public static String postUrl = "http://iderly.kenrick95.org/elder/photos";
 	
 	private ArrayList<Photo> photos = new ArrayList<Photo>();
 	private User elder;
@@ -53,9 +53,6 @@ public class ElderPhotoGalleryList extends ListFragment {
 		
 		this.elder = this.getArguments().getParcelable("elder");
 		this.fetchPhotos();
-				
-		this.mAdapter = new ElderPhotoListAdapter(this.getActivity(), this.photos);
-		this.setListAdapter(mAdapter);
 	}
 	
 	
@@ -65,18 +62,6 @@ public class ElderPhotoGalleryList extends ListFragment {
 	public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		View view = (View) inflater.inflate(R.layout.elder_photo_gallery_list_fragment, container, false);
-		
-//		this.headerView = (View) inflater.inflate(R.layout.photo_gallery_list_header, container, false);
-//		Button b = (Button) this.headerView.findViewById(R.id.Button_AddPhoto);
-//		
-//		b.setOnClickListener(new View.OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				Intent addPhoto = new Intent (ElderPhotoGalleryList.this.getActivity(), ElderAddPhotoActivity.class);
-//				startActivity(addPhoto);
-//			}
-//		});
 		
 		return view;
 	}
@@ -94,7 +79,9 @@ public class ElderPhotoGalleryList extends ListFragment {
 	
 	private void fetchPhotos () {
 		ProgressDialog pd = ProgressDialog.show(this.getActivity(), null, "Fetching photos...", true);
-		new HttpPostRequest(postUrl, pd, photos) {
+		
+		String targetUrl = postUrl + "/" + elder.getDeviceId();
+		new HttpPostRequest(targetUrl, pd, photos) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {
 				((ProgressDialog) this.mixed[0]).dismiss();
@@ -112,18 +99,11 @@ public class ElderPhotoGalleryList extends ListFragment {
 									photos.add(new Photo(message.getString("attachment"), message.getString("name"), message.getString("remarks")));
 								}
 								
-								new AlertDialog.Builder(ElderPhotoGalleryList.this.getActivity())
-									.setMessage("Fetching photos completed!")
-									.setNeutralButton("OK", new OnClickListener() {
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											dialog.dismiss();
-										}
-									})
-									.show();
+								mAdapter = new ElderPhotoListAdapter(ElderPhotoGalleryList.this.getActivity(), photos);
+								ElderPhotoGalleryList.this.setListAdapter(mAdapter);
 							} else {
 								new AlertDialog.Builder(ElderPhotoGalleryList.this.getActivity())
-									.setMessage("Error in fetching photos!")
+									.setMessage("Error occurred in fetching photos!")
 									.setNeutralButton("OK", new OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {

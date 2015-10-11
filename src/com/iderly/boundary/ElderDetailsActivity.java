@@ -36,6 +36,11 @@ import android.content.DialogInterface.OnClickListener;
 
 public class ElderDetailsActivity extends FragmentActivity implements ActionBar.TabListener {
 	public static String postUrl = "http://iderly.kenrick95.org/caregiver/delete_elder";
+	
+	public static int EDIT_ELDER = 0x00000001;
+	public static int DELETE_ELDER_OK = 0x80000000;
+	public static int EDIT_ELDER_OK = 0x80000001;
+	
 	private ViewPager viewPager;
 	private ElderDetailsPagerAdapter mAdapter;
 	private ActionBar actionBar;
@@ -100,9 +105,11 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		if (id == R.id.ActionBar_AddPhoto) {
+			Intent intent = new Intent(this, ElderAddPhotoActivity.class);
+			startActivity(intent);
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -122,11 +129,11 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 		Intent intent = new Intent(this, EditElderProfileActivity.class);
 		intent.putExtra("elder", this.elder);
 		
-		this.startActivity(intent);
+		this.startActivityForResult(intent, EDIT_ELDER);
 	}
 	
 	public void deleteElder (View v) {
-		ProgressDialog pd = ProgressDialog.show(this, null, "Deleting this elder...", true);
+		ProgressDialog pd = ProgressDialog.show(this, null, "Deleting selected elder...", true);
 		new HttpPostRequest(postUrl, pd) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {
@@ -144,6 +151,9 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 									@Override
 									public void onClick(DialogInterface dialog,	int which) {
 										dialog.dismiss();
+										
+										ElderDetailsActivity.this.setResult(DELETE_ELDER_OK);
+										ElderDetailsActivity.this.finish();
 									}
 								}).show();
 						} else {
@@ -163,5 +173,13 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 		}.addParameter("elder_device_id", elder.getDeviceId())
 			.addParameter("caregiver_device_id", Global.deviceId)
 			.send();
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == EDIT_ELDER && resultCode == EditElderProfileActivity.EDIT_ELDER_OK) {
+			setResult(EDIT_ELDER_OK);
+			finish();
+		}
 	}
 }
