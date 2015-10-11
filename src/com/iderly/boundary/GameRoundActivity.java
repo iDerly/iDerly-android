@@ -92,13 +92,13 @@ public class GameRoundActivity extends Activity {
 		
 		if (buttonNo>=0){
 			//set screen and buttons to correct/false based on asnwer result 
-			//Global.getGameManager().SendUserInput(buttonNo); 
+			//boolean roundResult = Global.getGameManager().SendUserInput(buttonNo); 
 			if (buttonNo == 3){ //correct
 				gameRoundLayout.setBackgroundColor(Color.argb(255, 200, 255, 200));
 				headerText.setText(R.string.GameRound_PictureCorrectText);
 	            UpdateView(true);
 			} else {		   //incorrect
-				((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(800);
+				((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(100);
 				gameRoundLayout.setBackgroundColor(Color.argb(255, 255, 200, 200));
 				headerText.setText(R.string.GameRound_PictureWrongText); 
 	            UpdateView(false);
@@ -109,10 +109,11 @@ public class GameRoundActivity extends Activity {
 				button.get(i).getBackground().setColorFilter(0xFFFFAAAA, PorterDuff.Mode.MULTIPLY); //red  
 			}
 			button.get(3).getBackground().setColorFilter(0xFFBBFFBB, PorterDuff.Mode.MULTIPLY); //green
- 
+			
+			
 //			//set pictureText to photo remark
-//			pictureText.setText("\"" + remark + "\"");
-//
+//			pictureText.setText("\"" + Global.getGameManager().getPhoto().getRemarks() + "\"");
+
 //			//"Click anywhere to continue" 
 			instText.setText(R.string.GameRound_ContinueText);
 			waitForContinue = true; 
@@ -131,13 +132,18 @@ public class GameRoundActivity extends Activity {
 
 	private int cnt = 0;
 	public boolean getData(){
+//		Retrieves next photo from the algo. Returns false if game is over
 		
-//		while(Global.getGameManager().GetNextRound()){
+//		boolean nextRoundAvailable = Global.getGameManager().GetNextRound();
+//		if (nextRoundAvailable){
 //			//updatePhoto
 //			for(int i=0;i<4;++i){
 //				button.get(i).setText(Global.getGameManager().getChoice(i));
 //			}
 //		}
+//		return nextRoundAvailable
+		
+		//temporary placeholder algo
 		++cnt;
 		return (cnt<=10);
 	}
@@ -218,6 +224,7 @@ public class GameRoundActivity extends Activity {
 	private void GoToEnd(){
 		Intent gameEndIntent = new Intent(this, GameEndActivity.class);
 	    startActivity(gameEndIntent);
+	    this.finish();
 	}
 
 	

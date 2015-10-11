@@ -1,11 +1,22 @@
 package com.iderly.control;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.RandomAccess;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.util.Log;
 import android.view.View;
 
+import com.iderly.boundary.EditElderProfileActivity;
 import com.iderly.entity.Photo;
 
 public class GameManager {
@@ -80,19 +91,38 @@ public class GameManager {
 		return true;
 	}
 	
-	public static void SendUserInput(int choice){
+	public static boolean SendUserInput(int choice){
+		//this function receives user input from Activity 
+		//updates score and database accordingly based on currentPhoto
+		//returns result
 		boolean roundResult = (selectedNames.get(choice) == correctName);	
 		if (GameMode == CLASSIC_MODE)
 			GameModeClassic.ReturnResult(roundResult);
 		else 
 			GameModeUnlimited.ReturnResult(roundResult); 
 		
-		//increment displayCount
-		if(roundResult){
-			//increment correct count
-		}
+		UpdateDatabase(roundResult?1:0);
+		
+		return roundResult;
 	}
 
+	public static void UpdateDatabase(int inp){
+		//update database for currentPhoto
+		//0: shown, user incorrect answer
+		//1: shown, user correct answer.
+		String postUrl = "http://iderly.kenrick95.org/game/inc_photo_stats";
+		
+		new HttpPostRequest(postUrl) {
+			@Override
+			public void onFinish(int statusCode, String responseText) { 
+				//what to put here what what
+				//assume peter's fault
+			}
+		}.addParameter("photo_id", ""+currentPhoto.getId())
+			.addParameter("option", ""+inp) 
+			.send();
+	}
+	
 	public static Photo getPhoto(){
 		return currentPhoto;
 	}

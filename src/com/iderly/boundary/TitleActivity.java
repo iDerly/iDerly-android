@@ -25,6 +25,7 @@ import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 public class TitleActivity extends Activity {
+	
 	private int gameMode = GameManager.CLASSIC_MODE;
 	private ActionBar actionBar;
 
@@ -101,6 +102,7 @@ public class TitleActivity extends Activity {
 		if (view.getId() == R.id.play_game_btn){
 			Intent gameIntent = new Intent(this, GameRoundActivity.class);
 		    startActivity(gameIntent);
+		    //this.finish();
 		}
 		return;
 	}

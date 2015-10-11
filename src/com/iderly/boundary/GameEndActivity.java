@@ -40,6 +40,7 @@ public class GameEndActivity extends Activity {
 			public void onClick(View view) {
 				Intent gameIntent = new Intent(GameEndActivity.this, TitleActivity.class);
 			    startActivity(gameIntent);
+			    GameEndActivity.this.finish();
 			}
         });
 		 
