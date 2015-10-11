@@ -14,6 +14,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -39,13 +40,15 @@ public class GameRoundActivity extends Activity {
 	private RelativeLayout gameRoundLayout;
 	private boolean waitForContinue;
 	private Color bgColor, buttonColor;
-	
+
+	private LinearLayout progBarHolder;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);  
 		setContentView(R.layout.activity_game_round);
 		gameRoundLayout = (RelativeLayout)findViewById(R.id.gameRoundLayout);
+		progBarHolder = (LinearLayout)findViewById(R.id.game_round_progbar);
 		
 		// Setting up Action Bar
 		this.actionBar = this.getActionBar();
@@ -95,6 +98,7 @@ public class GameRoundActivity extends Activity {
 				headerText.setText(R.string.GameRound_PictureCorrectText);
 	            UpdateView(true);
 			} else {		   //incorrect
+				((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(800);
 				gameRoundLayout.setBackgroundColor(Color.argb(255, 255, 200, 200));
 				headerText.setText(R.string.GameRound_PictureWrongText); 
 	            UpdateView(false);
@@ -147,13 +151,12 @@ public class GameRoundActivity extends Activity {
         android:layout_alignParentBottom="true"
         android:background="@drawable/rectangle" />*/
 		
-		LinearLayout progBarHolder = (LinearLayout)findViewById(R.id.game_round_progbar);
 
 		DisplayMetrics dm = new DisplayMetrics();
 		int width = progBarHolder.getWidth(); 
 		
 		View progBar = new View(this);
-		if (GameManager.GameMode == GameManager.CLASSIC_MODE){
+		if (GameManager.getGameMode() == GameManager.CLASSIC_MODE){
 			if (inp)
 				progBar.setBackgroundResource(R.drawable.barcorrect);
 			else 

@@ -97,6 +97,7 @@ public class TitleActivity extends Activity {
 	 */
 	public void startGameActivity (View view) {
 		// Start intent to the next page
+		GameManager.setGameMode(TitleActivity.this.gameMode);
 		if (view.getId() == R.id.play_game_btn){
 			Intent gameIntent = new Intent(this, GameRoundActivity.class);
 		    startActivity(gameIntent);

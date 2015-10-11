@@ -14,7 +14,7 @@ public class GameManager {
 	public static int UNLIMITED_MODE = 1;
 	public static int UNLIMITED_LIVES = 3;
  
-	public static int GameMode;
+	private static int GameMode;
     private static Random randomGenerator;
     
     private static Photo currentPhoto;
@@ -24,7 +24,7 @@ public class GameManager {
 	public static ArrayList<Photo> photoList;
 	
 	private static GameManager instance = new GameManager();
-	
+
 	public static GameManager getInstance(){
 		return instance;
 	}
@@ -38,7 +38,7 @@ public class GameManager {
 		long seed = System.nanoTime();
 		randomGenerator = new Random(seed);
 		 
-		GetPhotoDatabase(); 
+		RetrievePhotoDatabase(); 
 		
 		if (GameMode == CLASSIC_MODE)
 			GameModeClassic.Initialize();
@@ -99,9 +99,17 @@ public class GameManager {
 	
 	public static String getChoice(int ind){
 		return selectedNames.get(ind);
+	} 
+
+	public static int getGameMode(){
+		return GameMode;
+	}
+
+	public static void setGameMode(int inp){
+		GameMode = inp;
 	}
 	
-	private static void GetPhotoDatabase(){
+	private static void RetrievePhotoDatabase(){
 		//get list of photos somehow
 	}
 	

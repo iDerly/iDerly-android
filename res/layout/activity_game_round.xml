@@ -13,16 +13,21 @@
     <View
         android:id="@+id/myRectangleView"
         android:layout_width="match_parent"
-        android:layout_height="15dp"
+        android:layout_height="5dp"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/rectangle" />
 
     <LinearLayout
         android:id="@+id/game_round_progbar"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:layout_alignParentBottom="true" >
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="false"
+        android:layout_centerInParent="false"
+        android:layout_centerVertical="false"
+        android:orientation="horizontal" >
 
     </LinearLayout>
 
