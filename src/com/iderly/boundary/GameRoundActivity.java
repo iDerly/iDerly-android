@@ -64,7 +64,8 @@ public class GameRoundActivity extends Activity {
 		pictureText = (TextView)findViewById(R.id.gameRoundSubText);
 		instText = 	  (TextView)findViewById(R.id.gameRoundFooterText);
 		 
-//		Global.getGameManager().StartGame();
+		
+		Global.getGameManager().StartGame();
 		ResetRound();
 		getData();
 	} 

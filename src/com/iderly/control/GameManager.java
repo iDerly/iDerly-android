@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.RandomAccess;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,6 +18,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.iderly.boundary.EditElderProfileActivity;
+import com.iderly.boundary.ElderPhotoGalleryList;
+import com.iderly.boundary.GameRoundActivity;
 import com.iderly.entity.Photo;
 
 public class GameManager {
@@ -139,8 +142,43 @@ public class GameManager {
 		GameMode = inp;
 	}
 	
-	private static void RetrievePhotoDatabase(){
-		//get list of photos somehow
+	private static void RetrievePhotoDatabase(){ 
+		String postUrl = "http://iderly.kenrick95.org/elder/photos";
+		String deviceID = Global.deviceId;
+		String targetUrl = postUrl + "/" + deviceID;
+		Log.d("photoRet","RETRIEEEEEEEVE " + targetUrl);
+		
+		photoList = new ArrayList<Photo>();
+		
+		new HttpPostRequest(targetUrl, photoList) {
+			@Override
+			public void onFinish(int statusCode, String responseText) { 
+				Log.d("fetch photo", "response: " + responseText);
+				if(statusCode == HttpURLConnection.HTTP_OK) {;
+					try {
+						JSONObject response = new JSONObject(responseText);
+						
+						ArrayList<Photo> photos = (ArrayList<Photo>) this.mixed[0];
+						if(statusCode == HttpURLConnection.HTTP_OK) {
+							if(response.getInt("status") == 0) {
+								JSONArray messages = response.getJSONArray("message");
+								for(int i = 0, size = messages.length(); i < size; ++i) {
+									JSONObject message = messages.getJSONObject(i);
+									photos.add(new Photo(message.getString("attachment"), message.getString("name"), message.getString("remarks")));
+								} 
+							} 
+						}
+					} catch (JSONException e) {
+						// As always, either Kenrick or the Internet's fault
+					}
+				}
+			}
+		}.addParameter("device_id", deviceID)
+			.send();
+		
+		for (int i=0; i<photoList.size(); ++i){
+			Log.d("photo",photoList.get(i).toString());
+		}
 	}
 	
 }
