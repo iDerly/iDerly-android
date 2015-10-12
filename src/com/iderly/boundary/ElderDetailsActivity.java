@@ -40,6 +40,7 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 	public static int EDIT_ELDER = 0x00000001;
 	public static int DELETE_ELDER_OK = 0x80000000;
 	public static int EDIT_ELDER_OK = 0x80000001;
+	public static int ELDER_ADD_PHOTO = 0x00000001;
 	
 	private ViewPager viewPager;
 	private ElderDetailsPagerAdapter mAdapter;
@@ -107,7 +108,10 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 		int id = item.getItemId();
 		if (id == R.id.ActionBar_AddPhoto) {
 			Intent intent = new Intent(this, ElderAddPhotoActivity.class);
-			startActivity(intent);
+			intent.putExtra("device_id", elder.getDeviceId());
+			startActivityForResult(intent, ELDER_ADD_PHOTO);
+			
+			return true;
 		}
 		
 		return super.onOptionsItemSelected(item);
@@ -177,8 +181,15 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.d("activity result", String.format("%d, %d", requestCode, resultCode));
 		if(requestCode == EDIT_ELDER && resultCode == EditElderProfileActivity.EDIT_ELDER_OK) {
 			setResult(EDIT_ELDER_OK);
+			finish();
+		} else if(requestCode == ELDER_ADD_PHOTO && resultCode == ElderAddPhotoActivity.ELDER_ADD_PHOTO_OK) {
+			startActivity(getIntent());
+			finish();
+		} else if(resultCode == ElderPhotoGalleryDetailsActivity.DELETE_PHOTO_OK) {
+			startActivity(getIntent());
 			finish();
 		}
 	}

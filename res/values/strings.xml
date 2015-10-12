@@ -90,6 +90,7 @@
     <string name="ButtonText_PhotoImage">Select Image</string>
     <string name="AddPhotoButton_LabelText">Add Photo</string>
     <string name="Label_DeviceId">Device ID</string>
+    <string name="ActionBar_AddPhoto_Text">Add Photo</string>
 
 	<string name="Test">TestTets</string>
 

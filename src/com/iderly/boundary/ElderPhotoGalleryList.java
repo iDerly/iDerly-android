@@ -37,6 +37,8 @@ public class ElderPhotoGalleryList extends ListFragment {
 	private ElderPhotoListAdapter mAdapter;
 	private View headerView = null;
 	
+	public static int VIEW_PHOTO = 0x00000001;
+	
 	@Override
 	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,8 +75,10 @@ public class ElderPhotoGalleryList extends ListFragment {
 		
 		Intent intent = new Intent(this.getActivity(), ElderPhotoGalleryDetailsActivity.class);
 		intent.putExtra("photo", p);
+		intent.putExtra("device_id", elder.getDeviceId());
 		
-		this.startActivity(intent);
+		this.startActivityForResult(intent, VIEW_PHOTO);
+//		getActivity().finish();
 	}
 	
 	private void fetchPhotos () {
@@ -96,7 +100,7 @@ public class ElderPhotoGalleryList extends ListFragment {
 								JSONArray messages = response.getJSONArray("message");
 								for(int i = 0, size = messages.length(); i < size; ++i) {
 									JSONObject message = messages.getJSONObject(i);
-									photos.add(new Photo(message.getString("attachment"), message.getString("name"), message.getString("remarks")));
+									photos.add(new Photo(message.getInt("photo_id"), message.getString("attachment"), message.getString("name"), message.getString("remarks")));
 								}
 								
 								mAdapter = new ElderPhotoListAdapter(ElderPhotoGalleryList.this.getActivity(), photos);

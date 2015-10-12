@@ -46,7 +46,9 @@ public class ElderAddPhotoActivity extends Activity {
 	private static final int SELECT_PICTURE = 1;
 	private LinearLayout addPhotoMessages;
 	private String pictureString = "";
+	private String deviceId;
 	
+	public static int ELDER_ADD_PHOTO_OK = 0x00000001;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,8 @@ public class ElderAddPhotoActivity extends Activity {
 		
 		// Initialize message box
 		this.addPhotoMessages = (LinearLayout) findViewById(R.id.add_photo_messages);
+		
+		deviceId = getIntent().getExtras().getString("device_id");
 		
 		// Initialize view
 		((ImageView) findViewById(R.id.ImageView_PhotoImage)).setVisibility(View.GONE);
@@ -116,8 +120,8 @@ public class ElderAddPhotoActivity extends Activity {
 			
 			if (imageBitmap != null) {
 				this.pictureString = Global.getImageManager().encodeImageBase64(imageBitmap);
-				((ImageView) findViewById(R.id.ImageView_ElderProfilePicture)).setVisibility(View.VISIBLE);
-				((ImageView) findViewById(R.id.ImageView_ElderProfilePicture)).setImageBitmap(imageBitmap);
+				((ImageView) findViewById(R.id.ImageView_PhotoImage)).setVisibility(View.VISIBLE);
+				((ImageView) findViewById(R.id.ImageView_PhotoImage)).setImageBitmap(imageBitmap);
 			}
 		}
 	}
@@ -214,6 +218,8 @@ public class ElderAddPhotoActivity extends Activity {
 									.setNeutralButton("OK", new OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog, int which) {
+											setResult(ELDER_ADD_PHOTO_OK);
+											finish();
 											dialog.dismiss();
 										}
 									})
@@ -236,7 +242,7 @@ public class ElderAddPhotoActivity extends Activity {
 					}
 				}
 			}.addParameter("attachment", pictureString)
-				.addParameter("device_id", Global.deviceId)
+				.addParameter("device_id", deviceId)
 				.addParameter("name", photoName)
 				.addParameter("remarks", photoRemarks)
 				.send();

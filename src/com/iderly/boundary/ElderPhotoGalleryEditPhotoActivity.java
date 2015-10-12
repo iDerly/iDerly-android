@@ -32,8 +32,11 @@ import android.widget.TextView;
 public class ElderPhotoGalleryEditPhotoActivity extends Activity {
 	public static String postUrl = "http://iderly.kenrick95.org/elder/update_photo";
 	
+	public static int EDIT_PHOTO_OK = 0x00000001;
+	
 	private Photo photo;
 	private LinearLayout editPhotoMessages;
+	private String deviceId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class ElderPhotoGalleryEditPhotoActivity extends Activity {
 		
 		this.photo = (Photo) this.getIntent().getExtras().getParcelable("photo");
 		this.editPhotoMessages = (LinearLayout) findViewById(R.id.LL_EditPhoto_messages);
+		
+		deviceId = getIntent().getExtras().getString("device_id");
 		
 		// CAN ONLY CHANGE NAME AND REMARKS, BUT SHOW THE PHOTO --> PHOTO IS NOT EDITABLE THOUGH
 		((ImageView) findViewById(R.id.ImageView_PhotoGallery_EditPhoto)).setImageBitmap(this.photo.getImageBitmap());
@@ -118,6 +123,8 @@ public class ElderPhotoGalleryEditPhotoActivity extends Activity {
 									.setNeutralButton("OK", new OnClickListener() {
 										@Override
 										public void onClick(DialogInterface dialog,	int which) {
+											setResult(EDIT_PHOTO_OK);
+											finish();
 											dialog.dismiss();
 										}
 									}).show();
@@ -137,7 +144,7 @@ public class ElderPhotoGalleryEditPhotoActivity extends Activity {
 				}
     		}.addParameter("name", name)
     			.addParameter("remarks", remarks)
-    			.addParameter("device_id", Global.deviceId)
+    			.addParameter("device_id", deviceId)
     			.send();
     	}
     }

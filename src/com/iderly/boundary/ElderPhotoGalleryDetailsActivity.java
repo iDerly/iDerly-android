@@ -30,6 +30,9 @@ import android.widget.TextView;
 public class ElderPhotoGalleryDetailsActivity extends Activity {
 	public static String postUrl = "http://iderly.kenrick95.org/elder/delete_photo";
 	
+	public static int EDIT_PHOTO = 0x00000001;
+	public static int DELETE_PHOTO_OK = 0x00000002;
+	
 	private Photo photo;
 
 	@Override
@@ -66,8 +69,9 @@ public class ElderPhotoGalleryDetailsActivity extends Activity {
 	public void openEditPhotoGallery (View view) {
 		Intent intent = new Intent(this, ElderPhotoGalleryEditPhotoActivity.class);
 		intent.putExtra("photo", this.photo);
+		intent.putExtra("device_id", getIntent().getExtras().getString("device_id"));
 		
-		this.startActivity(intent);
+		this.startActivityForResult(intent, EDIT_PHOTO);
 	}
 	 
 	public void deletePhotoGallery (View view) {
@@ -88,12 +92,14 @@ public class ElderPhotoGalleryDetailsActivity extends Activity {
 								.setNeutralButton("OK", new OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog,	int which) {
+										setResult(DELETE_PHOTO_OK);
+										finish();
 										dialog.dismiss();
 									}
 								}).show();
 						} else {
 							adb.setMessage(response.getJSONArray("message").getString(0))
-								.setNeutralButton("OK", new OnClickListener() {
+								.setNeutralButton(response.getJSONArray("message").getString(0), new OnClickListener() {
 									@Override
 									public void onClick(DialogInterface dialog, int which) {
 										dialog.dismiss();
@@ -107,5 +113,14 @@ public class ElderPhotoGalleryDetailsActivity extends Activity {
 			}
 		}.addParameter("id", String.valueOf(photo.getId()))
 			.send();
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == EDIT_PHOTO && resultCode == ElderPhotoGalleryEditPhotoActivity.EDIT_PHOTO_OK) {
+			finish();
+			Intent intent = getIntent();
+			startActivity(intent);
+		}
 	}
 }

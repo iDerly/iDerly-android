@@ -11,7 +11,7 @@
         <menu>
             <item
                 android:id="@+id/ActionBar_AddPhoto"
-                android:title="@string/ActionBar_LoginCaregiver_Text" />
+                android:title="@string/ActionBar_AddPhoto_Text" />
         </menu>
         
     </item>

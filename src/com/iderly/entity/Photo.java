@@ -15,7 +15,8 @@ public class Photo implements Parcelable {
 	private int displayCount;
 	private int correctCount;
 	
-	public Photo (String imageBase64, String name, String remarks) {
+	public Photo (int id, String imageBase64, String name, String remarks) {
+		this.id = id;
 		this.imageBase64 = imageBase64;
 		this.name = name;
 		this.remarks = remarks;
@@ -60,6 +61,7 @@ public class Photo implements Parcelable {
 	
 	// PARCELABLE IMPLEMENTATION
 	public Photo (Parcel in) {
+		this.id = in.readInt();
 		this.imageBase64 = in.readString();
 		this.name = in.readString();
 		this.remarks = in.readString();
@@ -72,6 +74,7 @@ public class Photo implements Parcelable {
 	
 	@Override
 	public void writeToParcel (Parcel dest, int flags) {
+		dest.writeInt(this.id);
 		dest.writeString(this.imageBase64);
 		dest.writeString(this.name);
 		dest.writeString(this.remarks);
