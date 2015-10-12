@@ -43,21 +43,19 @@ public class GameManager {
 		return instance;
 	}
 	
-	public static void StartGame(){
-		Initialize();
-	}  
-	
-	private static void Initialize(){
-		//reset randomgen
-		long seed = System.nanoTime();
-		randomGenerator = new Random(seed);
-		 
-		RetrievePhotoDatabase(); 
-		
+	public static void StartGame(){  
 		if (GameMode == CLASSIC_MODE)
 			GameModeClassic.Initialize();
 		else 
 			GameModeUnlimited.Initialize(); 
+	}  
+	
+	public static void Initialize(){
+		//reset randomgen
+		long seed = System.nanoTime();
+		randomGenerator = new Random(seed);
+		 
+		RetrievePhotoDatabase();  
 	}                                                       
 	
 	public static boolean GetNextRound(){
@@ -142,6 +140,13 @@ public class GameManager {
 		GameMode = inp;
 	}
 	
+	public static String getScoreText(){ 
+		if (GameMode == CLASSIC_MODE)
+			return GameModeClassic.GetScore();
+		else 
+			return GameModeUnlimited.GetScore();
+	}
+	
 	private static void RetrievePhotoDatabase(){ 
 		String postUrl = "http://iderly.kenrick95.org/elder/photos";
 		String deviceID = Global.deviceId;
@@ -152,9 +157,9 @@ public class GameManager {
 		
 		new HttpPostRequest(targetUrl, photoList) {
 			@Override
-			public void onFinish(int statusCode, String responseText) { 
-				Log.d("fetch photo", "response: " + responseText);
+			public void onFinish(int statusCode, String responseText) {  
 				if(statusCode == HttpURLConnection.HTTP_OK) {;
+ 
 					try {
 						JSONObject response = new JSONObject(responseText);
 						
@@ -172,13 +177,15 @@ public class GameManager {
 						// As always, either Kenrick or the Internet's fault
 					}
 				}
+
+				for (int i=0; i<photoList.size(); ++i){
+					Log.d("photo",photoList.get(i).toString());
+				}
 			}
 		}.addParameter("device_id", deviceID)
 			.send();
+
 		
-		for (int i=0; i<photoList.size(); ++i){
-			Log.d("photo",photoList.get(i).toString());
-		}
 	}
 	
 }

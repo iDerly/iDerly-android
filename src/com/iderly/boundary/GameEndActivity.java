@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.iderly.R;
@@ -44,6 +45,12 @@ public class GameEndActivity extends Activity {
 			}
         });
 		 
+        SetScore();
+	}
+	
+	private void SetScore(){
+		TextView scoreText = (TextView)findViewById(R.id.gameEndScoreText);
+		scoreText.setText(Global.getGameManager().getScoreText());
 	}
 //
 //	@Override

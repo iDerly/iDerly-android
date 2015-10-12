@@ -6,6 +6,7 @@ import java.util.Random;
 
 import com.iderly.boundary.GameRoundActivity;
 
+import android.util.Log;
 import android.view.View;
 
 public class GameModeClassic {
@@ -19,6 +20,8 @@ public class GameModeClassic {
 	private static int rnd, score; 
 	
 	public static int GetNextIndex(){
+		if (rnd >= GameManager.CLASSIC_ROUNDS) return -1;
+		
 		Random randomGenerator = new Random();
 		Double select = randomGenerator.nextDouble()*totalChance;
 		
@@ -39,8 +42,8 @@ public class GameModeClassic {
 		++rnd;
 	}
 
-	public static int GetScore(){
-		return score;
+	public static String GetScore(){
+		return ""+score+"/"+GameManager.CLASSIC_ROUNDS;
 	}
 	
 	public static void Initialize(){
@@ -53,6 +56,7 @@ public class GameModeClassic {
 	private static void InitChanceList(){
 		totalChance = 0;
 		chanceList = new ArrayList<Double>();
+		Log.d("ChanceListSize",""+GameManager.photoList.size());
 		for(int i=0; i<GameManager.photoList.size(); ++i){
 			double chance = BASE_CHANCE - GameManager.photoList.get(i).getCorrectRatio()*CHANCE_MULTIPLIER;
 			totalChance += chance;

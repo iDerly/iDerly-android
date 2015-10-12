@@ -47,7 +47,7 @@
         android:layout_below="@id/gameEndScoreText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Points this round"
+        android:text="Point(s) this round"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="25sp" />
 

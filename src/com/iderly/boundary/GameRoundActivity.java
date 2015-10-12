@@ -63,9 +63,7 @@ public class GameRoundActivity extends Activity {
 		headerText =  (TextView)findViewById(R.id.gameRoundHeaderText);
 		pictureText = (TextView)findViewById(R.id.gameRoundSubText);
 		instText = 	  (TextView)findViewById(R.id.gameRoundFooterText);
-		 
-		
-		Global.getGameManager().StartGame();
+		  
 		ResetRound();
 		getData();
 	} 
@@ -93,8 +91,8 @@ public class GameRoundActivity extends Activity {
 		
 		if (buttonNo>=0){
 			//set screen and buttons to correct/false based on asnwer result 
-			//boolean roundResult = Global.getGameManager().SendUserInput(buttonNo); 
-			if (buttonNo == 3){ //correct
+			boolean roundResult = Global.getGameManager().SendUserInput(buttonNo); 
+			if (roundResult){//buttonNo == 3){ //correct
 				gameRoundLayout.setBackgroundColor(Color.argb(255, 200, 255, 200));
 				headerText.setText(R.string.GameRound_PictureCorrectText);
 	            UpdateView(true);
@@ -113,7 +111,7 @@ public class GameRoundActivity extends Activity {
 			
 			
 //			//set pictureText to photo remark
-//			pictureText.setText("\"" + Global.getGameManager().getPhoto().getRemarks() + "\"");
+			pictureText.setText("\"" + Global.getGameManager().getPhoto().getRemarks() + "\"");
 
 //			//"Click anywhere to continue" 
 			instText.setText(R.string.GameRound_ContinueText);
@@ -135,18 +133,18 @@ public class GameRoundActivity extends Activity {
 	public boolean getData(){
 //		Retrieves next photo from the algo. Returns false if game is over
 		
-//		boolean nextRoundAvailable = Global.getGameManager().GetNextRound();
-//		if (nextRoundAvailable){
-//			//updatePhoto
-//			for(int i=0;i<4;++i){
-//				button.get(i).setText(Global.getGameManager().getChoice(i));
-//			}
-//		}
-//		return nextRoundAvailable
+		boolean nextRoundAvailable = Global.getGameManager().GetNextRound();
+		if (nextRoundAvailable){
+			//updatePhoto
+			for(int i=0;i<4;++i){
+				button.get(i).setText(Global.getGameManager().getChoice(i));
+			}
+		}
+		return nextRoundAvailable;
 		
 		//temporary placeholder algo
-		++cnt;
-		return (cnt<=10);
+//		++cnt;
+//		return (cnt<=10);
 	}
 	
 	private void UpdateView(boolean inp){ 

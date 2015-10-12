@@ -28,8 +28,8 @@ public class GameModeUnlimited {
 		else --lives;
 	}
 
-	public static int GetScore(){
-		return score;
+	public static String GetScore(){
+		return ""+score;
 	}
 	
 	public static void Initialize(){

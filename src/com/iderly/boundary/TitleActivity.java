@@ -33,6 +33,7 @@ public class TitleActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Global.init(this);
+		Global.getGameManager().Initialize();
 		
 		SessionController.remove("session_id");
 		Log.d("device id", ": " + Global.deviceId);
@@ -100,8 +101,12 @@ public class TitleActivity extends Activity {
 		// Start intent to the next page
 		GameManager.setGameMode(TitleActivity.this.gameMode);
 		if (view.getId() == R.id.play_game_btn){
-			Intent gameIntent = new Intent(this, GameRoundActivity.class);
-		    startActivity(gameIntent);
+			Global.getGameManager().StartGame();
+			Log.d("Size",""+Global.getGameManager().photoList.size());
+			if (Global.getGameManager().photoList.size()>=10){
+				Intent gameIntent = new Intent(this, GameRoundActivity.class);
+			    startActivity(gameIntent);
+			}
 		    //this.finish();
 		}
 		return;
