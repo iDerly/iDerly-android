@@ -48,6 +48,7 @@ public class Photo implements Parcelable {
 	}
 	
 	public double getCorrectRatio(){
+		if (this.displayCount==0) return 0.5f;
 		return ((double)this.correctCount/(double)this.displayCount);
 	}
 

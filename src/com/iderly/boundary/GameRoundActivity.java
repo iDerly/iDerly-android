@@ -143,9 +143,7 @@ public class GameRoundActivity extends Activity {
 		boolean nextRoundAvailable = Global.getGameManager().GetNextRound();
 		
 		if (nextRoundAvailable){
-			//updatePhoto 
-			Log.d("photo",GameManager.getPhoto().toString());
-			Log.d("photo",GameManager.getPhoto().getImageBase64());
+			//updatePhoto  
 			
 			byte[] decodedString = Base64.decode(GameManager.getPhoto().getImageBase64(), Base64.DEFAULT);
 			Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
@@ -201,21 +199,7 @@ public class GameRoundActivity extends Activity {
 		//	button.get(i).setText("Candinegara"); 
 			button.get(i).setEnabled(true);
 
-		}
-		
-	//	button.get(0).setText("TEST!!");
-		Log.d("button text",button.get(0).getText() + " "+ button.get(0).getTextSize()); 
-		Log.d("button text",((Button)findViewById(R.id.gameChoice1)).getText() + " "+ ((Button)findViewById(R.id.gameChoice1)).getTextSize()); 
-		
-		Log.d("gameChoice1",""+R.id.gameChoice1);
-		Log.d("gameChoice2",""+R.id.gameChoice2);
-		Log.d("gameChoice3",""+R.id.gameChoice3);
-		Log.d("gameChoice4",""+R.id.gameChoice4);
-		
-		Log.d("gameRoundFooterText",""+R.id.gameRoundFooterText);
-		Log.d("gameRoundSubText",   ""+R.id.gameRoundSubText);
-		Log.d("gameRoundHeaderText",""+R.id.gameRoundHeaderText); 
-		
+		} 
 		
 		headerText.setText(R.string.GameRound_PictureText);
 		pictureText.setText("");

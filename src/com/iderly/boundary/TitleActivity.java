@@ -14,7 +14,10 @@ import com.iderly.control.SessionController;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -106,6 +109,15 @@ public class TitleActivity extends Activity {
 			if (Global.getGameManager().photoList.size()>=10){
 				Intent gameIntent = new Intent(this, GameRoundActivity.class);
 			    startActivity(gameIntent);
+			} else {
+				new AlertDialog.Builder(TitleActivity.this)
+					.setMessage("Not enough photos to play the game!")
+					.setNeutralButton("OK", new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					}).show();
 			}
 		    //this.finish();
 		}

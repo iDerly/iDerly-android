@@ -108,7 +108,7 @@ public class GameManager {
 			GameModeClassic.ReturnResult(roundResult);
 		else 
 			GameModeUnlimited.ReturnResult(roundResult); 
-		
+
 		UpdateDatabase(roundResult?1:0);
 		
 		return roundResult;
@@ -174,7 +174,7 @@ public class GameManager {
 								JSONArray messages = response.getJSONArray("message");
 								for(int i = 0, size = messages.length(); i < size; ++i) {
 									JSONObject message = messages.getJSONObject(i);
-									photos.add(new Photo(-1, message.getString("attachment"), message.getString("name"), message.getString("remarks")));
+									photos.add(new Photo(message.getInt("photo_id"), message.getString("attachment"), message.getString("name"), message.getString("remarks")));
 								} 
 							} 
 						}

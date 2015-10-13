@@ -24,7 +24,8 @@ public class GameModeClassic {
 		
 		Random randomGenerator = new Random();
 		Double select = randomGenerator.nextDouble()*totalChance;
-		
+
+		Log.d("select",""+select);
 		int ret = 0;
 		while (select > chanceList.get(ret)){
 			++ret;
@@ -54,13 +55,15 @@ public class GameModeClassic {
 	}
 	
 	private static void InitChanceList(){
-		totalChance = 0;
+		Log.d("Chancelist","chancelist");
+		totalChance = 0.f;
 		chanceList = new ArrayList<Double>();
-		Log.d("ChanceListSize",""+GameManager.photoList.size());
+		Log.d("ChanceListSize",""+GameManager.photoList.size()+" "+totalChance);
 		for(int i=0; i<GameManager.photoList.size(); ++i){
 			double chance = BASE_CHANCE - GameManager.photoList.get(i).getCorrectRatio()*CHANCE_MULTIPLIER;
 			totalChance += chance;
 			chanceList.add(chance);
 		}  
+		Log.d("ChancelistRet",""+chanceList.size()+" / "+GameManager.photoList.size()+" total "+totalChance);
 	} 
 }
