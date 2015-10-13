@@ -198,12 +198,12 @@ public class GameRoundActivity extends Activity {
 		for(int i=0;i<4;++i){
 			button.get(i).setBackgroundResource(android.R.drawable.btn_default);
 			button.get(i).getBackground().setColorFilter(0xFFFFFFFF, PorterDuff.Mode.MULTIPLY); //white  
-			button.get(i).setText("Candinegara"); 
+		//	button.get(i).setText("Candinegara"); 
 			button.get(i).setEnabled(true);
 
 		}
 		
-		button.get(0).setText("TEST!!");
+	//	button.get(0).setText("TEST!!");
 		Log.d("button text",button.get(0).getText() + " "+ button.get(0).getTextSize()); 
 		Log.d("button text",((Button)findViewById(R.id.gameChoice1)).getText() + " "+ ((Button)findViewById(R.id.gameChoice1)).getTextSize()); 
 		
