@@ -40,7 +40,7 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 	public static int EDIT_ELDER = 0x00000001;
 	public static int DELETE_ELDER_OK = 0x80000000;
 	public static int EDIT_ELDER_OK = 0x80000001;
-	public static int ELDER_ADD_PHOTO = 0x00000001;
+	public static int ELDER_ADD_PHOTO = 0x00000002;
 	
 	private ViewPager viewPager;
 	private ElderDetailsPagerAdapter mAdapter;
