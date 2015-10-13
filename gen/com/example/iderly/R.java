@@ -176,6 +176,7 @@ public final class R {
         public static final int title_activity_menu=0x7f07000c;
     }
     public static final class string {
+        public static final int ActionBar_AddPhoto_Text=0x7f050051;
         public static final int ActionBar_LoginCaregiver_Text=0x7f05000f;
         public static final int AddElderBtn_LabelText=0x7f050020;
         public static final int AddPhotoButton_LabelText=0x7f05004f;
@@ -229,7 +230,7 @@ public final class R {
         public static final int PlayGame_ButtonText=0x7f050030;
         public static final int RegisterBtn_LabelText=0x7f05001b;
         public static final int TEST_PhotoRemarks=0x7f050025;
-        public static final int Test=0x7f050051;
+        public static final int Test=0x7f050052;
         public static final int Text_EditElder_ElderDeviceId=0x7f05003d;
         public static final int Text_EditElder_ElderName=0x7f05003c;
         public static final int Text_ElderProfile_AverageScore=0x7f05002d;

@@ -68,7 +68,10 @@ public class GameManager {
 			photoID = GameModeUnlimited.GetNextIndex(); 
 		
 		if (photoID<0) return false;
+		
+		Log.d("Photolist size","Size: "+photoList.size()+" id: "+photoID);
 		currentPhoto  = photoList.get(photoID);
+		Log.d("curphot",currentPhoto.toString());
 		
 		//generate random names 
 		selectedNames = new ArrayList<String>();
@@ -92,11 +95,15 @@ public class GameManager {
 		return true;
 	}
 	
+	public static boolean GetAnswerResult(int choice){
+		return (selectedNames.get(choice) == correctName);
+	}
+	
 	public static boolean SendUserInput(int choice){
 		//this function receives user input from Activity 
 		//updates score and database accordingly based on currentPhoto
 		//returns result
-		boolean roundResult = (selectedNames.get(choice) == correctName);	
+		boolean roundResult = GetAnswerResult(choice);
 		if (GameMode == CLASSIC_MODE)
 			GameModeClassic.ReturnResult(roundResult);
 		else 
@@ -108,9 +115,7 @@ public class GameManager {
 	}
 
 	public static void UpdateDatabase(int inp){
-		//update database for currentPhoto
-		//0: shown, user incorrect answer
-		//1: shown, user correct answer.
+		//update database for currentPhoto, 0: shown, user incorrect answer, 1: shown, user correct answer.
 		String postUrl = "http://iderly.kenrick95.org/game/inc_photo_stats";
 		
 		new HttpPostRequest(postUrl) {
@@ -169,7 +174,7 @@ public class GameManager {
 								JSONArray messages = response.getJSONArray("message");
 								for(int i = 0, size = messages.length(); i < size; ++i) {
 									JSONObject message = messages.getJSONObject(i);
-									photos.add(new Photo(message.getString("attachment"), message.getString("name"), message.getString("remarks")));
+									photos.add(new Photo(-1, message.getString("attachment"), message.getString("name"), message.getString("remarks")));
 								} 
 							} 
 						}

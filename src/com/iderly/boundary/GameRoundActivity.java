@@ -6,6 +6,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
@@ -15,6 +16,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -24,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -37,6 +40,7 @@ public class GameRoundActivity extends Activity {
 	private ActionBar actionBar;
 	private ArrayList<Button> button;
 	private TextView headerText, pictureText, instText;
+	private ImageView photoImage;
 	private RelativeLayout gameRoundLayout;
 	private boolean waitForContinue;
 	private Color bgColor, buttonColor;
@@ -49,6 +53,7 @@ public class GameRoundActivity extends Activity {
 		setContentView(R.layout.activity_game_round);
 		gameRoundLayout = (RelativeLayout)findViewById(R.id.gameRoundLayout);
 		progBarHolder = (LinearLayout)findViewById(R.id.game_round_progbar);
+		photoImage = (ImageView)findViewById(R.id.gamePhoto);
 		
 		// Setting up Action Bar
 		this.actionBar = this.getActionBar();
@@ -105,9 +110,11 @@ public class GameRoundActivity extends Activity {
 			
 			for(int i=0;i<4;++i){ 
 				button.get(i).setEnabled(false);
-				button.get(i).getBackground().setColorFilter(0xFFFFAAAA, PorterDuff.Mode.MULTIPLY); //red  
+				if (Global.getGameManager().GetAnswerResult(i))
+					button.get(i).getBackground().setColorFilter(0xFFBBFFBB, PorterDuff.Mode.MULTIPLY); //green
+				else 
+					button.get(i).getBackground().setColorFilter(0xFFFFAAAA, PorterDuff.Mode.MULTIPLY); //red
 			}
-			button.get(3).getBackground().setColorFilter(0xFFBBFFBB, PorterDuff.Mode.MULTIPLY); //green
 			
 			
 //			//set pictureText to photo remark
@@ -131,31 +138,28 @@ public class GameRoundActivity extends Activity {
 
 	private int cnt = 0;
 	public boolean getData(){
-//		Retrieves next photo from the algo. Returns false if game is over
 		
+		// Retrieves next photo from the algo. Returns false if game is over 
 		boolean nextRoundAvailable = Global.getGameManager().GetNextRound();
+		
 		if (nextRoundAvailable){
-			//updatePhoto
+			//updatePhoto 
+			Log.d("photo",GameManager.getPhoto().toString());
+			Log.d("photo",GameManager.getPhoto().getImageBase64());
+			
+			byte[] decodedString = Base64.decode(GameManager.getPhoto().getImageBase64(), Base64.DEFAULT);
+			Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
+			photoImage.setImageBitmap(decodedByte);
+			
 			for(int i=0;i<4;++i){
 				button.get(i).setText(Global.getGameManager().getChoice(i));
 			}
 		}
 		return nextRoundAvailable;
-		
-		//temporary placeholder algo
-//		++cnt;
-//		return (cnt<=10);
+		 
 	}
 	
-	private void UpdateView(boolean inp){ 
-		/*    <View
-        android:id="@+id/myRectangleView"
-        android:layout_width="50dp"
-        android:layout_height="15dp"
-        android:layout_alignLeft="@+id/gamePhoto"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/rectangle" />*/
-		
+	private void UpdateView(boolean inp){  
 
 		DisplayMetrics dm = new DisplayMetrics();
 		int width = progBarHolder.getWidth(); 
@@ -198,7 +202,7 @@ public class GameRoundActivity extends Activity {
 			button.get(i).setEnabled(true);
 
 		}
-		 
+		
 		button.get(0).setText("TEST!!");
 		Log.d("button text",button.get(0).getText() + " "+ button.get(0).getTextSize()); 
 		Log.d("button text",((Button)findViewById(R.id.gameChoice1)).getText() + " "+ ((Button)findViewById(R.id.gameChoice1)).getTextSize()); 
@@ -209,7 +213,7 @@ public class GameRoundActivity extends Activity {
 		Log.d("gameChoice4",""+R.id.gameChoice4);
 		
 		Log.d("gameRoundFooterText",""+R.id.gameRoundFooterText);
-		Log.d("gameRoundSubText",""+R.id.gameRoundSubText);
+		Log.d("gameRoundSubText",   ""+R.id.gameRoundSubText);
 		Log.d("gameRoundHeaderText",""+R.id.gameRoundHeaderText); 
 		
 		
