@@ -32,6 +32,10 @@ public class GameModeUnlimited {
 		return ""+score;
 	}
 	
+	public static int GetScoreInt(){
+		return score;
+	}
+	
 	public static void Initialize(){
 		len = GameManager.photoList.size();
 		lives = GameManager.UNLIMITED_LIVES;
