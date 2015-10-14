@@ -145,6 +145,7 @@ public class ElderPhotoGalleryEditPhotoActivity extends Activity {
     		}.addParameter("name", name)
     			.addParameter("remarks", remarks)
     			.addParameter("device_id", deviceId)
+    			.addParameter("photo_id", String.valueOf(photo.getId()))
     			.send();
     	}
     }
