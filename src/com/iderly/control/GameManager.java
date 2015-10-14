@@ -1,8 +1,10 @@
 package com.iderly.control;
 
 import java.net.HttpURLConnection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Random;
 import java.util.RandomAccess;
 
@@ -35,6 +37,8 @@ public class GameManager {
     private static ArrayList<String> selectedNames;
     private static String correctName;
 
+    private static String startTime,endTime;
+    
 	public static ArrayList<Photo> photoList;
 	
 	private static GameManager instance = new GameManager();
@@ -43,7 +47,9 @@ public class GameManager {
 		return instance;
 	}
 	
-	public static void StartGame(){  
+	public static void StartGame(){
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		startTime = s.format(new Date());
 		if (GameMode == CLASSIC_MODE)
 			GameModeClassic.Initialize();
 		else 
@@ -188,6 +194,32 @@ public class GameManager {
 				}
 			}
 		}.addParameter("device_id", deviceID)
+			.send();
+
+		
+	}
+
+	
+	private static void SendGameResult(){ 
+		String postUrl = "http://iderly.kenrick95.org/game/add_result";
+		String deviceID = Global.deviceId;  
+
+		SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		endTime = s.format(new Date());
+		
+		photoList = new ArrayList<Photo>();
+		
+		new HttpPostRequest(postUrl) {
+			@Override
+			public void onFinish(int statusCode, String responseText) {  
+				if(statusCode == HttpURLConnection.HTTP_OK) {
+				} 
+			}
+		}.addParameter("device_id", deviceID)
+		.addParameter("score", getScoreText())
+		.addParameter("time_start", startTime)
+		.addParameter("time_end", endTime)
+		.addParameter("mode", (GameMode==CLASSIC_MODE)?"classic":"unlimited")
 			.send();
 
 		
