@@ -37,20 +37,61 @@ public class ElderProfileFragment extends Fragment {
 	@Override 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		View view = inflater.inflate(R.layout.fragment_elder_profile_details, container, false);
+		final View view = inflater.inflate(R.layout.fragment_elder_profile_details, container, false);
 //		this.elder = this.getActivity().getIntent().getExtras().getParcelable("elder");
 		this.elder = this.getArguments().getParcelable("elder");
 		
-		double elderAverageScore = 0.0;
-		// FETCH THIS ELDER'S AVERAGE SCORE FROM DATABASE FIRST!!
-		// HTTP REQUEST HERE!!
-		
-		Assert.assertNotNull(this.elder);
+		ProgressDialog pd = ProgressDialog.show(getActivity(), null, "Loading statistics", true);
+		new HttpPostRequest("http://iderly.kenrick95.org/elder/view/" + elder.getDeviceId(), pd) {
+			@Override
+			public void onFinish(int statusCode, String responseText) {
+				((ProgressDialog) this.mixed[0]).dismiss();
+				if(statusCode == HttpURLConnection.HTTP_OK) {
+					try {
+						JSONObject response = new JSONObject(responseText);
+						if(response.getInt("status") == 0) {
+							JSONObject message = response.getJSONObject("message");
+							int hiscore = message.isNull("game_hiscore") ? 0 : message.getInt("game_hiscore");
+							int hiscore_classic = message.isNull("game_hiscore_classic") ? 0 : message.getInt("game_hiscore_classic");
+							int hiscore_unlimited = message.isNull("game_hiscore_unlimited") ? 0 : message.getInt("game_hiscore_unlimited");
+							String lastplayed = message.isNull("game_lastplayed") ? "None" : message.getString("game_hiscore_lastplayed");
+							String lastplayed_classic = message.isNull("game_lastplayed_classic") ? "None" : message.getString("game_hiscore_lastplayed_classic");
+							String lastplayed_unlimited = message.isNull("game_lastplayed_unlimited") ? "None" : message.getString("game_hiscore_lastplayed_unlimited");
+							double avgscore = message.isNull("game_avgscore") ? -1.f : Double.parseDouble(message.getString("game_avgscore"));
+							double avgscore_classic = message.isNull("game_avgscore_classic") ? -1.f : Double.parseDouble(message.getString("game_avgscore_classic"));
+							double avgscore_unlimited = message.isNull("game_avgscore_unlimited") ? -1.f : Double.parseDouble(message.getString("game_avgscore_unlimited"));
+							
+							((TextView) view.findViewById(R.id.Text_ElderProfile_AverageScore)).setText(String.format("%.2f", avgscore));
+							((TextView) view.findViewById(R.id.Text_ElderProfile_AverageScoreClassic)).setText(String.format("%.2f", avgscore_classic));
+							((TextView) view.findViewById(R.id.Text_ElderProfile_AverageScoreUnlimited)).setText(String.format("%.2f", avgscore_unlimited));
+							((TextView) view.findViewById(R.id.Text_ElderProfile_HighScore)).setText(String.valueOf(hiscore));
+							((TextView) view.findViewById(R.id.Text_ElderProfile_HighScoreClassic)).setText(String.valueOf(hiscore_classic));
+							((TextView) view.findViewById(R.id.Text_ElderProfile_HighScoreUnlimited)).setText(String.valueOf(hiscore_unlimited));
+							((TextView) view.findViewById(R.id.Text_ElderProfile_LastPlayed)).setText(lastplayed);
+							((TextView) view.findViewById(R.id.Text_ElderProfile_LastPlayedClassic)).setText(lastplayed_classic);
+							((TextView) view.findViewById(R.id.Text_ElderProfile_LastPlayedUnlimited)).setText(lastplayed_unlimited);
+						} else {
+							new AlertDialog.Builder(getActivity())
+								.setMessage(response.getJSONArray("message").getString(0))
+								.setNeutralButton("OK", new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										dialog.dismiss();
+									}
+								})
+								.show();
+						}
+					} catch (JSONException e) {
+						// Kenrick pls
+					}
+				}
+			}
+		}.send();
 		
 		((TextView) view.findViewById(R.id.Text_ElderProfile_DeviceId)).setText(this.elder.getDeviceId());
 		((TextView) view.findViewById(R.id.Text_ElderProfile_Name)).setText(this.elder.getName());
-		((TextView) view.findViewById(R.id.Text_ElderProfile_AverageScore)).setText("" + elderAverageScore);
 		((ImageView) view.findViewById(R.id.ImageView_ElderProfile_ProfilePicture)).setImageBitmap(this.elder.getProfPic().getImageBitmap());
+		
 		return view;
 	}
 	

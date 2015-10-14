@@ -57,6 +57,20 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 		// Fetch Elder from Intent putExtra
 		this.elder = this.getIntent().getExtras().getParcelable("elder");
 		
+		new HttpPostRequest("http://iderly.kenrick95.org/elder/view/" + elder.getDeviceId()) {
+			@Override
+			public void onFinish(int statusCode, String responseText) {
+				if(statusCode == HttpURLConnection.HTTP_OK) {
+					try {
+						JSONObject response = new JSONObject(responseText);
+						
+					} catch (JSONException e) {
+						// Kenrick -_-
+					}
+				}
+			}
+		}.send();
+		
 		this.actionBar = this.getActionBar();
 		this.actionBar.setSubtitle("");
 		

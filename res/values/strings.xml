@@ -52,6 +52,14 @@
     <string name="Label_ElderProfile_Email">Email</string>
     <string name="Text_ElderProfile_Email">kenrick95@gmail.com</string>
     <string name="Label_ElderProfile_AverageScore">Average Score</string>
+    <string name="Label_ElderProfile_AverageScoreClassic">Average Score (Classic)</string>
+    <string name="Label_ElderProfile_AverageScoreUnlimited">Average Score (Unlimited)</string>
+    <string name="Label_ElderProfile_HighScore">High Score</string>
+    <string name="Label_ElderProfile_HighScoreClassic">High Score (Classic)</string>
+    <string name="Label_ElderProfile_HighScoreUnlimited">High Score (Unlimited)</string>
+    <string name="Label_ElderProfile_LastPlayed">Last Played</string>
+    <string name="Label_ElderProfile_LastPlayedClassic">Last Played (Classic)</string>
+    <string name="Label_ElderProfile_LastPlayedUnlimited">Last Played (Unlimited)</string>
     <string name="Text_ElderProfile_AverageScore">95.5</string>
     <string name="Label_ElderProfile_ProfilePicture">Picture</string>
     <string name="Text_ElderProfile_EditButton">Edit Profile</string>

@@ -2,6 +2,8 @@ package com.iderly.control;
 
 import java.util.List;
 
+import junit.framework.Assert;
+
 import com.example.iderly.R;
 import com.iderly.entity.Photo;
 
@@ -22,9 +24,9 @@ public class ElderPhotoListAdapter extends ArrayAdapter<Photo> {
 		this.context = context;
 	}
 	
-	private class ViewHolder {
-		private TextView photoName, photoRemarks;
-		private ImageView photo;
+	public class ViewHolder {
+		public TextView photoName, photoRemarks;
+		public ImageView photo;
 	}
 	
 	public View getView (int position, View convertView, ViewGroup parent) {
@@ -33,17 +35,12 @@ public class ElderPhotoListAdapter extends ArrayAdapter<Photo> {
 		ViewHolder holder = null;
 		LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 		
-		if (convertView == null) {
-			convertView = mInflater.inflate(R.layout.elder_photo_list_item, parent, false);
-			holder = new ViewHolder();
-			
-			holder.photo = (ImageView) convertView.findViewById(R.id.ImageView_Photo);
-			holder.photoName = (TextView) convertView.findViewById(R.id.Field_PhotoName);
-			holder.photoRemarks = (TextView) convertView.findViewById(R.id.Field_PhotoRemarks);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
+		convertView = mInflater.inflate(R.layout.elder_photo_list_item, parent, false);
+		holder = new ViewHolder();
 		
+		holder.photo = (ImageView) convertView.findViewById(R.id.ImageView_Photo);
+		holder.photoName = (TextView) convertView.findViewById(R.id.Field_PhotoName);
+		holder.photoRemarks = (TextView) convertView.findViewById(R.id.Field_PhotoRemarks);
 		
 		if (p != null) {
 			holder.photo.setImageBitmap(p.getImageBitmap());
