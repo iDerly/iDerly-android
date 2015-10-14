@@ -47,12 +47,6 @@ public class ElderPhotoGalleryList extends ListFragment {
 	@Override
 	public void onActivityCreated (Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
-		// Set the header view in the list fragment
-		if (this.headerView != null) {
-			this.getListView().addHeaderView(this.headerView);
-		}
-		
 		this.elder = this.getArguments().getParcelable("elder");
 		this.fetchPhotos();
 	}

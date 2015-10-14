@@ -137,7 +137,7 @@ public class ElderDetailsActivity extends FragmentActivity implements ActionBar.
 	}
 	
 	public void deleteElder (View v) {
-		ProgressDialog pd = ProgressDialog.show(this, null, "Deleting selected elder...", true);
+		ProgressDialog pd = ProgressDialog.show(this, null, "Deleting elder...", true);
 		new HttpPostRequest(postUrl, pd) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {

@@ -101,7 +101,7 @@ public class EditElderProfileActivity extends Activity {
 		}
 		
 		if (valid == 1) {
-			ProgressDialog pd = ProgressDialog.show(this, null, "Editting elder profiles...", true);
+			ProgressDialog pd = ProgressDialog.show(this, null, "Updating elder profiles...", true);
 			new HttpPostRequest(postUrl, pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {

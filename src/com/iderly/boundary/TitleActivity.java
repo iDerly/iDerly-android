@@ -41,7 +41,7 @@ public class TitleActivity extends Activity {
 		SessionController.remove("session_id");
 		Log.d("device id", ": " + Global.deviceId);
 		
-		ProgressDialog pd = ProgressDialog.show(this, null, "Sorry, loading...", true);
+		ProgressDialog pd = ProgressDialog.show(this, null, "Loading...", true);
 		new HttpPostRequest("http://iderly.kenrick95.org/elder/auth", pd) {
 			@Override
 			public void onFinish(int statusCode, String responseText) {

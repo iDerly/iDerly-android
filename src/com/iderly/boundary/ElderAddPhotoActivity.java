@@ -202,7 +202,7 @@ public class ElderAddPhotoActivity extends Activity {
 		}
 		
 		if (valid == 1) {
-			ProgressDialog pd = ProgressDialog.show(this, null, "Adding hansum photo...", true);
+			ProgressDialog pd = ProgressDialog.show(this, null, "Adding photo...", true);
 			new HttpPostRequest(postUrl, pd) {
 				@Override
 				public void onFinish(int statusCode, String responseText) {
