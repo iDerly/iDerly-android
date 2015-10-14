@@ -47,6 +47,10 @@ public class GameModeClassic {
 		return ""+score+"/"+GameManager.CLASSIC_ROUNDS;
 	}
 	
+	public static int GetScoreInt(){
+		return score;
+	}
+	
 	public static void Initialize(){
 		InitChanceList();
 		result = new boolean[GameManager.CLASSIC_ROUNDS];

@@ -114,7 +114,7 @@ public class GameManager {
 			GameModeClassic.ReturnResult(roundResult);
 		else 
 			GameModeUnlimited.ReturnResult(roundResult); 
-
+		
 		UpdateDatabase(roundResult?1:0);
 		
 		return roundResult;
@@ -150,12 +150,18 @@ public class GameManager {
 	public static void setGameMode(int inp){
 		GameMode = inp;
 	}
-	
+
 	public static String getScoreText(){ 
 		if (GameMode == CLASSIC_MODE)
 			return GameModeClassic.GetScore();
 		else 
 			return GameModeUnlimited.GetScore();
+	}
+	public static int getScoreInt(){ 
+		if (GameMode == CLASSIC_MODE)
+			return GameModeClassic.GetScoreInt();
+		else 
+			return GameModeUnlimited.GetScoreInt();
 	}
 	
 	private static void RetrievePhotoDatabase(){ 
@@ -180,7 +186,7 @@ public class GameManager {
 								JSONArray messages = response.getJSONArray("message");
 								for(int i = 0, size = messages.length(); i < size; ++i) {
 									JSONObject message = messages.getJSONObject(i);
-									photos.add(new Photo(message.getInt("photo_id"), message.getString("attachment"), message.getString("name"), message.getString("remarks")));
+									photos.add(new Photo(-1, message.getString("attachment"), message.getString("name"), message.getString("remarks")));
 								} 
 							} 
 						}
@@ -200,7 +206,7 @@ public class GameManager {
 	}
 
 	
-	private static void SendGameResult(){ 
+	public static void SendGameResult(){ 
 		String postUrl = "http://iderly.kenrick95.org/game/add_result";
 		String deviceID = Global.deviceId;  
 
@@ -216,12 +222,13 @@ public class GameManager {
 				} 
 			}
 		}.addParameter("device_id", deviceID)
-		.addParameter("score", getScoreText())
+		.addParameter("score", ""+getScoreInt())
 		.addParameter("time_start", startTime)
 		.addParameter("time_end", endTime)
 		.addParameter("mode", (GameMode==CLASSIC_MODE)?"classic":"unlimited")
 			.send();
-
+		
+		Log.d("Send result", ""+deviceID+" Score: "+getScoreText()+" starttime "+startTime+" endtime "+endTime);
 		
 	}
 	
